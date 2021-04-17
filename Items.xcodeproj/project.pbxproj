@@ -12,6 +12,7 @@
 		37734A32262B2B700048E659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37734A31262B2B700048E659 /* Assets.xcassets */; };
 		37734A35262B2B700048E659 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37734A34262B2B700048E659 /* Preview Assets.xcassets */; };
 		37734A44262B2C660048E659 /* TabContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A43262B2C660048E659 /* TabContainerView.swift */; };
+		37734A48262B2CE20048E659 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A47262B2CE20048E659 /* AddItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		37734A34262B2B700048E659 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37734A36262B2B700048E659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37734A43262B2C660048E659 /* TabContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainerView.swift; sourceTree = "<group>"; };
+		37734A47262B2CE20048E659 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		37734A3D262B2BF90048E659 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37734A46262B2CD50048E659 /* AddItemView */,
 				37734A42262B2C570048E659 /* TabContainerView */,
 			);
 			path = Views;
@@ -118,6 +121,14 @@
 				37734A43262B2C660048E659 /* TabContainerView.swift */,
 			);
 			path = TabContainerView;
+			sourceTree = "<group>";
+		};
+		37734A46262B2CD50048E659 /* AddItemView */ = {
+			isa = PBXGroup;
+			children = (
+				37734A47262B2CE20048E659 /* AddItemView.swift */,
+			);
+			path = AddItemView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +203,7 @@
 				37734A44262B2C660048E659 /* TabContainerView.swift in Sources */,
 				37734A30262B2B6C0048E659 /* ContentView.swift in Sources */,
 				37734A2E262B2B6C0048E659 /* ItemsApp.swift in Sources */,
+				37734A48262B2CE20048E659 /* AddItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

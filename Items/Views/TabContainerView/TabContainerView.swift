@@ -79,7 +79,7 @@ struct TabContainerView: View {
         .edgesIgnoringSafeArea(.all)
         .fullScreenCover(isPresented: $showAddSheet) {
             NavigationView {
-                NewItemView()
+                AddItemView()
             }
         }
     }
