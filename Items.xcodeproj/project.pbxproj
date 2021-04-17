@@ -18,6 +18,7 @@
 		37734A5C262B2E760048E659 /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A5B262B2E760048E659 /* ItemsView.swift */; };
 		37734A61262B2F1A0048E659 /* SingleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A60262B2F1A0048E659 /* SingleCollectionView.swift */; };
 		37734A66262B2FF50048E659 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A65262B2FF50048E659 /* ProfileView.swift */; };
+		37734A6C262B30540048E659 /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A6B262B30540048E659 /* ProView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		37734A5B262B2E760048E659 /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
 		37734A60262B2F1A0048E659 /* SingleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionView.swift; sourceTree = "<group>"; };
 		37734A65262B2FF50048E659 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		37734A6B262B30540048E659 /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		37734A3D262B2BF90048E659 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37734A6A262B30360048E659 /* ProView */,
 				37734A64262B2FCF0048E659 /* ProfileView */,
 				37734A5F262B2F080048E659 /* SingleCollectionView */,
 				37734A5A262B2E6B0048E659 /* ItemsView */,
@@ -194,6 +197,14 @@
 			path = ProfileView;
 			sourceTree = "<group>";
 		};
+		37734A6A262B30360048E659 /* ProView */ = {
+			isa = PBXGroup;
+			children = (
+				37734A6B262B30540048E659 /* ProView.swift */,
+			);
+			path = ProView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,6 +276,7 @@
 			files = (
 				37734A44262B2C660048E659 /* TabContainerView.swift in Sources */,
 				37734A66262B2FF50048E659 /* ProfileView.swift in Sources */,
+				37734A6C262B30540048E659 /* ProView.swift in Sources */,
 				37734A2E262B2B6C0048E659 /* ItemsApp.swift in Sources */,
 				37734A5C262B2E760048E659 /* ItemsView.swift in Sources */,
 				37734A53262B2DAB0048E659 /* NewCollectionView.swift in Sources */,
