@@ -71,7 +71,7 @@ struct CollectionsView: View {
                         NavigationLink(
                             destination: ItemsView(),
                             label: {
-                                CollectionsItemView(collection: collection)
+                                SingleCollectionView(collection: collection)
                             })
                     }
                     .foregroundColor(.primary)
@@ -111,7 +111,7 @@ struct CollectionsView: View {
                     NavigationLink(
                         destination: ItemsView(),
                         label: {
-                            CollectionsItemView(collection: collection)
+                            SingleCollectionView(collection: collection)
                         })
                 }
                 .foregroundColor(.primary)
