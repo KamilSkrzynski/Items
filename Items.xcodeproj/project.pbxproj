@@ -52,6 +52,11 @@
 		37734A2C262B2B6C0048E659 /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				37734A41262B2C2F0048E659 /* Extensions */,
+				37734A40262B2C0B0048E659 /* Services */,
+				37734A3F262B2C070048E659 /* Models */,
+				37734A3E262B2C020048E659 /* ViewModels */,
+				37734A3D262B2BF90048E659 /* Views */,
 				37734A2D262B2B6C0048E659 /* ItemsApp.swift */,
 				37734A2F262B2B6C0048E659 /* ContentView.swift */,
 				37734A31262B2B700048E659 /* Assets.xcassets */,
@@ -67,6 +72,41 @@
 				37734A34262B2B700048E659 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		37734A3D262B2BF90048E659 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		37734A3E262B2C020048E659 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		37734A3F262B2C070048E659 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		37734A40262B2C0B0048E659 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		37734A41262B2C2F0048E659 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
