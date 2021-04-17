@@ -9,6 +9,7 @@ import Foundation
 
 final class ProfileViewModel: ObservableObject {
     
-    @Published var createPushed = false
-    
+    @Published var title = "Profile"
+    @Published var chevron = "chevron.right"
+    @Published var createPushed = false    
 }
