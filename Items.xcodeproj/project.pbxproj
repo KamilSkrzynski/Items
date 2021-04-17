@@ -21,6 +21,7 @@
 		37734A6C262B30540048E659 /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A6B262B30540048E659 /* ProView.swift */; };
 		37734A71262B30B30048E659 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A70262B30B30048E659 /* AccountView.swift */; };
 		37734A76262B30FC0048E659 /* TermsPrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A75262B30FC0048E659 /* TermsPrivacyView.swift */; };
+		37734A82262B31630048E659 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37734A81262B31630048E659 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		37734A6B262B30540048E659 /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
 		37734A70262B30B30048E659 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		37734A75262B30FC0048E659 /* TermsPrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsPrivacyView.swift; sourceTree = "<group>"; };
+		37734A81262B31630048E659 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		37734A41262B2C2F0048E659 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				37734A81262B31630048E659 /* Colors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				37734A71262B30B30048E659 /* AccountView.swift in Sources */,
 				37734A5C262B2E760048E659 /* ItemsView.swift in Sources */,
 				37734A53262B2DAB0048E659 /* NewCollectionView.swift in Sources */,
+				37734A82262B31630048E659 /* Colors.swift in Sources */,
 				37734A57262B2DF10048E659 /* SingleItemView.swift in Sources */,
 				37734A4E262B2D6C0048E659 /* CollectionsView.swift in Sources */,
 				37734A61262B2F1A0048E659 /* SingleCollectionView.swift in Sources */,
