@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     
+    @StateObject var viewModel: AccountViewModel
     @Environment(\.presentationMode) var presentationMode
     
     @State var email: String = ""
@@ -18,20 +19,23 @@ struct AccountView: View {
         GeometryReader { proxy in
             VStack {
                 
-                Text("Create an account to unlock exclusive features such as iCloud synchronize")
-                    .font(.headline)
-                    .foregroundColor(.gray)
+                HStack {
+                    Text(viewModel.subtitle)
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
                 
                 VStack {
                     HStack {
-                        Image(systemName: "envelope.fill")
-                        TextField("email...", text: $email)
+                        Image(systemName: viewModel.emailIconImage)
+                        TextField(viewModel.emailPlaceholderText, text: $email)
                     }
                     .padding()
                     
                     HStack {
-                        Image(systemName: "lock.rectangle.fill")
-                        SecureField("password...", text: $password)
+                        Image(systemName: viewModel.passwordIconImage)
+                        SecureField(viewModel.passwordPlaceholderText, text: $password)
                     }
                     .padding()
                 }
@@ -47,21 +51,21 @@ struct AccountView: View {
                                 .foregroundColor(.secondaryColor)
                                 .offset(x: 10)
                             
-                            Image(systemName: "arrow.right.square.fill")
+                            Image(systemName: viewModel.buttonIconImage)
                                 .font(.system(size: 30))
                                 .foregroundColor(.mainColor)
                                 .offset(x: 10)
                         }
                         Spacer()
-                            .frame(width: proxy.size.width*0.18)
-                        Text("Create Account")
+                            .frame(width: viewModel.buttonTitle == "Log In" ? proxy.size.width*0.30 : proxy.size.width*0.28)
+                        Text(viewModel.buttonTitle)
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .frame(height: 60)
                         Spacer()
                         
                     }
-                    .opacity(check() ? 1.0 : 0.3)
+                    .opacity(viewModel.isValidEmail(email) && viewModel.isValidPassword(password) ? 1.0 : 0.3)
                 })
                 .frame(maxWidth: .infinity)
                 .background(Color.grayColor)
@@ -74,41 +78,41 @@ struct AccountView: View {
                         .foregroundColor(.gray)
                     
                     Spacer()
-                        .frame(width: proxy.size.height*0.03)
+                        .frame(width: proxy.size.height*0.001)
                 }
                 
                 Spacer()
             }
             .padding()
-            .navigationTitle("Create Account")
+            .navigationTitle(viewModel.title)
             .navigationBarItems(leading:
                                     Button(action: {
                                         self.presentationMode.wrappedValue.dismiss()
                                     }, label: {
-                                        Image(systemName: "xmark")
+                                        Image(systemName: viewModel.closeIconImage)
                                             .foregroundColor(.primary)
                                     }))
         }
     }
     
-    func check() -> Bool {
-        if !password.isEmpty, password.count > 7, !email.isEmpty, email.contains("@") {
-            return true
-        }
-        else {
-            return false
-        }
-    }
+//    func check() -> Bool {
+//        if !password.isEmpty, password.count > 7, !email.isEmpty, email.contains("@") {
+//            return true
+//        }
+//        else {
+//            return false
+//        }
+//    }
 }
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AccountView()
+            AccountView(viewModel: .init(mode: .login, isPushed: .constant(false)))
                 .preferredColorScheme(.dark)
         }
         NavigationView {
-            AccountView()
+            AccountView(viewModel: .init(mode: .signup, isPushed: .constant(false)))
                 .preferredColorScheme(.light)
         }
     }

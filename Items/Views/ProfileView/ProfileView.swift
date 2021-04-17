@@ -18,6 +18,8 @@ enum Sheets: Identifiable {
 
 struct ProfileView: View {
     
+    @StateObject private var viewModel = ProfileViewModel()
+    
     @State var activeSheet: Sheets?
     
     var body: some View {
@@ -101,7 +103,7 @@ struct ProfileView: View {
             switch item {
             case .create:
                 NavigationView {
-                    AccountView()
+                    AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.createPushed))
                 }
             case .pro:
                 NavigationView {
