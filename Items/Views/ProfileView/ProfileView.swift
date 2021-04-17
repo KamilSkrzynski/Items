@@ -101,7 +101,7 @@ struct ProfileView: View {
             switch item {
             case .create:
                 NavigationView {
-                    CreateAccountView()
+                    AccountView()
                 }
             case .pro:
                 NavigationView {
