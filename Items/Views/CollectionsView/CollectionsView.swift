@@ -69,7 +69,7 @@ struct CollectionsView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 500))], content: {
                     ForEach(customCollections, id: \.self) { collection in
                         NavigationLink(
-                            destination: ItemView(),
+                            destination: ItemsView(),
                             label: {
                                 CollectionsItemView(collection: collection)
                             })
@@ -109,7 +109,7 @@ struct CollectionsView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 500))], content: {
                 ForEach(suggestedCollections, id: \.self) { collection in
                     NavigationLink(
-                        destination: ItemView(),
+                        destination: ItemsView(),
                         label: {
                             CollectionsItemView(collection: collection)
                         })
