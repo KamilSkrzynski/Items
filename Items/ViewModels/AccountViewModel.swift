@@ -17,12 +17,12 @@ final class AccountViewModel: ObservableObject {
         self._isPushed = isPushed
     }
     
-    var emailPlaceholderText = "email"
-    var passwordPlaceholderText = "password"
-    var emailIconImage = "envelope.fill"
-    var passwordIconImage = "lock.rectangle.fill"
-    var buttonIconImage = "arrow.right.square.fill"
-    var closeIconImage = "xmark"
+    let emailPlaceholderText = "email"
+    let passwordPlaceholderText = "password"
+    let emailIconImage = "envelope.fill"
+    let passwordIconImage = "lock.rectangle.fill"
+    let buttonIconImage = "arrow.right.square.fill"
+    let closeIconImage = "xmark"
     
     var title: String {
         switch mode {
