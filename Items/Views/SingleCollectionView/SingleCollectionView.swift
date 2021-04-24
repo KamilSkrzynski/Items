@@ -9,39 +9,48 @@ import SwiftUI
 
 struct SingleCollectionView: View {
     
-    @State var collection: String
+    @StateObject var viewModel: SingleCollectionViewModel
     
     var body: some View {
-        HStack {
-            Image(collection)
-                .resizable()
-                .frame(width: 100, height: 100)
-                .scaledToFill()
-                .offset(x: 10, y: 10)
-            
-            Spacer()
-            
-            VStack(alignment: .leading) {
-                Text("Tech")
-                    .font(.headline)
+        GeometryReader { proxy in
+            VStack {
+                Image(viewModel.imageName)
+                    .resizable()
+                    .frame(width: 150, height: 150)
+                    .scaledToFill()
+                    .offset(x: -15, y: -10)
                 
-                Text("Save your tech essentials")
-                    .font(.callout)
+                Spacer()
+                Spacer()
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(viewModel.title)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        
+                        Text(viewModel.subtitle)
+                            .font(.callout)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.leading)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                }
+                Spacer()
             }
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .offset(x: -5)
+            .frame(width: 180, height: 280)
+            .background(Color.grayColor)
+            .padding()
         }
-        .background(Color.grayColor)
-        .padding()
-        .frame(maxWidth: .infinity)
     }
 }
 
 struct SingleCollectionView_Previews: PreviewProvider {
+    static let viewModel = SingleCollectionViewModel(title: "Tech", subtitle: "Test tech expand", imageName: "Tech")
     static var previews: some View {
-        SingleCollectionView(collection: "Tech")
-            .preferredColorScheme(.dark)
+        SingleCollectionView(viewModel: viewModel)
+            .preferredColorScheme(.light)
     }
 }

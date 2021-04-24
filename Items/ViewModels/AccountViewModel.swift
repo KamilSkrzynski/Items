@@ -30,7 +30,6 @@ final class AccountViewModel: ObservableObject {
             return "Log In"
         case .signup:
             return "Create Account"
-            
         }
     }
     
@@ -40,7 +39,6 @@ final class AccountViewModel: ObservableObject {
             return "Log into your account"
         case .signup:
             return "Create an account to unlock exclusive features such as iCloud synchronize"
-            
         }
     }
     
@@ -49,8 +47,7 @@ final class AccountViewModel: ObservableObject {
         case .login:
             return "Log In"
         case .signup:
-            return "Sign Up"
-            
+            return "Sign Up"   
         }
     }
     

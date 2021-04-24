@@ -9,23 +9,89 @@ import SwiftUI
 
 struct CollectionsView: View {
     
+    @StateObject private var viewModel = CollectionsViewModel()
+    
     @Environment(\.colorScheme) var colorScheme
     
-    let customCollections: [String] = []
-    let suggestedCollections = ["Tech", "Clothes", "Home"]
     
-    @State var selectedTab = 0
+    let customCollections: [String] = []
     
     @State var showSheet: Bool = false
     
     @State var createCollection: Bool = false
     @State var showProfile: Bool = false
     
+    var customGrid: some View{
+        VStack {
+            HStack {
+                Text(viewModel.customListTitle)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+            }
+            .padding()
+            
+            HStack {
+                Button(action: {
+                    self.showSheet.toggle()
+                }, label: {
+                            Text(customCollections.count > 0 ? viewModel.anyCustomListButtonTitle : viewModel.emptyCustomListButtonTitle)
+                                .font(.system(size: 15))
+                                .fontWeight(.semibold)
+                                .foregroundColor(.secondary)
+                })
+                
+                Spacer()
+            }
+            .padding(.horizontal)
+            
+            if customCollections.count > 0 {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 500))], content: {
+                    ForEach(viewModel.suggestedCollections, id: \.self) { collection in
+                        NavigationLink(
+                            destination: ItemsView(),
+                            label: {
+                                                    SingleCollectionView(viewModel: collection)
+                            })
+                    }
+                    .foregroundColor(.primary)
+                })
+            }
+        }
+    }
+    
+    var suggestedGrid: some View {
+        VStack {
+            HStack {
+                Text(viewModel.suggestedListTitle)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+            }
+            .padding()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+            LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
+                ForEach(viewModel.suggestedCollections, id: \.self) { collection in
+                    NavigationLink(
+                        destination: ItemsView(),
+                        label: {
+                            SingleCollectionView(viewModel: collection)
+                                .padding(.bottom, 280)
+                                .padding(.trailing, 190)
+                        })
+                }
+                .foregroundColor(.primary)
+            })
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 HStack {
-                    Text("Sort your items by collections")
+                    Text(viewModel.subtitle)
                         .font(.headline)
                         .foregroundColor(.gray)
                     Spacer()
@@ -40,10 +106,9 @@ struct CollectionsView: View {
                 suggestedGrid
             }
             Spacer()
-            //  TabContainerView(selectedTab: selectedTab)
         }
         .edgesIgnoringSafeArea(.bottom)
-        .navigationTitle("Collections")
+        .navigationTitle(viewModel.title)
         .sheet(isPresented: $createCollection) {
             NewCollectionView()
         }
@@ -54,73 +119,10 @@ struct CollectionsView: View {
         })
         .accentColor(.primary)
     }
-    
-    var customGrid: some View{
-        VStack {
-            HStack {
-                Text("Custom lists")
-                    .font(.title)
-                    .fontWeight(.semibold)
-                Spacer()
-            }
-            .padding()
-            
-            if customCollections.count > 0 {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 500))], content: {
-                    ForEach(customCollections, id: \.self) { collection in
-                        NavigationLink(
-                            destination: ItemsView(),
-                            label: {
-                                SingleCollectionView(collection: collection)
-                            })
-                    }
-                    .foregroundColor(.primary)
-                })
-            }
-            else {
-                HStack {
-                    Button(action: {
-                        self.showSheet.toggle()
-                    }, label: {
-                        Text("Add your first collection")
-                            .font(.system(size: 15))
-                            .fontWeight(.regular)
-                            .foregroundColor(.secondary)
-                            .opacity(0.5)
-                    })
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-    
-    var suggestedGrid: some View {
-        VStack {
-            HStack {
-                Text("Suggested lists")
-                    .font(.title)
-                    .fontWeight(.semibold)
-                Spacer()
-            }
-            .padding()
-            
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 500))], content: {
-                ForEach(suggestedCollections, id: \.self) { collection in
-                    NavigationLink(
-                        destination: ItemsView(),
-                        label: {
-                            SingleCollectionView(collection: collection)
-                        })
-                }
-                .foregroundColor(.primary)
-            })
-        }
-    }
 }
 
 struct CollectionsView_Previews: PreviewProvider {
+    
     static var previews: some View {
         NavigationView {
             CollectionsView()

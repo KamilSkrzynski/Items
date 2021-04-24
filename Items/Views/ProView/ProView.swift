@@ -26,7 +26,7 @@ struct ProView: View {
                         ZStack {
                             Rectangle()
                                 .frame(width: 20, height: 20)
-                                .overlay(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.6862745098, green: 0.1098039216, blue: 0.3568627451, alpha: 1)), Color(#colorLiteral(red: 0.9647058824, green: 0.3058823529, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1607843137, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                .overlay(Gradient.primaryGradient)
                             
                             Image(systemName: viewModel.benefitImageName)
                                 .foregroundColor(.grayColor)
@@ -50,7 +50,7 @@ struct ProView: View {
                     HStack {
                         Rectangle()
                             .frame(width: subscriptionButton.width, height: 80)
-                            .overlay(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.6862745098, green: 0.1098039216, blue: 0.3568627451, alpha: 1)), Color(#colorLiteral(red: 0.9647058824, green: 0.3058823529, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.724828855, green: 0.4041588916, blue: 0.08592099306, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .overlay(Gradient.primaryGradient)
                             .opacity(selectedOption == subscriptionButton.selectedOption ? 1.0 : 0.1)
                             .offset(x: -5)
                         
@@ -89,7 +89,7 @@ struct ProView: View {
     }
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 HStack {
                     Text(viewModel.subtitle)
@@ -124,9 +124,7 @@ struct ProView: View {
                 Button(action: {
                     
                 }, label: {
-                    LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.6862745098, green: 0.1098039216, blue: 0.3568627451, alpha: 1)), Color(#colorLiteral(red: 0.9647058824, green: 0.3058823529, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.724828855, green: 0.4041588916, blue: 0.08592099306, alpha: 1))]),
-                                   startPoint: .topLeading,
-                                   endPoint: .bottomTrailing)
+                    Gradient.primaryGradient
                         .mask(
                             Text(viewModel.buttonTitle)
                                 .font(.system(size: 20))

@@ -11,7 +11,7 @@ import SwiftUI
 struct ItemsApp: App {
     var body: some Scene {
         WindowGroup {
-            TabContainerView()
+                TabContainerView()
         }
     }
 }

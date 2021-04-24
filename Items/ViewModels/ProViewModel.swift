@@ -37,13 +37,13 @@ final class ProViewModel: ObservableObject {
                            payAmount: "$ 4,99",
                            savePercentage: "Save 17%",
                            selectedOption: 1,
-                           width: 160),
+                           width: 60),
         
         SubscriptionButton(valuePerMonth: "$ 1,99 a month",
                            subscriptionLength: "1 month",
                            payAmount: "$ 1,99",
                            savePercentage: "",
                            selectedOption: 2,
-                           width: 80)
+                           width: 20)
     ]
 }

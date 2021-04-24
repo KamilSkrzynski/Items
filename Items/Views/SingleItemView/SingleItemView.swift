@@ -48,7 +48,7 @@ struct SingleItemView: View {
                     .font(.caption)
                     .foregroundColor(.primary)
                 
-                Text("$ 99.99")
+                Text("$ 99,99")
                     .font(.callout)
                     .foregroundColor(.primary)
             }

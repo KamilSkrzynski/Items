@@ -11,7 +11,7 @@ struct TabContainerView: View {
     
     @State var selectedTab: Int = 0
     @State var showAddSheet: Bool = false
-
+    
     var body: some View {
         
         VStack {
@@ -20,10 +20,9 @@ struct TabContainerView: View {
                     CollectionsView()
                 }
             }
-            else if selectedTab == 1 {
-                NavigationView {
-                    ProfileView()
-                }
+            else if selectedTab == 1 {                    NavigationView {
+                ProfileView()
+            }
             }
             HStack {
                 Button(action: {
@@ -45,7 +44,7 @@ struct TabContainerView: View {
                             //      .stroke(Color.black)
                             .foregroundColor(Color.secondaryColor)
                             .frame(width: 80, height: 80)
-                            .shadow(radius: 20)
+                      //      .shadow(color: .primary, radius: 5)
                         
                         Circle()
                             .foregroundColor(Color.mainColor)
