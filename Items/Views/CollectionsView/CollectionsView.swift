@@ -13,13 +13,9 @@ struct CollectionsView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    
-    let customCollections: [String] = []
-    
     @State var showSheet: Bool = false
     
     @State var createCollection: Bool = false
-    @State var showProfile: Bool = false
     
     var customGrid: some View{
         VStack {
@@ -31,31 +27,50 @@ struct CollectionsView: View {
             }
             .padding()
             
-            HStack {
-                Button(action: {
-                    self.showSheet.toggle()
-                }, label: {
-                            Text(customCollections.count > 0 ? viewModel.anyCustomListButtonTitle : viewModel.emptyCustomListButtonTitle)
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.secondary)
-                })
-                
-                Spacer()
-            }
-            .padding(.horizontal)
-            
-            if customCollections.count > 0 {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 500))], content: {
-                    ForEach(viewModel.suggestedCollections, id: \.self) { collection in
+            if viewModel.customCollections.count > 0 {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                    ForEach(viewModel.customCollections, id: \.self) { collection in
                         NavigationLink(
                             destination: ItemsView(),
                             label: {
-                                                    SingleCollectionView(viewModel: collection)
+                                SingleCollectionView(viewModel: collection)
+                                    .padding(.bottom, 280)
+                                    .padding(.trailing, 190)
                             })
                     }
                     .foregroundColor(.primary)
-                })
+                       
+                        HStack {
+                            Button(action: {
+                                self.createCollection.toggle()
+                            }, label: {
+                                        Text(viewModel.anyCustomListButtonTitle)
+                                            .font(.system(size: 15))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.secondary)
+                            })
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+            }
+            else {
+                HStack {
+                    Button(action: {
+                        self.createCollection.toggle()
+                    }, label: {
+                                Text(viewModel.emptyCustomListButtonTitle)
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.secondary)
+                    })
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
             }
         }
     }
@@ -112,12 +127,13 @@ struct CollectionsView: View {
         .sheet(isPresented: $createCollection) {
             NewCollectionView()
         }
-        .sheet(isPresented: $showSheet, content: {
-            NavigationView {
-                ProView()
-            }
-        })
         .accentColor(.primary)
+//        .sheet(isPresented: $showSheet, content: {
+//            NavigationView {
+//                ProView()
+//            }
+//        })
+//        .accentColor(.primary)
     }
 }
 

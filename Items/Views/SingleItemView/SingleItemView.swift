@@ -44,13 +44,13 @@ struct SingleItemView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 
-                Text("store: Zara")
-                    .font(.caption)
-                    .foregroundColor(.primary)
-                
-                Text("$ 99,99")
+                Text("store:")
                     .font(.callout)
                     .foregroundColor(.primary)
+                
+                Text("#bottoms")
+                    .font(.caption)
+                    .foregroundColor(.gray)
             }
             .offset(x: -5, y: 10)
             .padding(.horizontal, 5)

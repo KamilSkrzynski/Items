@@ -21,4 +21,19 @@ final class CollectionsViewModel: ObservableObject {
         SingleCollectionViewModel(title: "Tech", subtitle: "Save your tech essentials", imageName: "Tech"),
         SingleCollectionViewModel(title: "Home", subtitle: "Elevate your home's design", imageName: "Home")
     ]
+    
+    let customCollections = [
+        SingleCollectionViewModel(title: "Workout", subtitle: "Get your gear", imageName: "Workout")
+    ]
+}
+
+extension CollectionsViewModel {
+    enum Sheets: Identifiable {
+        case createCollection
+        case pro
+        
+        var id: Int {
+            hashValue
+        }
+    }
 }

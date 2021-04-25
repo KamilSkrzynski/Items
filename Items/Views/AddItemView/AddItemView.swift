@@ -13,7 +13,7 @@ struct AddItemView: View {
     
     @State var name = ""
     @State var store = ""
-    @State var price = ""
+    @State var tag = ""
     @State var collection = "collection"
     
     @State private var showCollections = false
@@ -56,13 +56,13 @@ struct AddItemView: View {
                             TextField("store", text: $store)
                         }
                         HStack {
-                            Image(systemName: "dollarsign.square.fill")
-                            TextField("price", text: $price)
+                            Image(systemName: "tag.fill")
+                                .font(.system(size: 15))
+                            TextField("tag", text: $tag)
                         }
                         
                         HStack {
-                            Image(systemName: "tag.fill")
-                                .font(.system(size: 15))
+                            Image(systemName: "doc.fill")
                             Menu  {
                                 ForEach(collections, id: \.self) { coll in
                                     Button(action: {
@@ -124,7 +124,7 @@ struct AddItemView: View {
     }
     
     func check() -> Bool {
-        if !name.isEmpty, !store.isEmpty, !price.isEmpty, !collection.isEmpty {
+        if !name.isEmpty, !store.isEmpty, !tag.isEmpty, !collection.isEmpty {
             return true
         }
         else {
