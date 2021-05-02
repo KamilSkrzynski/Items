@@ -19,6 +19,7 @@ final class AccountViewModel: ObservableObject {
     
     let emailPlaceholderText = "email"
     let passwordPlaceholderText = "password"
+    let passwordAgainPlaceholderText = "password again"
     let emailIconImage = "envelope.fill"
     let passwordIconImage = "lock.rectangle.fill"
     let buttonIconImage = "arrow.right.square.fill"
@@ -49,8 +50,7 @@ final class AccountViewModel: ObservableObject {
         case .signup:
             return "Sign Up"   
         }
-    }
-    
+    }    
 }
 
 extension AccountViewModel {
@@ -62,6 +62,13 @@ extension AccountViewModel {
     
     func isValidPassword(_ password: String) -> Bool {
         return password.count > 5
+    }
+    
+    func isPasswordMatching(_ password1: String, _ password2: String) -> Bool {
+        if password1 == password2 {
+            return true
+        }
+        return false
     }
 }
 

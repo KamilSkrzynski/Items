@@ -33,6 +33,10 @@
 		378F9088262C3267003AAE39 /* CustomCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F9087262C3267003AAE39 /* CustomCollection.swift */; };
 		378F9093262C3542003AAE39 /* SingleCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F9092262C3542003AAE39 /* SingleCollectionViewModel.swift */; };
 		378F9097262C4E8D003AAE39 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F9096262C4E8D003AAE39 /* LandingView.swift */; };
+		379E1793263ECEA2002AD0F0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E1792263ECEA2002AD0F0 /* Item.swift */; };
+		379E1795263ED332002AD0F0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E1794263ED332002AD0F0 /* DataService.swift */; };
+		379E1797263ED33A002AD0F0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E1796263ED33A002AD0F0 /* AuthService.swift */; };
+		379E1799263F1196002AD0F0 /* ProfileItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E1798263F1196002AD0F0 /* ProfileItemViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,10 @@
 		378F9087262C3267003AAE39 /* CustomCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollection.swift; sourceTree = "<group>"; };
 		378F9092262C3542003AAE39 /* SingleCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionViewModel.swift; sourceTree = "<group>"; };
 		378F9096262C4E8D003AAE39 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		379E1792263ECEA2002AD0F0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		379E1794263ED332002AD0F0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		379E1796263ED33A002AD0F0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		379E1798263F1196002AD0F0 /* ProfileItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +152,7 @@
 				37734A94262B5FB40048E659 /* ProViewModel.swift */,
 				378F907C262C2E8A003AAE39 /* CollectionsViewModel.swift */,
 				378F9092262C3542003AAE39 /* SingleCollectionViewModel.swift */,
+				379E1798263F1196002AD0F0 /* ProfileItemViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -156,6 +165,7 @@
 				37734A97262B63700048E659 /* SubscriptionButton.swift */,
 				378F9084262C3247003AAE39 /* SuggestedCollection.swift */,
 				378F9087262C3267003AAE39 /* CustomCollection.swift */,
+				379E1792263ECEA2002AD0F0 /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -163,6 +173,8 @@
 		37734A40262B2C0B0048E659 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				379E1794263ED332002AD0F0 /* DataService.swift */,
+				379E1796263ED33A002AD0F0 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -341,10 +353,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				37734A44262B2C660048E659 /* TabContainerView.swift in Sources */,
+				379E1795263ED332002AD0F0 /* DataService.swift in Sources */,
 				37734A76262B30FC0048E659 /* TermsPrivacyView.swift in Sources */,
 				37734A66262B2FF50048E659 /* ProfileView.swift in Sources */,
 				37734A6C262B30540048E659 /* ProView.swift in Sources */,
 				37734A2E262B2B6C0048E659 /* ItemsApp.swift in Sources */,
+				379E1793263ECEA2002AD0F0 /* Item.swift in Sources */,
 				37734A71262B30B30048E659 /* AccountView.swift in Sources */,
 				37734A5C262B2E760048E659 /* ItemsView.swift in Sources */,
 				37734A53262B2DAB0048E659 /* NewCollectionView.swift in Sources */,
@@ -359,6 +373,8 @@
 				37734A57262B2DF10048E659 /* SingleItemView.swift in Sources */,
 				37734A4E262B2D6C0048E659 /* CollectionsView.swift in Sources */,
 				378F9088262C3267003AAE39 /* CustomCollection.swift in Sources */,
+				379E1799263F1196002AD0F0 /* ProfileItemViewModel.swift in Sources */,
+				379E1797263ED33A002AD0F0 /* AuthService.swift in Sources */,
 				378F907D262C2E8A003AAE39 /* CollectionsViewModel.swift in Sources */,
 				37734A61262B2F1A0048E659 /* SingleCollectionView.swift in Sources */,
 				37734A48262B2CE20048E659 /* AddItemView.swift in Sources */,

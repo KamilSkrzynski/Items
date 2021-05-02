@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct ItemsApp: App {
+    
+    @AppStorage("isDarkMode") private var isDarkMode = true
+    
     var body: some Scene {
         WindowGroup {
                 TabContainerView()
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }

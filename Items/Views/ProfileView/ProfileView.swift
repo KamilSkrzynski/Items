@@ -8,47 +8,41 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     @StateObject private var viewModel = ProfileViewModel()
     
     @State var activeSheet: ProfileViewButton.Sheets?
     
-    
     var profileOptions: some View {
-        ForEach(viewModel.buttons, id: \.self) { button in
+        List(viewModel.itemViewModels.indices, id: \.self) { index in
             Button(action: {
-                activeSheet = button.sheet
+                viewModel.tappedItem(at: index)
             }, label: {
-                HStack() {
-                    ZStack {
-                        Rectangle()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.secondaryColor)
-                            .opacity(0.5)
-                        Image(systemName: button.imageName)
-                            .foregroundColor(.mainColor)
-                            .font(.system(size: 35))
-                    }
-                    .offset(x: 10, y: 10)
-                    Text(button.title)
-                        .padding()
+                HStack {
+                    Image(systemName: viewModel.itemViewModels[index].image)
+                        .foregroundColor(.secondaryColor)
+                        .font(.system(size: 25))
+                    Text(viewModel.itemViewModels[index].name)
                     Spacer()
-                    Image(systemName: viewModel.chevron)
-                        .padding()
                 }
+                .offset(x: 5)
                 .accentColor(.primary)
-                .frame(height: 60)
-                .background(Color.grayColor)
-                .padding()
+        //        .frame(height: 60)
+            //    .background(Color.grayColor)
+                .padding(.vertical, 5)
             })
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
     }
     
     var body: some View {
-        VStack() {
+        VStack {
             
             profileOptions
-            
+
             Spacer()
             
         }
@@ -57,14 +51,17 @@ struct ProfileView: View {
             case .create:
                 NavigationView {
                     AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.createPushed))
+                        .preferredColorScheme(isDarkMode ? .dark : .light)
                 }
             case .pro:
                 NavigationView {
                     ProView()
+                        .preferredColorScheme(isDarkMode ? .dark : .light)
                 }
             case .privacy:
                 NavigationView {
                     TermsPrivacyView()
+                        .preferredColorScheme(isDarkMode ? .dark : .light)
                 }
             }
         }

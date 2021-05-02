@@ -9,56 +9,43 @@ import SwiftUI
 
 struct LandingView: View {
     var body: some View {
-        GeometryReader { proxy in
-            VStack(alignment: .center) {
-                
-                ZStack {
-                    
-                    Rectangle()
-                        .frame(width: 150, height: 150)
-                        .foregroundColor(.primary)
-                        .offset(x: 10, y: 10)
-                    Image("logo")
-                            .resizable()
-                        .frame(width: 150, height: 150)
-                }
-                Gradient.primaryGradient
-                    .mask(VStack {
-                        Text("ITEMS")
-                        .font(.system(size: 50))
-                            .fontWeight(.bold)
-                    }).frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .padding()
+        NavigationView {
+            VStack {
+                Spacer()
+                Text("ITEMS")
+                    .font(.system(size: 50, weight: .bold))
                 Text("Track things you want to buy")
-                    .font(.headline)
-                    .foregroundColor(.primary)
+                    .font(.title3)
+                    .fontWeight(.semibold)
                 
                 Spacer()
-                
-                NavigationLink(
-                    destination:
-                        TabContainerView(),
-                    label: {
-                        Gradient.primaryGradient
-                            .mask(
-                                Text("Get Started")
-                                    .font(.system(size: 20))
-                                    .fontWeight(.bold)
-                            )
-                            .background(Color.grayColor)
-                            .frame(height: 60)
-                    })
+                HStack {
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 25))
+                        .foregroundColor(.appColor)
+                        .padding()
+                    Spacer()
+                Text("Get Started")
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .font(.title2)
+                    Spacer()
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 25))
+                        .foregroundColor(.white).padding()
+                }
+                .frame(height: 60)
+                .frame(maxWidth: .infinity)
+                .background(Color.appColor)
+                .padding()
             }
-            .padding()
-        }
-        }
+            .shadow(radius: 3)
+        }.background(Color.red)
+    }
 }
 
 struct LandingView_Previews: PreviewProvider {
     static var previews: some View {
         LandingView()
-            .preferredColorScheme(.dark)
-            
     }
 }

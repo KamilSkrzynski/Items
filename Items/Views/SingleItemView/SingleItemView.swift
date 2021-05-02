@@ -22,19 +22,22 @@ struct SingleItemView: View {
                         
                     }, label: {
                         Image(systemName: "trash")
-                            .font(.system(size: 20))
+                            .font(.system(size: 15))
                             .foregroundColor(.secondaryColor)
                     })
-                    .offset(x: 60)
+                    .offset(x: 60, y: 5)
                     
                     Spacer()
                     
+                    Divider()
+                        .padding()
+                    
                     Image("\(item)")
                         .resizable()
-                        .frame(width: 150, height: 150)
+                        .frame(width: 140, height: 140)
                         .scaledToFill()
+                        .offset(y: -5)
                 }
-                .offset(x: -10, y: 10)
             }
             .frame(width: 150, height: 200)
             

@@ -14,6 +14,7 @@ struct AccountView: View {
     
     @State var email: String = ""
     @State var password: String = ""
+    @State var passwordAgain: String = ""
     
     var body: some View {
         VStack {
@@ -29,14 +30,25 @@ struct AccountView: View {
                 HStack {
                     Image(systemName: viewModel.emailIconImage)
                     TextField(viewModel.emailPlaceholderText, text: $email)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                 }
                 .padding()
                 
                 HStack {
                     Image(systemName: viewModel.passwordIconImage)
                     SecureField(viewModel.passwordPlaceholderText, text: $password)
+                        .autocapitalization(.none)
                 }
                 .padding()
+                if viewModel.title == "Create Account" {
+                HStack {
+                    Image(systemName: viewModel.passwordIconImage)
+                    SecureField(viewModel.passwordAgainPlaceholderText, text: $passwordAgain)
+                        .autocapitalization(.none)
+                }
+                .padding()
+                }
             }
             .background(Color.grayColor)
             
@@ -46,27 +58,30 @@ struct AccountView: View {
                 HStack {
                     Image(systemName: viewModel.buttonIconImage)
                         .font(.system(size: 30))
-                        .foregroundColor(.grayColor)
+                        .foregroundColor(.clear)
                     Spacer()
                     Text(viewModel.buttonTitle)
                         .font(.system(size: 20))
                         .fontWeight(.bold)
-                        .padding()
+                        .foregroundColor(.white)
                     Spacer()
                     Image(systemName: viewModel.buttonIconImage)
                         .font(.system(size: 30))
-                        .foregroundColor(.secondaryColor)
+                        .foregroundColor(.white)
                     
                     
                 }
                 .padding()
                 .frame(height: 60)
-                .opacity(viewModel.isValidEmail(email) && viewModel.isValidPassword(password) ? 1.0 : 0.3)
             })
             .frame(maxWidth: .infinity)
-            .background(Color.grayColor)
+            .background(Color.appColor)
             .accentColor(.primary)
             .padding(.vertical)
+            .opacity(withAnimation {
+                viewModel.isValidEmail(email) && viewModel.isValidPassword(password)  && viewModel.isPasswordMatching(password, passwordAgain) ? 1.0 : 0.3
+
+    })
             
             Text("Privacy Policy")
                 .font(.footnote)

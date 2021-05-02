@@ -21,18 +21,18 @@ struct ProView: View {
             ForEach(viewModel.benefits, id: \.self) { benefit in
                 HStack {
                     ZStack {
-                        Rectangle()
-                            .frame(width: 25, height: 25)
+//                        Rectangle()
+//                            .frame(width: 25, height: 25)
                         ZStack {
-                            Rectangle()
-                                .frame(width: 20, height: 20)
-                                .overlay(Gradient.primaryGradient)
+//                            Rectangle()
+//                                .frame(width: 20, height: 20)
+//                                .overlay(Color.appColor)
                             
                             Image(systemName: viewModel.benefitImageName)
-                                .foregroundColor(.grayColor)
-                                .offset(x: 5, y: -5)
+                                .foregroundColor(.appColor)
+                  //              .offset(x: 5, y: -5)
                         }
-                        .offset(x: -5, y: 5)
+               //         .offset(x: -5, y: 5)
                     }
                     Text(benefit.title)
                     Spacer()
@@ -48,13 +48,13 @@ struct ProView: View {
             VStack {
                 ZStack {
                     HStack {
-                        Rectangle()
-                            .frame(width: subscriptionButton.width, height: 80)
-                            .overlay(Gradient.primaryGradient)
-                            .opacity(selectedOption == subscriptionButton.selectedOption ? 1.0 : 0.1)
-                            .offset(x: -5)
-                        
-                        Spacer()
+//                        Rectangle()
+//                            .frame(width: subscriptionButton.width, height: 80)
+//                    //        .overlay(Gradient.primaryGradient)
+//                            .opacity(selectedOption == subscriptionButton.selectedOption ? 1.0 : 0.1)
+//                            .offset(x: -5)
+//                        
+//                        Spacer()
                     }
                     
                     VStack {
@@ -73,9 +73,10 @@ struct ProView: View {
                                 .font(.headline)
                         }
                     }
+                    .foregroundColor(selectedOption == subscriptionButton.selectedOption ? .mainColor : .secondaryColor)
                     .accentColor(.primary)
                     .padding()
-                    .background(Color.grayColor)
+                    .background(Color.appColor)
                 }
                 .frame(height: 60)
             }
@@ -124,14 +125,15 @@ struct ProView: View {
                 Button(action: {
                     
                 }, label: {
-                    Gradient.primaryGradient
-                        .mask(
+                    VStack {
                             Text(viewModel.buttonTitle)
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                        )
-                        .background(Color.grayColor)
-                        .frame(height: 60)
+                                .foregroundColor(.white)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                        .background(Color.green)
                 })
                 
                 Spacer()

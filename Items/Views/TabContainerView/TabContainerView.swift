@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabContainerView: View {
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var selectedTab: Int = 0
     @State var showAddSheet: Bool = false
@@ -79,6 +80,7 @@ struct TabContainerView: View {
         .fullScreenCover(isPresented: $showAddSheet) {
             NavigationView {
                 AddItemView()
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
             }
         }
     }

@@ -18,16 +18,19 @@ struct SingleCollectionView: View {
                     .resizable()
                     .frame(width: 150, height: 150)
                     .scaledToFill()
-                    .offset(x: -15, y: -10)
+                    .padding(.horizontal)
+                    .offset(y: -2)
                 
-                Spacer()
+                Divider()
+                    .padding(.horizontal)
+                
                 Spacer()
                 
                 HStack {
                     VStack(alignment: .leading) {
                         Text(viewModel.title)
                             .font(.title2)
-                            .fontWeight(.bold)
+                            .fontWeight(.semibold)
                         
                         Text(viewModel.subtitle)
                             .font(.callout)
@@ -38,13 +41,15 @@ struct SingleCollectionView: View {
                     
                     Spacer()
                 }
-                Spacer()
             }
-            .frame(width: 180, height: 280)
-            .background(Color.grayColor)
             .padding()
+            .frame(width: 180, height: 300)
+            .background(Color.grayColor)
         }
+        .padding(.leading)
+        
     }
+    
 }
 
 struct SingleCollectionView_Previews: PreviewProvider {

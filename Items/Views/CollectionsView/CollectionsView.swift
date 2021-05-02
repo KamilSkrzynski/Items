@@ -11,7 +11,7 @@ struct CollectionsView: View {
     
     @StateObject private var viewModel = CollectionsViewModel()
     
-    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var showSheet: Bool = false
     
@@ -125,7 +125,10 @@ struct CollectionsView: View {
         .edgesIgnoringSafeArea(.bottom)
         .navigationTitle(viewModel.title)
         .sheet(isPresented: $createCollection) {
-            NewCollectionView()
+            NavigationView {
+                NewCollectionView()
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
+                    .background(isDarkMode == true ? Color.black.ignoresSafeArea()  : Color.white.ignoresSafeArea() )           }
         }
         .accentColor(.primary)
 //        .sheet(isPresented: $showSheet, content: {
@@ -144,5 +147,6 @@ struct CollectionsView_Previews: PreviewProvider {
             CollectionsView()
                 .preferredColorScheme(.dark)
         }
+        .preferredColorScheme(.light)
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CustomCollection {
     
-    var id = UUID()
+    let id = UUID()
     var userID: String
     var title: String
     var subtitle: String?

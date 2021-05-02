@@ -13,7 +13,7 @@ final class ProViewModel: ObservableObject {
     let subtitle = "Upgrade to unlock"
     let buttonTitle = "Start your 7 day free trial now"
     let trialText = "Your first 7 days are free. No charge until your 7 day free trial ends. Cancel anytime."
-    let benefitImageName = "square.split.diagonal.fill"
+    let benefitImageName = "checkmark.rectangle.fill"
     let closeIconImage = "xmark"
     
     var benefits = [

@@ -50,15 +50,21 @@ struct AddItemView: View {
                         HStack { //scribble.variable
                             Image(systemName: "scribble.variable")
                             TextField("name", text: $name)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
                         }
                         HStack {
                             Image(systemName: "shippingbox.fill")
                             TextField("store", text: $store)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
                         }
                         HStack {
                             Image(systemName: "tag.fill")
                                 .font(.system(size: 15))
                             TextField("tag", text: $tag)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
                         }
                         
                         HStack {
@@ -91,25 +97,27 @@ struct AddItemView: View {
                 HStack {
                     Image(systemName: "plus.square.fill")
                         .font(.system(size: 30))
-                        .foregroundColor(.grayColor)
+                        .foregroundColor(.clear)
                     Spacer()
                     Text("Create")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
+                        .foregroundColor(.white)
                     Spacer()
                     Image(systemName: "plus.square.fill")
                         .font(.system(size: 30))
-                        .foregroundColor(.secondaryColor)
+                        .foregroundColor(.white)
                     
                 }
                 .padding()
                 .frame(height: 60)
-                .opacity(check() ? 1.0 : 0.3)
             })
             .frame(maxWidth: .infinity)
-            .background(Color.grayColor)
+            .background(Color.appColor)
             .accentColor(.primary)
             .padding(.vertical)
+            .opacity(check() ? 1.0 : 0.3)
+            
             Spacer()
         }
         .padding()
