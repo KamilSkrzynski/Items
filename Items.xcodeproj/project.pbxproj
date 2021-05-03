@@ -39,6 +39,7 @@
 		379E1799263F1196002AD0F0 /* ProfileItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E1798263F1196002AD0F0 /* ProfileItemViewModel.swift */; };
 		379E179D26401794002AD0F0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E179C26401794002AD0F0 /* OnboardingView.swift */; };
 		379E179F26405383002AD0F0 /* AddItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E179E26405383002AD0F0 /* AddItemViewModel.swift */; };
+		379E17A126405663002AD0F0 /* NewCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17A026405663002AD0F0 /* NewCollectionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		379E1798263F1196002AD0F0 /* ProfileItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemViewModel.swift; sourceTree = "<group>"; };
 		379E179C26401794002AD0F0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		379E179E26405383002AD0F0 /* AddItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModel.swift; sourceTree = "<group>"; };
+		379E17A026405663002AD0F0 /* NewCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCollectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				378F9092262C3542003AAE39 /* SingleCollectionViewModel.swift */,
 				379E1798263F1196002AD0F0 /* ProfileItemViewModel.swift */,
 				379E179E26405383002AD0F0 /* AddItemViewModel.swift */,
+				379E17A026405663002AD0F0 /* NewCollectionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				378F9097262C4E8D003AAE39 /* LandingView.swift in Sources */,
 				378F9093262C3542003AAE39 /* SingleCollectionViewModel.swift in Sources */,
 				37734A8F262B4F3B0048E659 /* ProfileViewButton.swift in Sources */,
+				379E17A126405663002AD0F0 /* NewCollectionViewModel.swift in Sources */,
 				37734A82262B31630048E659 /* Colors.swift in Sources */,
 				37734A57262B2DF10048E659 /* SingleItemView.swift in Sources */,
 				37734A4E262B2D6C0048E659 /* CollectionsView.swift in Sources */,

@@ -9,18 +9,16 @@ import SwiftUI
 
 struct NewCollectionView: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    @StateObject private var viewModel = NewCollectionViewModel()
     
-    @State var title = ""
-    @State var subtitle = ""
-    @State var tag = ""
+    @Environment(\.presentationMode) var presentationMode
     
     @State private var showCollections = false
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("Create new collection for your items")
+                Text(viewModel.subtitle)
                     .font(.headline)
                     .foregroundColor(.gray)
                     .padding(.bottom)
@@ -33,7 +31,7 @@ struct NewCollectionView: View {
                                 .frame(width: 140, height: 140)
                                 .foregroundColor(.mainColor)
                             
-                            Image(systemName: "photo.fill")
+                            Image(systemName: viewModel.imagePlaceholderImageName)
                                 .foregroundColor(.secondaryColor)
                                 .font(.system(size: 60))
                         }
@@ -43,12 +41,12 @@ struct NewCollectionView: View {
                     Spacer()
                     
                     VStack(spacing: 20) {
-                        HStack {                            Image(systemName: "scribble.variable")
-                            TextField("title", text: $title)
+                        HStack {                            Image(systemName: viewModel.collectionTitleImageName)
+                            TextField(viewModel.titlePlaceholder, text: $viewModel.collectionTitle)
                         }
                         HStack {
-                            Image(systemName: "shippingbox.fill")
-                            TextField("subtitle", text: $subtitle)
+                            Image(systemName: viewModel.collectionSubtitleImageName)
+                            TextField(viewModel.subtitlePlaceholder, text: $viewModel.collectionSubtitle)
                         }                    }
                         .padding()
                 }
@@ -61,16 +59,16 @@ struct NewCollectionView: View {
                 
             }, label: {
                 HStack {
-                    Image(systemName: "plus.square.fill")
+                    Image(systemName: viewModel.buttonImageName)
                         .font(.system(size: 30))
                         .foregroundColor(.clear)
                     Spacer()
-                    Text("Create")
+                    Text(viewModel.buttonTitle)
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     Spacer()
-                    Image(systemName: "plus.square.fill")
+                    Image(systemName: viewModel.buttonImageName)
                         .font(.system(size: 30))
                         .foregroundColor(.white)
                     
@@ -82,28 +80,19 @@ struct NewCollectionView: View {
             .background(Color.appColor)
             .accentColor(.primary)
             .padding(.vertical)
-            .opacity(check() ? 1.0 : 0.3)
+            .opacity(viewModel.check() ? 1.0 : 0.3)
             
             Spacer()
         }
         .padding()
-        .navigationTitle("New Collection")
+        .navigationTitle(viewModel.title)
         .navigationBarItems(leading:
                                 Button(action: {
                                     self.presentationMode.wrappedValue.dismiss()
                                 }, label: {
-                                    Image(systemName: "xmark")
+                                    Image(systemName: viewModel.closeButtonImageName)
                                         .foregroundColor(.primary)
                                 }))
-    }
-    
-    func check() -> Bool {
-        if !title.isEmpty, !subtitle.isEmpty {
-            return true
-        }
-        else {
-            return false
-        }
     }
 }
 struct NewCollectionView_Previews: PreviewProvider {
