@@ -9,12 +9,10 @@ import SwiftUI
 
 struct AddItemView: View {
     
+    @StateObject private var viewModel = AddItemViewModel()
+    
     @Environment(\.presentationMode) var presentationMode
     
-    @State var name = ""
-    @State var store = ""
-    @State var tag = ""
-    @State var collection = "collection"
     
     @State private var showCollections = false
     
@@ -24,7 +22,7 @@ struct AddItemView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("Create new item you want to track")
+                Text(viewModel.subtitle)
                     .font(.headline)
                     .foregroundColor(.gray)
                     .padding(.bottom)
@@ -48,40 +46,40 @@ struct AddItemView: View {
                     
                     VStack(spacing: 20) {
                         HStack { //scribble.variable
-                            Image(systemName: "scribble.variable")
-                            TextField("name", text: $name)
+                            Image(systemName: viewModel.nameImageName)
+                            TextField(viewModel.namePlaceholer, text: $viewModel.name)
                                 .autocapitalization(.none)
                                 .disableAutocorrection(true)
                         }
                         HStack {
-                            Image(systemName: "shippingbox.fill")
-                            TextField("store", text: $store)
+                            Image(systemName: viewModel.storeImageName)
+                            TextField(viewModel.storePlaceholer, text: $viewModel.store)
                                 .autocapitalization(.none)
                                 .disableAutocorrection(true)
                         }
                         HStack {
-                            Image(systemName: "tag.fill")
+                            Image(systemName: viewModel.tagImageName)
                                 .font(.system(size: 15))
-                            TextField("tag", text: $tag)
+                            TextField(viewModel.tagPlaceholer, text: $viewModel.tag)
                                 .autocapitalization(.none)
                                 .disableAutocorrection(true)
                         }
                         
                         HStack {
-                            Image(systemName: "doc.fill")
+                            Image(systemName: viewModel.collectionImageName)
                             Menu  {
                                 ForEach(collections, id: \.self) { coll in
                                     Button(action: {
-                                        self.collection = coll
+                                        viewModel.collection = coll
                                     }, label: {
                                         Text("\(coll)")
                                     })
                                 }
                             } label: {
                                 
-                                Text("\(collection)")
+                                Text("\(viewModel.collection)")
                                 Spacer()
-                            }     .accentColor(collection != "collection" ? .primary : Color(.systemGray3))
+                            }     .accentColor(viewModel.collection != viewModel.collection ? .primary : Color(.systemGray3))
                         }
                     }
                     .padding()
@@ -95,16 +93,16 @@ struct AddItemView: View {
                 
             }, label: {
                 HStack {
-                    Image(systemName: "plus.square.fill")
+                    Image(systemName: viewModel.buttonImageName)
                         .font(.system(size: 30))
                         .foregroundColor(.clear)
                     Spacer()
-                    Text("Create")
+                    Text(viewModel.buttonTitle)
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     Spacer()
-                    Image(systemName: "plus.square.fill")
+                    Image(systemName: viewModel.buttonImageName)
                         .font(.system(size: 30))
                         .foregroundColor(.white)
                     
@@ -116,28 +114,19 @@ struct AddItemView: View {
             .background(Color.appColor)
             .accentColor(.primary)
             .padding(.vertical)
-            .opacity(check() ? 1.0 : 0.3)
+            .opacity(viewModel.check() ? 1.0 : 0.3)
             
             Spacer()
         }
         .padding()
-        .navigationTitle("New Item")
+        .navigationTitle(viewModel.title)
         .navigationBarItems(leading:
                                 Button(action: {
                                     self.presentationMode.wrappedValue.dismiss()
                                 }, label: {
-                                    Image(systemName: "xmark")
+                                    Image(systemName: viewModel.closeButtonImageName)
                                         .foregroundColor(.primary)
                                 }))
-    }
-    
-    func check() -> Bool {
-        if !name.isEmpty, !store.isEmpty, !tag.isEmpty, !collection.isEmpty {
-            return true
-        }
-        else {
-            return false
-        }
     }
 }
 

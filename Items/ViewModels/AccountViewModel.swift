@@ -10,11 +10,9 @@ import SwiftUI
 final class AccountViewModel: ObservableObject {
     
     private let mode: Mode
-    @Binding var isPushed: Bool
     
-    init(mode: Mode, isPushed: Binding<Bool>) {
+    init(mode: Mode) {
         self.mode = mode
-        self._isPushed = isPushed
     }
     
     let emailPlaceholderText = "email"

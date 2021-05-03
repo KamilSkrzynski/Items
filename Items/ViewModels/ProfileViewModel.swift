@@ -31,19 +31,16 @@ final class ProfileViewModel: ObservableObject {
         case .mode:
             isDarkMode = !isDarkMode
             buildItems()
+        case .account:
+            createPushed = true
         default:
             break
         }
     }
     
     let title = "Profile"
+    let subtitle = "Manage your profile"
     let chevron = "chevron.right"
     
     @Published var createPushed = false
-    
-    var buttons = [
-        ProfileViewButton(imageName: "person.crop.circle.fill.badge.plus", title: "Create Account", sheet: .create),
-        ProfileViewButton(imageName: "lightbulb.fill", title: "Switch to Dark Mode", sheet: .pro),
-        ProfileViewButton(imageName: "shield.lefthalf.fill", title: "Privacy Policy", sheet: .privacy)
-    ]
 }

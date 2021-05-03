@@ -93,24 +93,17 @@ struct AccountView: View {
         }
         .padding()
         .navigationTitle(viewModel.title)
-        .navigationBarItems(leading:
-                                Button(action: {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                }, label: {
-                                    Image(systemName: viewModel.closeIconImage)
-                                        .foregroundColor(.primary)
-                                }))
     }
 }
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AccountView(viewModel: .init(mode: .login, isPushed: .constant(false)))
+            AccountView(viewModel: .init(mode: .login))
                 .preferredColorScheme(.dark)
         }
         NavigationView {
-            AccountView(viewModel: .init(mode: .signup, isPushed: .constant(false)))
+            AccountView(viewModel: .init(mode: .signup))
                 .preferredColorScheme(.light)
         }
     }

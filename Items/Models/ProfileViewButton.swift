@@ -11,10 +11,10 @@ struct ProfileViewButton: Hashable {
     
     var imageName: String
     var title: String
-    var sheet: Sheets
+    var type: ProfileViewButtonType
     
     
-    enum Sheets: Identifiable {
+    enum ProfileViewButtonType: Identifiable {
         case create
         case pro
         case privacy
