@@ -40,6 +40,7 @@
 		379E179D26401794002AD0F0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E179C26401794002AD0F0 /* OnboardingView.swift */; };
 		379E179F26405383002AD0F0 /* AddItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E179E26405383002AD0F0 /* AddItemViewModel.swift */; };
 		379E17A126405663002AD0F0 /* NewCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17A026405663002AD0F0 /* NewCollectionViewModel.swift */; };
+		379E17A326412A41002AD0F0 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17A226412A41002AD0F0 /* OnboardingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		379E179C26401794002AD0F0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		379E179E26405383002AD0F0 /* AddItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModel.swift; sourceTree = "<group>"; };
 		379E17A026405663002AD0F0 /* NewCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCollectionViewModel.swift; sourceTree = "<group>"; };
+		379E17A226412A41002AD0F0 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				379E1798263F1196002AD0F0 /* ProfileItemViewModel.swift */,
 				379E179E26405383002AD0F0 /* AddItemViewModel.swift */,
 				379E17A026405663002AD0F0 /* NewCollectionViewModel.swift */,
+				379E17A226412A41002AD0F0 /* OnboardingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				379E179D26401794002AD0F0 /* OnboardingView.swift in Sources */,
 				37734A44262B2C660048E659 /* TabContainerView.swift in Sources */,
 				379E1795263ED332002AD0F0 /* DataService.swift in Sources */,
+				379E17A326412A41002AD0F0 /* OnboardingViewModel.swift in Sources */,
 				37734A76262B30FC0048E659 /* TermsPrivacyView.swift in Sources */,
 				37734A66262B2FF50048E659 /* ProfileView.swift in Sources */,
 				37734A6C262B30540048E659 /* ProView.swift in Sources */,

@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct ItemsApp: App {
     
-    @AppStorage("isDarkMode") private var isDarkMode = true
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some Scene {
         WindowGroup {

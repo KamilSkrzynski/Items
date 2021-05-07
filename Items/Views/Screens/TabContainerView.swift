@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabContainerView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isOnboardingWatched") private var isOnboardingToWatch = true
     
     @State var selectedTab: Int = 0
     @State var showAddSheet: Bool = false
@@ -55,8 +56,8 @@ struct TabContainerView: View {
                             .font(.system(size: 25))
                             .foregroundColor(.primary)
                     }
-                    .offset(y: -30)
                 })
+                .offset(y: -30)
                 
                 Spacer(minLength: 0)
                 
@@ -77,6 +78,12 @@ struct TabContainerView: View {
         }
         .accentColor(.primary)
         .edgesIgnoringSafeArea(.all)
+        .fullScreenCover(isPresented: $isOnboardingToWatch) {
+            NavigationView {
+                OnboardingView()
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
+            }
+        }
         .fullScreenCover(isPresented: $showAddSheet) {
             NavigationView {
                 AddItemView()
