@@ -7,6 +7,7 @@ target 'Items' do
 
   # Pods for Items
 
+pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Firebase/Firestore'

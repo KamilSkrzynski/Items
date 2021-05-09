@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -105,7 +105,6 @@
 		37734A21262B2B6C0048E659 = {
 			isa = PBXGroup;
 			children = (
-				379E17A62647D53D002AD0F0 /* LaunchScreen.storyboard */,
 				37734A2C262B2B6C0048E659 /* Items */,
 				37734A2B262B2B6C0048E659 /* Products */,
 				CEB2817884166A20BDC8B215 /* Pods */,
@@ -132,6 +131,7 @@
 				37734A2D262B2B6C0048E659 /* ItemsApp.swift */,
 				37734A36262B2B700048E659 /* Info.plist */,
 				379E17A82647DBA1002AD0F0 /* GoogleService-Info.plist */,
+				379E17A62647D53D002AD0F0 /* LaunchScreen.storyboard */,
 				37734A85262B31F50048E659 /* Assets.xcassets */,
 				37734A33262B2B700048E659 /* Preview Content */,
 			);
@@ -234,7 +234,6 @@
 				29384217F212D9B5BE668527 /* Pods-Items.debug.xcconfig */,
 				865CE8F45EECC9453FF5BF56 /* Pods-Items.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

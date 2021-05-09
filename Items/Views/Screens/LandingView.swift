@@ -15,33 +15,45 @@ struct LandingView: View {
                 
                 Text("ITEMS")
                     .font(.system(size: 50, weight: .bold))
+                    .animation(.default)
                 Text("Track things you want to buy")
                     .font(.title3)
                     .fontWeight(.semibold)
+                    .animation(.default)
                 
                 Spacer()
-                HStack {
-                    Image(systemName: "arrow.right")
-                        .font(.system(size: 25))
-                        .foregroundColor(.appColor)
-                        .padding()
-                    Spacer()
-                Text("Get Started")
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .font(.title2)
-                    Spacer()
-                    Image(systemName: "arrow.right")
-                        .font(.system(size: 25))
-                        .foregroundColor(.white).padding()
+                NavigationLink(
+                    destination: TabContainerView())
+                    {
+                    
+                
+                Button(action: {
+                    AuthService.instance.signInAnonymously()
+                }, label: {
+                    HStack {
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 25))
+                            .foregroundColor(.clear)
+                            .padding()
+                        Spacer()
+                    Text("Get Started")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        Spacer()
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 25))
+                            .foregroundColor(.white).padding()
+                    }
+                    .frame(height: 60)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.appColor)
+                    .padding()
+                })
                 }
-                .frame(height: 60)
-                .frame(maxWidth: .infinity)
-                .background(Color.appColor)
-                .padding()
             }
             .shadow(radius: 3)
-        }.background(Color.red)
+        }
     }
 }
 

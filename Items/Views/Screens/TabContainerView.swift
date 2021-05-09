@@ -21,10 +21,12 @@ struct TabContainerView: View {
                 NavigationView {
                     CollectionsView()
                 }
+
             }
-            else if selectedTab == 1 {                    NavigationView {
+            else if selectedTab == 1 {
+                NavigationView {
                 ProfileView()
-            }
+                }
             }
             HStack {
                 Button(action: {
@@ -76,6 +78,7 @@ struct TabContainerView: View {
             .frame(height: 100)
             .background(Color.grayColor)
         }
+        .navigationBarBackButtonHidden(true)
         .accentColor(.primary)
         .edgesIgnoringSafeArea(.all)
         .fullScreenCover(isPresented: $isOnboardingToWatch) {
