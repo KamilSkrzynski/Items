@@ -75,7 +75,7 @@ struct OnboardingView: View {
                         Text("Got it!")
                             .font(.system(size: 30))
                                 .fontWeight(.bold)
-                                .frame(width: 110, height: 30)
+                                .frame(width: 110, height: 40)
                                 .padding(.horizontal)
                     })
                     .accentColor(.primary)
@@ -87,6 +87,7 @@ struct OnboardingView: View {
             .tag(view.selection)
             }
         }.tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
             .navigationBarItems(trailing:
                                     Button(action: {
                                         self.isOnboardingToWatch = false

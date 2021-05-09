@@ -12,6 +12,7 @@ struct LandingView: View {
         NavigationView {
             VStack {
                 Spacer()
+                
                 Text("ITEMS")
                     .font(.system(size: 50, weight: .bold))
                 Text("Track things you want to buy")

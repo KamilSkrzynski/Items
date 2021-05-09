@@ -1,0 +1,6 @@
+framework module Pods_Items {
+  umbrella header "Pods-Items-umbrella.h"
+
+  export *
+  module * { export * }
+}
