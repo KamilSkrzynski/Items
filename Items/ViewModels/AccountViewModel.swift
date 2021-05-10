@@ -9,11 +9,21 @@ import SwiftUI
 
 final class AccountViewModel: ObservableObject {
     
+    @Binding var isPushed: Bool
     private let mode: Mode
+    private let authService: AuthServiceProtocol
     
-    init(mode: Mode) {
+    init(mode: Mode,
+         authService: AuthServiceProtocol = AuthService(),
+         isPushed: Binding<Bool>) {
         self.mode = mode
+        self.authService = authService
+        self._isPushed = isPushed
     }
+    
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var passwordAgain: String = ""
     
     let emailPlaceholderText = "email"
     let passwordPlaceholderText = "password"
@@ -48,7 +58,27 @@ final class AccountViewModel: ObservableObject {
         case .signup:
             return "Sign Up"   
         }
-    }    
+    }
+    
+    func tappedActionButton()  {
+        switch mode {
+        case .login:
+            authService.login(email: email, password: password)
+            self.isPushed = false
+        case .signup:
+            authService.linkAccount(email: email, password: password)
+            self.isPushed = false
+        }
+    }
+    
+    func buttonOpacity() -> Double {
+        switch mode {
+        case .login:
+            return isValidEmail(email) && isValidPassword(password) ? 1.0 : 0.3
+        case .signup:
+           return isValidEmail(email) && isValidPassword(password)  && isPasswordMatching(password, passwordAgain) ? 1.0 : 0.3
+        }
+    }
 }
 
 extension AccountViewModel {

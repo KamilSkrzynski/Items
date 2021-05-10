@@ -44,6 +44,7 @@
 		379E17A326412A41002AD0F0 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17A226412A41002AD0F0 /* OnboardingViewModel.swift */; };
 		379E17A72647D53D002AD0F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 379E17A62647D53D002AD0F0 /* LaunchScreen.storyboard */; };
 		379E17A92647DBA1002AD0F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 379E17A82647DBA1002AD0F0 /* GoogleService-Info.plist */; };
+		379E17AD26483475002AD0F0 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17AC26483475002AD0F0 /* LandingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		379E17A226412A41002AD0F0 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		379E17A62647D53D002AD0F0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		379E17A82647DBA1002AD0F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		379E17AC26483475002AD0F0 /* LandingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
 		865CE8F45EECC9453FF5BF56 /* Pods-Items.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Items.release.xcconfig"; path = "Target Support Files/Pods-Items/Pods-Items.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +169,7 @@
 				379E179E26405383002AD0F0 /* AddItemViewModel.swift */,
 				379E17A026405663002AD0F0 /* NewCollectionViewModel.swift */,
 				379E17A226412A41002AD0F0 /* OnboardingViewModel.swift */,
+				379E17AC26483475002AD0F0 /* LandingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				379E1797263ED33A002AD0F0 /* AuthService.swift in Sources */,
 				378F907D262C2E8A003AAE39 /* CollectionsViewModel.swift in Sources */,
 				379E179F26405383002AD0F0 /* AddItemViewModel.swift in Sources */,
+				379E17AD26483475002AD0F0 /* LandingViewModel.swift in Sources */,
 				37734A61262B2F1A0048E659 /* SingleCollectionView.swift in Sources */,
 				37734A48262B2CE20048E659 /* AddItemView.swift in Sources */,
 				37734A92262B5F930048E659 /* ProBenefitLine.swift in Sources */,

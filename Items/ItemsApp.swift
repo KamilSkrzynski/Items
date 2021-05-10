@@ -27,6 +27,7 @@ struct ItemsApp: App {
             }
             else {
                 LandingView()
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
             }
         }
     }

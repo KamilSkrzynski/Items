@@ -56,8 +56,8 @@ struct ProfileView: View {
             
             profileOptions
                 .background(NavigationLink(
-                                destination: AccountView(viewModel: .init(mode: .signup)),
-                                isActive: $viewModel.createPushed,
+                                destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
+                                isActive: $viewModel.loginSignupPushed,
                                 label: {
                                 }))
             Spacer()

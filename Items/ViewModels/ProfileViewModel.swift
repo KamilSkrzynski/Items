@@ -13,6 +13,12 @@ final class ProfileViewModel: ObservableObject {
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @Published private(set) var itemViewModels: [ProfileItemViewModel] = []
+    @Published var loginSignupPushed = false
+    private let authService: AuthServiceProtocol
+    
+    init(authService: AuthServiceProtocol = AuthService()) {
+        self.authService = authService
+    }
     
     func onAppear() {
         buildItems()
@@ -20,10 +26,14 @@ final class ProfileViewModel: ObservableObject {
     
     private func buildItems() {
         itemViewModels = [
-            .init(name: "Create Account", image: "person.crop.circle.fill.badge.plus", type: .account),
+            .init(name: authService.currentUser?.email ?? "Create Account", image: "person.fill", type: .account),
             .init(name: "Switch to \(isDarkMode ? "Light" : "Dark") Mode", image: "lightbulb.fill", type: .mode),
             .init(name: "Privacy Policy", image: "shield.lefthalf.fill", type: .privacy)
         ]
+        
+        if authService.currentUser?.email != nil {
+            itemViewModels += [.init(name: "Logout", image: "figure.walk", type: .logout)]
+        }
     }
     
     func tappedItem(at index: Int) {
@@ -32,7 +42,10 @@ final class ProfileViewModel: ObservableObject {
             isDarkMode = !isDarkMode
             buildItems()
         case .account:
-            createPushed = true
+            guard authService.currentUser?.email == nil else { return }
+            loginSignupPushed = true
+        case .logout:
+            authService.logout()
         default:
             break
         }
@@ -41,6 +54,4 @@ final class ProfileViewModel: ObservableObject {
     let title = "Profile"
     let subtitle = "Manage your profile"
     let chevron = "chevron.right"
-    
-    @Published var createPushed = false
 }

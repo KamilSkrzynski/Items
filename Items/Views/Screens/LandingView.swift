@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LandingView: View {
+    
+    @StateObject private var viewModel = LandingViewModel()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -28,7 +31,7 @@ struct LandingView: View {
                     
                 
                 Button(action: {
-                    AuthService.instance.signInAnonymously()
+                    viewModel.getStartedTapped()
                 }, label: {
                     HStack {
                         Image(systemName: "arrow.right")
@@ -51,6 +54,17 @@ struct LandingView: View {
                     .padding()
                 })
                 }
+                
+                NavigationLink(
+                    destination: AccountView(viewModel: .init(mode: .login, isPushed: $viewModel.loginPushed)),
+                    isActive: $viewModel.loginPushed){
+                        Button(action: {
+                            viewModel.loginPushed = true
+                        }, label: {
+                            Text("I already have an account")
+                        })
+                        .accentColor(.primary)
+                    }
             }
             .shadow(radius: 3)
         }

@@ -12,10 +12,6 @@ struct AccountView: View {
     @StateObject var viewModel: AccountViewModel
     @Environment(\.presentationMode) var presentationMode
     
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var passwordAgain: String = ""
-    
     var body: some View {
         VStack {
             
@@ -29,7 +25,7 @@ struct AccountView: View {
             VStack {
                 HStack {
                     Image(systemName: viewModel.emailIconImage)
-                    TextField(viewModel.emailPlaceholderText, text: $email)
+                    TextField(viewModel.emailPlaceholderText, text: $viewModel.email)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                 }
@@ -37,14 +33,14 @@ struct AccountView: View {
                 
                 HStack {
                     Image(systemName: viewModel.passwordIconImage)
-                    SecureField(viewModel.passwordPlaceholderText, text: $password)
+                    SecureField(viewModel.passwordPlaceholderText, text: $viewModel.password)
                         .autocapitalization(.none)
                 }
                 .padding()
                 if viewModel.title == "Create Account" {
                 HStack {
                     Image(systemName: viewModel.passwordIconImage)
-                    SecureField(viewModel.passwordAgainPlaceholderText, text: $passwordAgain)
+                    SecureField(viewModel.passwordAgainPlaceholderText, text: $viewModel.passwordAgain)
                         .autocapitalization(.none)
                 }
                 .padding()
@@ -53,7 +49,7 @@ struct AccountView: View {
             .background(Color.grayColor)
             
             Button(action: {
-                
+                viewModel.tappedActionButton()
             }, label: {
                 HStack {
                     Image(systemName: viewModel.buttonIconImage)
@@ -79,7 +75,8 @@ struct AccountView: View {
             .accentColor(.primary)
             .padding(.vertical)
             .opacity(withAnimation {
-                viewModel.isValidEmail(email) && viewModel.isValidPassword(password)  && viewModel.isPasswordMatching(password, passwordAgain) ? 1.0 : 0.3
+                
+                viewModel.buttonOpacity()
 
     })
             
@@ -99,11 +96,11 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AccountView(viewModel: .init(mode: .login))
+            AccountView(viewModel: .init(mode: .login, isPushed: .constant(false)))
                 .preferredColorScheme(.dark)
         }
         NavigationView {
-            AccountView(viewModel: .init(mode: .signup))
+            AccountView(viewModel: .init(mode: .signup, isPushed: .constant(false)))
                 .preferredColorScheme(.light)
         }
     }
