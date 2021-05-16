@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct SuggestedCollection: Hashable {
     
+    let id = UUID().uuidString
     var title: String
     var subtitle: String
-    var imageName: String
+    let imageName: UIImage
 }

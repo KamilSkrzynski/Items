@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 import SwiftUI
 
 protocol AuthServiceProtocol {
@@ -15,7 +16,11 @@ protocol AuthServiceProtocol {
     func linkAccount(email: String, password: String)
     func logout()
     func login(email: String, password: String)
+    func createUser(userID: String, email: String, dateCreated: Date, isPro: Bool)
+    func updateUserAfterLink(userID: String, email: String)
 }
+
+let db = Firestore.firestore()
 
 final class AuthService: AuthServiceProtocol {
     
@@ -24,7 +29,16 @@ final class AuthService: AuthServiceProtocol {
     
     let currentUser = Auth.auth().currentUser
     
-    // MARK: Functions
+    private var users = db.collection("users")
+    
+    
+    let suggestedCollections = [
+        SuggestedCollection(title: "Clothes", subtitle: "Expand your wardrobe", imageName: UIImage(named: "Clothes")!),
+        SuggestedCollection(title: "Tech", subtitle: "Save your tech essentials", imageName: UIImage(named: "Tech")!),
+        SuggestedCollection(title: "Home", subtitle: "Elevate your home's design", imageName: UIImage(named: "Home")!)
+    ]
+    
+    // MARK: Authentication functions
     
     func linkAccount(email: String, password: String) {
         let emailCredential = EmailAuthProvider.credential(withEmail: email, password: password)
@@ -40,19 +54,30 @@ final class AuthService: AuthServiceProtocol {
                         return
                     }
                     //Good to go
+                    let id = user.uid
+                    self.updateUserAfterLink(userID: id, email: email)
                 }
             }
         })
     }
     
     func signInAnonymously() {
-        Auth.auth().signInAnonymously { authResult, error in
+        Auth.auth().signInAnonymously { [self] authResult, error in
             if let error = error {
                 print("Error singing in anonymously: \(error)")
                 return
             }
             else {
+                guard let user = authResult?.user else { return }
                 self.isSignedIn = true
+                
+                let id = user.uid
+                self.createUser(userID: id, email: "anonymous", dateCreated: Date(), isPro: false)
+                suggestedCollections.forEach { collection in
+                DataService.instance.createCollection(userID: id, collectionID: collection.id, title: collection.title, subtitle: collection.subtitle, dateCreated: Date(), image: collection.imageName)
+                    
+                    print("Successfully created suggested collections")
+                }
                 print("Successfully signed in anonymously")
                 return
             }
@@ -82,5 +107,21 @@ final class AuthService: AuthServiceProtocol {
                 return
             }
         }
+    }
+    
+    // MARK: Firestore functions
+    func createUser(userID: String, email: String, dateCreated: Date, isPro: Bool) {
+        users.document("\(userID)").setData(
+            [
+                "user_id": userID,
+                "email": email,
+                "date_created": Date(),
+                "is_pro": isPro
+        ]
+        )
+    }
+    
+    func updateUserAfterLink(userID: String, email: String) {
+        users.document("\(userID)").updateData(["email": email])
     }
 }

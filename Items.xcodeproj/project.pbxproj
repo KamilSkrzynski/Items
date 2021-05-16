@@ -45,6 +45,7 @@
 		379E17A72647D53D002AD0F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 379E17A62647D53D002AD0F0 /* LaunchScreen.storyboard */; };
 		379E17A92647DBA1002AD0F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 379E17A82647DBA1002AD0F0 /* GoogleService-Info.plist */; };
 		379E17AD26483475002AD0F0 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17AC26483475002AD0F0 /* LandingViewModel.swift */; };
+		379E17B126512260002AD0F0 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17B026512260002AD0F0 /* ImageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		379E17A62647D53D002AD0F0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		379E17A82647DBA1002AD0F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		379E17AC26483475002AD0F0 /* LandingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
+		379E17B026512260002AD0F0 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		865CE8F45EECC9453FF5BF56 /* Pods-Items.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Items.release.xcconfig"; path = "Target Support Files/Pods-Items/Pods-Items.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 			children = (
 				379E1794263ED332002AD0F0 /* DataService.swift */,
 				379E1796263ED33A002AD0F0 /* AuthService.swift */,
+				379E17B026512260002AD0F0 /* ImageManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				379E179D26401794002AD0F0 /* OnboardingView.swift in Sources */,
+				379E17B126512260002AD0F0 /* ImageManager.swift in Sources */,
 				37734A44262B2C660048E659 /* TabContainerView.swift in Sources */,
 				379E1795263ED332002AD0F0 /* DataService.swift in Sources */,
 				379E17A326412A41002AD0F0 /* OnboardingViewModel.swift in Sources */,
