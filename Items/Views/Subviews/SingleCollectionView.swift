@@ -9,12 +9,15 @@ import SwiftUI
 
 struct SingleCollectionView: View {
     
-    @StateObject var viewModel: SingleCollectionViewModel
+    @State var collection: SuggestedCollection
+    @AppStorage("userID") private var userID = ""
+    
+    @State var image: UIImage = UIImage(named: "Placeholder")!
     
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                Image(viewModel.imageName)
+                Image(uiImage: image)
                     .resizable()
                     .frame(width: 150, height: 150)
                     .scaledToFill()
@@ -28,11 +31,11 @@ struct SingleCollectionView: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(viewModel.title)
+                        Text(collection.title)
                             .font(.title2)
                             .fontWeight(.semibold)
                         
-                        Text(viewModel.subtitle)
+                        Text(collection.subtitle)
                             .font(.callout)
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.leading)
@@ -46,16 +49,26 @@ struct SingleCollectionView: View {
             .frame(width: 180, height: 300)
             .background(Color.grayColor)
         }
+        .onAppear {
+            getImage()
+        }
         .padding(.leading)
-        
     }
     
+    func getImage() {
+        ImageManager.instance.downloadCollectionImage(userID: collection.userID, collectionID: collection.collectionID) { returnedImage in
+            if let image = returnedImage {
+                self.image = image
+            }
+        }
+    }
 }
 
 struct SingleCollectionView_Previews: PreviewProvider {
-    static let viewModel = SingleCollectionViewModel(title: "Tech", subtitle: "Test tech expand", imageName: "Tech")
+    static var collection = SuggestedCollection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat", isSuggested: true)
+    
     static var previews: some View {
-        SingleCollectionView(viewModel: viewModel)
-            .preferredColorScheme(.light)
+        SingleCollectionView(collection: collection)
+            .preferredColorScheme(.dark)
     }
 }

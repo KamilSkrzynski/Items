@@ -46,6 +46,9 @@
 		379E17A92647DBA1002AD0F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 379E17A82647DBA1002AD0F0 /* GoogleService-Info.plist */; };
 		379E17AD26483475002AD0F0 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17AC26483475002AD0F0 /* LandingViewModel.swift */; };
 		379E17B126512260002AD0F0 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17B026512260002AD0F0 /* ImageManager.swift */; };
+		379E17B32651538D002AD0F0 /* CollectionsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17B22651538D002AD0F0 /* CollectionsArray.swift */; };
+		379E17B526518804002AD0F0 /* CustomCollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17B426518804002AD0F0 /* CustomCollectionsView.swift */; };
+		379E17B726518810002AD0F0 /* SuggestedCollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17B626518810002AD0F0 /* SuggestedCollectionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +94,9 @@
 		379E17A82647DBA1002AD0F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		379E17AC26483475002AD0F0 /* LandingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
 		379E17B026512260002AD0F0 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		379E17B22651538D002AD0F0 /* CollectionsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsArray.swift; sourceTree = "<group>"; };
+		379E17B426518804002AD0F0 /* CustomCollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionsView.swift; sourceTree = "<group>"; };
+		379E17B626518810002AD0F0 /* SuggestedCollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedCollectionsView.swift; sourceTree = "<group>"; };
 		865CE8F45EECC9453FF5BF56 /* Pods-Items.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Items.release.xcconfig"; path = "Target Support Files/Pods-Items/Pods-Items.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +191,7 @@
 				378F9084262C3247003AAE39 /* SuggestedCollection.swift */,
 				378F9087262C3267003AAE39 /* CustomCollection.swift */,
 				379E1792263ECEA2002AD0F0 /* Item.swift */,
+				379E17B22651538D002AD0F0 /* CollectionsArray.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +237,8 @@
 			children = (
 				37734A60262B2F1A0048E659 /* SingleCollectionView.swift */,
 				37734A56262B2DF10048E659 /* SingleItemView.swift */,
+				379E17B426518804002AD0F0 /* CustomCollectionsView.swift */,
+				379E17B626518810002AD0F0 /* SuggestedCollectionsView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -393,13 +402,16 @@
 				378F9088262C3267003AAE39 /* CustomCollection.swift in Sources */,
 				379E1799263F1196002AD0F0 /* ProfileItemViewModel.swift in Sources */,
 				379E1797263ED33A002AD0F0 /* AuthService.swift in Sources */,
+				379E17B32651538D002AD0F0 /* CollectionsArray.swift in Sources */,
 				378F907D262C2E8A003AAE39 /* CollectionsViewModel.swift in Sources */,
 				379E179F26405383002AD0F0 /* AddItemViewModel.swift in Sources */,
 				379E17AD26483475002AD0F0 /* LandingViewModel.swift in Sources */,
 				37734A61262B2F1A0048E659 /* SingleCollectionView.swift in Sources */,
 				37734A48262B2CE20048E659 /* AddItemView.swift in Sources */,
 				37734A92262B5F930048E659 /* ProBenefitLine.swift in Sources */,
+				379E17B726518810002AD0F0 /* SuggestedCollectionsView.swift in Sources */,
 				378F9085262C3247003AAE39 /* SuggestedCollection.swift in Sources */,
+				379E17B526518804002AD0F0 /* CustomCollectionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

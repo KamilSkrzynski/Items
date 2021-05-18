@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class CollectionsViewModel: ObservableObject {
- 
+    
+    @AppStorage("userID") private var userID = ""
+    
     let title = "Collections"
     let subtitle = "Sort your items by collections"
     let customListTitle = "Custom lists"
@@ -16,15 +19,11 @@ final class CollectionsViewModel: ObservableObject {
     let emptyCustomListButtonTitle = "Add your first collection"
     let anyCustomListButtonTitle = "Add collection"
     
-    let suggestedCollections = [
-        SingleCollectionViewModel(title: "Clothes", subtitle: "Expand your wardrobe", imageName: "Clothes"),
-        SingleCollectionViewModel(title: "Tech", subtitle: "Save your tech essentials", imageName: "Tech"),
-        SingleCollectionViewModel(title: "Home", subtitle: "Elevate your home's design", imageName: "Home")
-    ]
+  //  @Published var suggestedCollections = CollectionsArray(isSuggested: true)
     
-    let customCollections = [
-        SingleCollectionViewModel(title: "Workout", subtitle: "Get your gear", imageName: "Workout")
-    ]
+//    let suggestedCollectionImages = [UIImage(named: "Clothes"), UIImage(named: "Tech"), UIImage(named: "Home")]
+    
+    @Published var customCollections = CollectionsArray(isSuggested: false)
 }
 
 extension CollectionsViewModel {

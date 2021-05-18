@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class SingleCollectionViewModel: ObservableObject {
     
     init(title: String, subtitle: String, imageName: String) {
         self.title = title
         self.subtitle = subtitle
-        self.imageName = imageName
+        self.collectionImage = imageName
     }
     
-    var imageName: String
+    @Published var collectionImage: String
     var title: String
     var subtitle: String
 
@@ -32,8 +33,6 @@ extension SingleCollectionViewModel: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(ObjectIdentifier(self).hashValue)
     }
-    
-    
 }
 
     

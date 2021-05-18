@@ -8,6 +8,8 @@
 import Foundation
 import FirebaseStorage
 
+let imageCache = NSCache<AnyObject, UIImage>()
+
 final class ImageManager {
     
     static let instance = ImageManager()
@@ -18,6 +20,14 @@ final class ImageManager {
         let path = getCollectionImagePath(userID: userID, collectionID: collectionID)
         
         uploadImage(path: path, image: image) { _ in }
+    }
+    
+    func downloadCollectionImage(userID: String, collectionID: String, handler: @escaping (_ image: UIImage?) -> ()) {
+        let path = getCollectionImagePath(userID: userID, collectionID: collectionID)
+        
+        downloadImage(path: path) { returnedImage in
+            handler(returnedImage)
+        }
     }
     
     private func getCollectionImagePath(userID: String, collectionID: String) -> StorageReference {
@@ -81,6 +91,30 @@ final class ImageManager {
                 print("Success uploading image")
                 handler(true)
                 return
+            }
+        }
+    }
+    
+    private func downloadImage(path: StorageReference, handler: @escaping(_ image: UIImage?) -> ()) {
+        
+        if let cachedImage = imageCache.object(forKey: path) {
+            print("Image found in cache")
+            handler(cachedImage)
+            return
+        }
+        else {
+            path.getData(maxSize: 27 * 1024 * 1024) { (returnedImageData, error) in
+                
+                if let data = returnedImageData, let image = UIImage(data: data) {
+                    // Success getting image data
+                    imageCache.setObject(image, forKey: path)
+                    handler(image)
+                    return
+                }
+                else {
+                    print("Error getting data from path for image")
+                    return
+                }
             }
         }
     }

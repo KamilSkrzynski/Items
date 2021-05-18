@@ -26,17 +26,12 @@ final class AuthService: AuthServiceProtocol {
     
     // MARK: Properties
     @AppStorage("isSignedIn") private var isSignedIn = false
+    @AppStorage("userID") private var userID = ""
     
     let currentUser = Auth.auth().currentUser
     
     private var users = db.collection("users")
     
-    
-    let suggestedCollections = [
-        SuggestedCollection(title: "Clothes", subtitle: "Expand your wardrobe", imageName: UIImage(named: "Clothes")!),
-        SuggestedCollection(title: "Tech", subtitle: "Save your tech essentials", imageName: UIImage(named: "Tech")!),
-        SuggestedCollection(title: "Home", subtitle: "Elevate your home's design", imageName: UIImage(named: "Home")!)
-    ]
     
     // MARK: Authentication functions
     
@@ -70,11 +65,18 @@ final class AuthService: AuthServiceProtocol {
             else {
                 guard let user = authResult?.user else { return }
                 self.isSignedIn = true
-                
                 let id = user.uid
+                self.userID = id
+                print(userID)
+                let suggestedCollections = [
+                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Clothes", subtitle: "Expand your wardrobe", isSuggested: true),
+                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Tech", subtitle: "Save your tech essentials", isSuggested: true),
+                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Home", subtitle: "Elevate your home's design", isSuggested: true)
+                ]
+                
                 self.createUser(userID: id, email: "anonymous", dateCreated: Date(), isPro: false)
                 suggestedCollections.forEach { collection in
-                DataService.instance.createCollection(userID: id, collectionID: collection.id, title: collection.title, subtitle: collection.subtitle, dateCreated: Date(), image: collection.imageName)
+                    DataService.instance.createCollection(userID: id, title: collection.title, subtitle: collection.subtitle, dateCreated: Date(), image: UIImage(named: collection.title)!, isSuggested: collection.isSuggested)
                     
                     print("Successfully created suggested collections")
                 }

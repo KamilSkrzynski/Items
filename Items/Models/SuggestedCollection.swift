@@ -8,10 +8,16 @@
 import Foundation
 import SwiftUI
 
-struct SuggestedCollection: Hashable {
+struct SuggestedCollection: Identifiable, Hashable {
     
-    let id = UUID().uuidString
+    let id = UUID()
+    var collectionID: String
+    var userID: String
     var title: String
     var subtitle: String
-    let imageName: UIImage
+    var isSuggested: Bool
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

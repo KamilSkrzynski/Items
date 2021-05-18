@@ -11,6 +11,9 @@ struct CollectionsView: View {
     
     @StateObject private var viewModel = CollectionsViewModel()
     
+    @ObservedObject var collections: CollectionsArray
+    
+    
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var showSheet: Bool = false
@@ -27,14 +30,14 @@ struct CollectionsView: View {
             }
             .padding()
             
-            if viewModel.customCollections.count > 0 {
+            if viewModel.customCollections.collectionArray.count > 0 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                    ForEach(viewModel.customCollections, id: \.self) { collection in
+                        ForEach(viewModel.customCollections.collectionArray, id: \.self) { collection in
                         NavigationLink(
                             destination: ItemsView(),
                             label: {
-                                SingleCollectionView(viewModel: collection)
+                                SingleCollectionView(collection: collection)
                                     .padding(.bottom, 280)
                                     .padding(.trailing, 190)
                             })
@@ -87,11 +90,12 @@ struct CollectionsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
-                ForEach(viewModel.suggestedCollections, id: \.self) { collection in
+                // Error with ForEach!!!
+                ForEach(collections.collectionArray, id: \.self) { collection in
                     NavigationLink(
                         destination: ItemsView(),
                         label: {
-                            SingleCollectionView(viewModel: collection)
+                            SingleCollectionView(collection: collection)
                                 .padding(.bottom, 280)
                                 .padding(.trailing, 190)
                         })
@@ -144,7 +148,7 @@ struct CollectionsView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            CollectionsView()
+            CollectionsView(collections: CollectionsArray(isSuggested: true))
                 .preferredColorScheme(.dark)
         }
         .preferredColorScheme(.light)
