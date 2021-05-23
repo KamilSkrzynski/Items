@@ -9,11 +9,9 @@ import SwiftUI
 
 struct ItemsView: View {
     
-    @ObservedObject private var itemsArray = ItemsArray(collection: "collection")
+    @ObservedObject private var itemsArray = ItemsArray(collection: "Clothes")
     
     @State var collection: String
-    
-    var number = [0, 1, 2, 3, 4, 5, 6, 7]
     
     var body: some View {
         if itemsArray.itemsArray.count > 0 {
@@ -21,7 +19,7 @@ struct ItemsView: View {
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: [.init(.flexible(), spacing: 20), .init(.flexible())], spacing: 20, content: {
                     ForEach(itemsArray.itemsArray, id: \.self) { item in
-                        SingleItemView(item: item, itemImage: 1)
+                        SingleItemView(item: item)
                     }
                 })
             }

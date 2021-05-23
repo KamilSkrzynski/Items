@@ -11,6 +11,7 @@ import SwiftUI
 struct Item: Identifiable, Hashable {
     
     let id = UUID()
+    var itemID: String
     var userID: String
     var name: String
     var tag: String

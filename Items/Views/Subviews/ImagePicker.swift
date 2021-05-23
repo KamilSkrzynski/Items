@@ -12,12 +12,13 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var imageSelected: UIImage
+    @State var isEdit: Bool
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        picker.allowsEditing = false
+        picker.allowsEditing = isEdit
         return picker
     }
     

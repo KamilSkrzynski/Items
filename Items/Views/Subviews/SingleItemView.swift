@@ -9,8 +9,10 @@ import SwiftUI
 
 struct SingleItemView: View {
     
+    @AppStorage("userID") private var userID = ""
+    
     @State var item: Item
-    @State var itemImage: Int
+    @State var image: UIImage = UIImage(named: "Placeholder")!
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,7 +35,7 @@ struct SingleItemView: View {
                     Divider()
                         .padding()
                     
-                    Image("\(itemImage)")
+                    Image(uiImage: image)
                         .resizable()
                         .frame(width: 140, height: 140)
                         .scaledToFill()
@@ -54,15 +56,25 @@ struct SingleItemView: View {
             }
             .offset(x: -5, y: 10)
             .padding(.horizontal, 5)
+        }.onAppear {
+            getImage()
         }
         .padding()
+    }
+    
+    func getImage() {
+        ImageManager.instance.downloadItemImage(userID: userID, itemID: item.itemID) { returnedImage in
+            if let image = returnedImage {
+                self.image = image
+            }
+        }
     }
 }
 
 struct SingleItemView_Previews: PreviewProvider {
-    static let item = Item(userID: "", name: "T-shirt", tag: "tops", collection: "")
+    static let item = Item(itemID: "", userID: "", name: "T-shirt", tag: "tops", collection: "")
     static var previews: some View {
-        SingleItemView(item: item, itemImage: 0)
+        SingleItemView(item: item)
             .preferredColorScheme(.dark)
     }
 }

@@ -112,7 +112,7 @@ struct AddItemView: View {
             Spacer()
         }
         .sheet(isPresented: $showImagePicker, content: {
-            ImagePicker(imageSelected: $imageSelected).preferredColorScheme(isDarkMode ? .dark : .light)
+            ImagePicker(imageSelected: $imageSelected, isEdit: true).preferredColorScheme(isDarkMode ? .dark : .light)
         })
         .padding()
         .navigationTitle(viewModel.title)

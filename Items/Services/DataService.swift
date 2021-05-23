@@ -145,13 +145,14 @@ final class DataService {
             
             for document in snapshot.documents {
                 if let userID = document.get("user_id") as? String,
+                   let itemID = document.get("item_id") as? String,
                    let collection = document.get("collection") as? String,
                    let name = document.get("name") as? String,
                    let tag = document.get("tag") as? String
                    
                    {
                     print("Getting \(collection) items from Firebase")
-                    let item = Item(userID: userID, name: name, tag: tag, collection: collection)
+                    let item = Item(itemID: itemID, userID: userID, name: name, tag: tag, collection: collection)
                     
                     print("Adding \(collection) items to items array")
                     items.append(item)

@@ -89,7 +89,7 @@ struct NewCollectionView: View {
             
             Spacer()
         }.sheet(isPresented: $showImagePicker, content: {
-            ImagePicker(imageSelected: $imageSelected).preferredColorScheme(isDarkMode ? .dark : .light)
+            ImagePicker(imageSelected: $imageSelected, isEdit: false).preferredColorScheme(isDarkMode ? .dark : .light)
         })
         .padding()
         .navigationTitle(viewModel.title)
