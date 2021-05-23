@@ -64,6 +64,16 @@ final class DataService {
         }
     }
     
+    func downloadItems(userID: String, collection: String, handler: @escaping(_ items: [Item]) -> ()) {
+        
+        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("collection", isEqualTo: collection).getDocuments { querySnapshot, error in
+            
+            
+            handler(self.getItemsFromSnapshot(querySnapshot: querySnapshot))
+            print("Getting \(collection) items for user: \(userID)")
+        }
+    }
+    
 //    private func getItemsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Item] {
 //        var items = [Item]()
 //
@@ -81,7 +91,7 @@ final class DataService {
             print("Getting collection names for user: \(userID)")
         }
     }
-    
+    // MARK: Private functions
     private func getCollectionNameFromSnapshot(querySnapshot: QuerySnapshot?) -> [String] {
         var collectionNames = [String]()
         
@@ -124,6 +134,33 @@ final class DataService {
         }
         else {
             return suggestedCollections
+        }
+    }
+    
+    private func getItemsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Item] {
+        var items = [Item]()
+        
+        
+        if let snapshot = querySnapshot, snapshot.documents.count > 0 {
+            
+            for document in snapshot.documents {
+                if let userID = document.get("user_id") as? String,
+                   let collection = document.get("collection") as? String,
+                   let name = document.get("name") as? String,
+                   let tag = document.get("tag") as? String
+                   
+                   {
+                    print("Getting \(collection) items from Firebase")
+                    let item = Item(userID: userID, name: name, tag: tag, collection: collection)
+                    
+                    print("Adding \(collection) items to items array")
+                    items.append(item)
+                }
+            }
+            return items
+        }
+        else {
+            return items
         }
     }
 }

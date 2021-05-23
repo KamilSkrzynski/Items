@@ -9,13 +9,15 @@ import SwiftUI
 
 struct AddItemView: View {
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("userID") private var userID = ""
     
     @StateObject private var viewModel = AddItemViewModel()
     
     @Environment(\.presentationMode) var presentationMode
     
-    
+    @State var imageSelected: UIImage = UIImage(named: "Placeholder")!
+    @State private var showImagePicker: Bool = false
     @State private var showCollections = false
     
     var collections = ["tech", "clothes", "home"]
@@ -29,17 +31,12 @@ struct AddItemView: View {
                     .padding(.bottom)
                 HStack {
                     Button(action: {
-                        
+                        showImagePicker.toggle()
                     }, label: {
-                        ZStack {
-                            Rectangle()
-                                .frame(width: 140, height: 140)
-                                .foregroundColor(.mainColor)
-                            
-                            Image(systemName: "photo.fill")
-                                .foregroundColor(.secondaryColor)
-                                .font(.system(size: 60))
-                        }
+                        Image(uiImage: imageSelected)
+                                    .resizable()
+                                    .frame(width: 150, height: 150)
+                                    .scaledToFill()
                     })
                     
                     
@@ -114,6 +111,9 @@ struct AddItemView: View {
             
             Spacer()
         }
+        .sheet(isPresented: $showImagePicker, content: {
+            ImagePicker(imageSelected: $imageSelected).preferredColorScheme(isDarkMode ? .dark : .light)
+        })
         .padding()
         .navigationTitle(viewModel.title)
         .navigationBarItems(leading:

@@ -13,9 +13,8 @@ struct Item: Identifiable, Hashable {
     let id = UUID()
     var userID: String
     var name: String
-    var tag: String?
-    var image: UIImage
-    var collectionID: String
+    var tag: String
+    var collection: String
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

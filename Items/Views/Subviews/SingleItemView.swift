@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SingleItemView: View {
     
-    @State var item: Int
+    @State var item: Item
+    @State var itemImage: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -32,7 +33,7 @@ struct SingleItemView: View {
                     Divider()
                         .padding()
                     
-                    Image("\(item)")
+                    Image("\(itemImage)")
                         .resizable()
                         .frame(width: 140, height: 140)
                         .scaledToFill()
@@ -42,12 +43,12 @@ struct SingleItemView: View {
             .frame(width: 150, height: 200)
             
             VStack(alignment: .leading) {
-                Text("Tracksuit")
+                Text(item.name)
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 
-                Text("#bottoms")
+                Text("#\(item.tag)")
                     .font(.caption)
                     .foregroundColor(.gray)
             }
@@ -59,8 +60,9 @@ struct SingleItemView: View {
 }
 
 struct SingleItemView_Previews: PreviewProvider {
+    static let item = Item(userID: "", name: "T-shirt", tag: "tops", collection: "")
     static var previews: some View {
-        SingleItemView(item: 0)
+        SingleItemView(item: item, itemImage: 0)
             .preferredColorScheme(.dark)
     }
 }

@@ -16,7 +16,6 @@ struct CollectionsView: View {
     
     @ObservedObject var suggestedCollections = CollectionsArray(isSuggested: true)
     
-    
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var showSheet: Bool = false
@@ -38,7 +37,7 @@ struct CollectionsView: View {
                     HStack {
                         ForEach(customCollections.collectionArray, id: \.self) { collection in
                         NavigationLink(
-                            destination: ItemsView(),
+                            destination: ItemsView(collection: collection.title),
                             label: {
                                 SingleCollectionView(collection: collection)
                                     .padding(.bottom, 280)
@@ -96,7 +95,7 @@ struct CollectionsView: View {
                 // Error with ForEach!!!
                 ForEach(suggestedCollections.collectionArray, id: \.self) { collection in
                     NavigationLink(
-                        destination: ItemsView(),
+                        destination: ItemsView(collection: collection.title),
                         label: {
                             SingleCollectionView(collection: collection)
                                 .padding(.bottom, 280)

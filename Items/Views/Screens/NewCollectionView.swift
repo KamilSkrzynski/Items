@@ -9,12 +9,15 @@ import SwiftUI
 
 struct NewCollectionView: View {
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("userID") private var userID = ""
     
     @StateObject private var viewModel = NewCollectionViewModel()
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State var imageSelected: UIImage = UIImage(named: "Placeholder")!
+    @State private var showImagePicker: Bool = false
     @State private var showCollections = false
     
     var body: some View {
@@ -26,17 +29,12 @@ struct NewCollectionView: View {
                     .padding(.bottom)
                 HStack {
                     Button(action: {
-                        
+                        showImagePicker.toggle()
                     }, label: {
-                        ZStack {
-                            Rectangle()
-                                .frame(width: 140, height: 140)
-                                .foregroundColor(.mainColor)
-                            
-                            Image(systemName: viewModel.imagePlaceholderImageName)
-                                .foregroundColor(.secondaryColor)
-                                .font(.system(size: 60))
-                        }
+                        Image(uiImage: imageSelected)
+                                .resizable()
+                                .frame(width: 150, height: 150)
+                                .scaledToFill()
                     })
                     
                     
@@ -62,7 +60,7 @@ struct NewCollectionView: View {
             }
             
             Button(action: {
-                DataService.instance.createCollection(userID: userID, title: viewModel.collectionTitle, subtitle: viewModel.collectionSubtitle, dateCreated: Date(), image: UIImage(named: "Placeholder")!, isSuggested: false)
+                DataService.instance.createCollection(userID: userID, title: viewModel.collectionTitle, subtitle: viewModel.collectionSubtitle, dateCreated: Date(), image: imageSelected, isSuggested: false)
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {
@@ -90,7 +88,9 @@ struct NewCollectionView: View {
             .opacity(viewModel.check() ? 1.0 : 0.3)
             
             Spacer()
-        }
+        }.sheet(isPresented: $showImagePicker, content: {
+            ImagePicker(imageSelected: $imageSelected).preferredColorScheme(isDarkMode ? .dark : .light)
+        })
         .padding()
         .navigationTitle(viewModel.title)
         .navigationBarItems(leading:

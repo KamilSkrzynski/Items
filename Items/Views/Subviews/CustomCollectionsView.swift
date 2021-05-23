@@ -29,7 +29,7 @@ struct CustomCollectionsView: View {
                     HStack {
                         ForEach(collections.collectionArray, id: \.self) { collection in
                         NavigationLink(
-                            destination: ItemsView(),
+                            destination: ItemsView(collection: collection.title),
                             label: {
                                 EmptyView()
                                     .padding(.bottom, 280)
