@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class AddItemViewModel: ObservableObject {
+    
+    @AppStorage("userID") private var userID = ""
     
     let title = "New Item"
     let subtitle = "Create new item you want to track"
@@ -18,23 +21,30 @@ final class AddItemViewModel: ObservableObject {
     let namePlaceholer = "name"
     let storePlaceholer = "store"
     let tagPlaceholer = "tag"
+    let collectionPlaceholder = "collection"
     
     let imagePlaceholderImageName = "photo.fill"
     
-    let nameImageName = "scribble.variable"
-    let storeImageName = "shippingbox.fill"
+    let nameImageName = "square.and.pencil"
     let tagImageName = "tag.fill"
     let collectionImageName = "doc.fill"
     let closeButtonImageName = "xmark"
     
     @Published var name = ""
-    @Published var store = ""
     @Published var tag = ""
     @Published var collection = "collection"
+    @Published var collectionNames = [String]()
+    
+    init() {
+        DataService.instance.downloadCollectionNames(userID: userID) { returnedNames in
+            self.collectionNames.append(contentsOf: returnedNames)
+            print(self.collectionNames)
+        }
+    }
     
     
     func check() -> Bool {
-        if !name.isEmpty, !store.isEmpty, !tag.isEmpty, !collection.isEmpty {
+        if !name.isEmpty, !tag.isEmpty, !collection.isEmpty {
             return true
         }
         else {

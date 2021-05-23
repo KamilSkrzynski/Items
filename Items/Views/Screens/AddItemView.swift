@@ -9,13 +9,14 @@ import SwiftUI
 
 struct AddItemView: View {
     
+    @AppStorage("userID") private var userID = ""
+    
     @StateObject private var viewModel = AddItemViewModel()
     
     @Environment(\.presentationMode) var presentationMode
     
     
     @State private var showCollections = false
-    
     
     var collections = ["tech", "clothes", "home"]
     
@@ -52,12 +53,6 @@ struct AddItemView: View {
                                 .disableAutocorrection(true)
                         }
                         HStack {
-                            Image(systemName: viewModel.storeImageName)
-                            TextField(viewModel.storePlaceholer, text: $viewModel.store)
-                                .autocapitalization(.none)
-                                .disableAutocorrection(true)
-                        }
-                        HStack {
                             Image(systemName: viewModel.tagImageName)
                                 .font(.system(size: 15))
                             TextField(viewModel.tagPlaceholer, text: $viewModel.tag)
@@ -68,7 +63,7 @@ struct AddItemView: View {
                         HStack {
                             Image(systemName: viewModel.collectionImageName)
                             Menu  {
-                                ForEach(collections, id: \.self) { coll in
+                                ForEach(viewModel.collectionNames, id: \.self) { coll in
                                     Button(action: {
                                         viewModel.collection = coll
                                     }, label: {
@@ -79,7 +74,7 @@ struct AddItemView: View {
                                 
                                 Text("\(viewModel.collection)")
                                 Spacer()
-                            }     .accentColor(viewModel.collection != viewModel.collection ? .primary : Color(.systemGray3))
+                            }.accentColor(viewModel.collection != viewModel.collectionPlaceholder ? .primary : Color(.systemGray3))
                         }
                     }
                     .padding()
@@ -90,7 +85,8 @@ struct AddItemView: View {
             }
             
             Button(action: {
-                
+                DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, dateCreated: Date(), image: UIImage(named: "4")!)
+                presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {
                     Image(systemName: viewModel.buttonImageName)

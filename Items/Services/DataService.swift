@@ -19,6 +19,23 @@ final class DataService {
     private var REF_COLLECTIONS = db.collection("collections")
     private var REF_ITEMS = db.collection("items")
     
+    func createItem(userID: String, collection: String, name: String, tag: String, dateCreated: Date, image: UIImage) {
+        
+        let document = REF_ITEMS.document()
+        let itemID = document.documentID
+        ImageManager.instance.uploadItemImage(userID: userID, itemID: itemID, image: image)
+        
+        REF_ITEMS.document("\(itemID)").setData([
+            "user_id": userID,
+            "item_id": itemID,
+            "collection": collection,
+            "name": name,
+            "tag": tag,
+            "date_created": dateCreated
+        ])
+        
+    }
+    
     func createCollection(userID: String, title: String, subtitle: String, dateCreated: Date, image: UIImage, isSuggested: Bool) {
         
         let document = REF_COLLECTIONS.document()
@@ -35,12 +52,50 @@ final class DataService {
         ])
     }
     
+ //   func listen
+    
     func downloadCollections(userID: String, isSuggested: Bool, handler: @escaping(_ suggestedCollections: [SuggestedCollection]) -> ()) {
         
         REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).whereField("is_suggested", isEqualTo: isSuggested).getDocuments { querySnapshot, error in
             
+            
             handler(self.getCollectionsFromSnapshot(querySnapshot: querySnapshot))
-            print("\(userID)")
+            print("Getting collections for user: \(userID)")
+        }
+    }
+    
+//    private func getItemsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Item] {
+//        var items = [Item]()
+//
+//        if let snapshot = querySnapshot, snapshot.documents.count > 0 {
+//            for document in snapshot.documents {
+//                if let userID = document.get("user_id") as? String,
+//            }
+//        }
+//    }
+    
+    func downloadCollectionNames(userID: String, handler: @escaping(_ suggestedCollections: [String]) -> ()) {
+        REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).getDocuments { querySnapshot, error in
+            
+            handler(self.getCollectionNameFromSnapshot(querySnapshot: querySnapshot))
+            print("Getting collection names for user: \(userID)")
+        }
+    }
+    
+    private func getCollectionNameFromSnapshot(querySnapshot: QuerySnapshot?) -> [String] {
+        var collectionNames = [String]()
+        
+        if let snapshot = querySnapshot, snapshot.documents.count > 0 {
+            for document in snapshot.documents {
+                if let collectionTitle = document.get("title") as? String {
+                    let collectionName = collectionTitle
+                    collectionNames.append(collectionName)
+                }
+            }
+            return collectionNames
+        }
+        else {
+            return collectionNames
         }
     }
     
@@ -49,7 +104,6 @@ final class DataService {
         
         
         if let snapshot = querySnapshot, snapshot.documents.count > 0 {
-   //        var image: UIImage = UIImage()
             
             for document in snapshot.documents {
                 if let userID = document.get("user_id") as? String,
@@ -62,9 +116,8 @@ final class DataService {
                     print("Getting collection \(collectionID) from Firebase")
                     let suggestedCollection = SuggestedCollection(collectionID: collectionID, userID: userID, title: title, subtitle: subtitle, isSuggested: isSuggested)
                     
-                    print("Adding collection \(collectionID) to suggested collections array")
+                    print("Adding collection \(collectionID) to \(isSuggested ? "suggested" : "custom") collections array")
                     suggestedCollections.append(suggestedCollection)
-                 //   print("\(suggestedCollections)")
                 }
             }
             return suggestedCollections

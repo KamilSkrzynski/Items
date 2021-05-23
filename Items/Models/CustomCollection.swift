@@ -8,11 +8,16 @@
 import Foundation
 import SwiftUI
 
-struct CustomCollection {
+struct CustomCollection: Identifiable, Hashable {
     
     let id = UUID()
+    var collectionID: String
     var userID: String
     var title: String
-    var subtitle: String?
-    var image: UIImage
+    var subtitle: String
+    var isSuggested: Bool
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

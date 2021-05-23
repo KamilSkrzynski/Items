@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewCollectionView: View {
     
+    @AppStorage("userID") private var userID = ""
+    
     @StateObject private var viewModel = NewCollectionViewModel()
     
     @Environment(\.presentationMode) var presentationMode
@@ -43,10 +45,14 @@ struct NewCollectionView: View {
                     VStack(spacing: 20) {
                         HStack {                            Image(systemName: viewModel.collectionTitleImageName)
                             TextField(viewModel.titlePlaceholder, text: $viewModel.collectionTitle)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
                         }
                         HStack {
                             Image(systemName: viewModel.collectionSubtitleImageName)
                             TextField(viewModel.subtitlePlaceholder, text: $viewModel.collectionSubtitle)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
                         }                    }
                         .padding()
                 }
@@ -56,7 +62,8 @@ struct NewCollectionView: View {
             }
             
             Button(action: {
-                
+                DataService.instance.createCollection(userID: userID, title: viewModel.collectionTitle, subtitle: viewModel.collectionSubtitle, dateCreated: Date(), image: UIImage(named: "Placeholder")!, isSuggested: false)
+                presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {
                     Image(systemName: viewModel.buttonImageName)

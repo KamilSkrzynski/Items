@@ -16,10 +16,26 @@ final class ImageManager {
     
     private var REF_STORAGE = Storage.storage()
     
+    // MARK: Upload image
     func uploadCollectionImage(userID: String, collectionID: String, image: UIImage) {
         let path = getCollectionImagePath(userID: userID, collectionID: collectionID)
         
         uploadImage(path: path, image: image) { _ in }
+    }
+    
+    func uploadItemImage(userID: String, itemID: String, image: UIImage) {
+        let path = getItemImagePath(userID: userID, itemID: itemID)
+        
+        uploadImage(path: path, image: image) { _ in }
+    }
+    
+    //MARK: Download image
+    func downloadItemImage(userID: String, itemID: String, handler: @escaping (_ image: UIImage?) -> ()) {
+        let path = getItemImagePath(userID: userID, itemID: itemID)
+        
+        downloadImage(path: path) { returnedImage in
+            handler(returnedImage)
+        }
     }
     
     func downloadCollectionImage(userID: String, collectionID: String, handler: @escaping (_ image: UIImage?) -> ()) {
@@ -30,6 +46,7 @@ final class ImageManager {
         }
     }
     
+    // MARK: Private functions
     private func getCollectionImagePath(userID: String, collectionID: String) -> StorageReference {
         
         let collectionPath = "collections/\(userID)/\(collectionID)"

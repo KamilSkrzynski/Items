@@ -11,7 +11,10 @@ struct CollectionsView: View {
     
     @StateObject private var viewModel = CollectionsViewModel()
     
-    @ObservedObject var collections: CollectionsArray
+    @ObservedObject var customCollections = CollectionsArray(isSuggested: false)
+    
+    
+    @ObservedObject var suggestedCollections = CollectionsArray(isSuggested: true)
     
     
     @AppStorage("isDarkMode") private var isDarkMode = false
@@ -30,10 +33,10 @@ struct CollectionsView: View {
             }
             .padding()
             
-            if viewModel.customCollections.collectionArray.count > 0 {
+            if customCollections.collectionArray.count > 0 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(viewModel.customCollections.collectionArray, id: \.self) { collection in
+                        ForEach(customCollections.collectionArray, id: \.self) { collection in
                         NavigationLink(
                             destination: ItemsView(),
                             label: {
@@ -91,7 +94,7 @@ struct CollectionsView: View {
             ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
                 // Error with ForEach!!!
-                ForEach(collections.collectionArray, id: \.self) { collection in
+                ForEach(suggestedCollections.collectionArray, id: \.self) { collection in
                     NavigationLink(
                         destination: ItemsView(),
                         label: {
@@ -148,7 +151,7 @@ struct CollectionsView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            CollectionsView(collections: CollectionsArray(isSuggested: true))
+            CollectionsView()
                 .preferredColorScheme(.dark)
         }
         .preferredColorScheme(.light)

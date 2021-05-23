@@ -16,10 +16,10 @@ final class CollectionsViewModel: ObservableObject {
     let subtitle = "Sort your items by collections"
     let customListTitle = "Custom lists"
     let suggestedListTitle = "Suggested lists"
-    let emptyCustomListButtonTitle = "Add your first collection"
-    let anyCustomListButtonTitle = "Add collection"
+    let emptyCustomListButtonTitle = "Add your first collection here"
+    let anyCustomListButtonTitle = "Add collection here"
     
-  //  @Published var suggestedCollections = CollectionsArray(isSuggested: true)
+    @Published var suggestedCollections = CollectionsArray(isSuggested: true)
     
 //    let suggestedCollectionImages = [UIImage(named: "Clothes"), UIImage(named: "Tech"), UIImage(named: "Home")]
     

@@ -20,7 +20,7 @@ struct TabContainerView: View {
         VStack {
             if selectedTab == 0 {
                 NavigationView {
-                    CollectionsView(collections: posts)
+                    CollectionsView()
                 }
 
             }

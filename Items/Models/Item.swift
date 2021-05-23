@@ -8,13 +8,16 @@
 import Foundation
 import SwiftUI
 
-struct Item {
+struct Item: Identifiable, Hashable {
     
     let id = UUID()
     var userID: String
     var name: String
     var tag: String?
-    var store: String?
     var image: UIImage
-    var collection: String
+    var collectionID: String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

@@ -47,10 +47,6 @@ struct SingleItemView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 
-                Text("store:")
-                    .font(.callout)
-                    .foregroundColor(.primary)
-                
                 Text("#bottoms")
                     .font(.caption)
                     .foregroundColor(.gray)
