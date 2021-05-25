@@ -27,7 +27,20 @@ struct SingleCollectionView: View {
                 Divider()
                     .padding(.horizontal)
                 
-                Spacer()
+                
+                if collection.isSuggested == false {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        DataService.instance.deleteCollection(collectionID: collection.collectionID)
+                    }, label: {
+                        Image(systemName: "trash")
+                            .font(.system(size: 15))
+                            .foregroundColor(.secondaryColor)
+                    })
+                    .offset(x: -10, y: 5)
+                }
+                }
                 
                 HStack {
                     VStack(alignment: .leading) {
@@ -41,12 +54,11 @@ struct SingleCollectionView: View {
                             .multilineTextAlignment(.leading)
                     }
                     .padding()
-                    
                     Spacer()
                 }
             }
             .padding()
-            .frame(width: 180, height: 300)
+            .frame(width: 180, height: 310)
             .background(Color.grayColor)
         }
         .onAppear {
@@ -65,7 +77,7 @@ struct SingleCollectionView: View {
 }
 
 struct SingleCollectionView_Previews: PreviewProvider {
-    static var collection = SuggestedCollection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat", isSuggested: true)
+    static var collection = SuggestedCollection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat jasdkajs ahsdjash", isSuggested: true)
     
     static var previews: some View {
         SingleCollectionView(collection: collection)

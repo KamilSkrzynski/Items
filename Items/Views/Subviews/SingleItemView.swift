@@ -22,7 +22,7 @@ struct SingleItemView: View {
                 
                 VStack {
                     Button(action: {
-                        
+                        DataService.instance.deleteItem(itemID: item.itemID)
                     }, label: {
                         Image(systemName: "trash")
                             .font(.system(size: 15))
@@ -63,7 +63,7 @@ struct SingleItemView: View {
     }
     
     func getImage() {
-        ImageManager.instance.downloadItemImage(userID: userID, itemID: item.itemID) { returnedImage in
+        ImageManager.instance.downloadItemImage(userID: item.userID, itemID: item.itemID) { returnedImage in
             if let image = returnedImage {
                 self.image = image
             }

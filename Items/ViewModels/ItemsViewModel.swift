@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
+final class ItemsViewModel: ObservableObject {
+    
+}

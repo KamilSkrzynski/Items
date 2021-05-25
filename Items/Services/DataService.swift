@@ -74,6 +74,29 @@ final class DataService {
         }
     }
     
+    func deleteItem(itemID: String) {
+        REF_ITEMS.document("\(itemID)").delete() { error in
+            if let error = error {
+                print("Error removing item: \(error)")
+            }
+            else {
+                print("Item removed!")
+            }
+        }
+    }
+    
+    func deleteCollection(collectionID: String) {
+        REF_COLLECTIONS.document("\(collectionID)").delete() { error in
+            if let error = error {
+                print("Error removing collection: \(error)")
+            }
+            else {
+                print("Collection removed!")
+            }
+        }
+      //  REF_ITEMS.whereField("collection_id", isEqualTo: collectionID).getDocuments(completion: <#T##FIRQuerySnapshotBlock##FIRQuerySnapshotBlock##(QuerySnapshot?, Error?) -> Void#>)
+    }
+    
 //    private func getItemsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Item] {
 //        var items = [Item]()
 //
