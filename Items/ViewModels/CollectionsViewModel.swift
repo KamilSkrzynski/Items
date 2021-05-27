@@ -19,11 +19,6 @@ final class CollectionsViewModel: ObservableObject {
     let emptyCustomListButtonTitle = "Add your first collection here"
     let anyCustomListButtonTitle = "Add collection here"
     
-    @Published var suggestedCollections = CollectionsArray(isSuggested: true)
-    
-//    let suggestedCollectionImages = [UIImage(named: "Clothes"), UIImage(named: "Tech"), UIImage(named: "Home")]
-    
-    @Published var customCollections = CollectionsArray(isSuggested: false)
 }
 
 extension CollectionsViewModel {

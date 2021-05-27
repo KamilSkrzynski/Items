@@ -9,12 +9,10 @@ import SwiftUI
 
 struct CollectionsView: View {
     
-    @StateObject private var viewModel = CollectionsViewModel()
+    @ObservedObject private var viewModel = CollectionsViewModel()
     
-    @ObservedObject var customCollections = CollectionsArray(isSuggested: false)
-    
-    
-    @ObservedObject var suggestedCollections = CollectionsArray(isSuggested: true)
+    @ObservedObject var customCollections: CollectionsArray
+    @ObservedObject var suggestedCollections: CollectionsArray
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     
@@ -37,7 +35,7 @@ struct CollectionsView: View {
                     HStack {
                         ForEach(customCollections.collectionArray, id: \.self) { collection in
                         NavigationLink(
-                            destination: ItemsView(collection: collection.title),
+                            destination: ItemsView(itemsArray: ItemsArray(collection: collection.title), collection: collection.title),
                             label: {
                                 SingleCollectionView(collection: collection)
                                     .padding(.bottom, 280)
@@ -92,10 +90,9 @@ struct CollectionsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
-                // Error with ForEach!!!
                 ForEach(suggestedCollections.collectionArray, id: \.self) { collection in
                     NavigationLink(
-                        destination: ItemsView(collection: collection.title),
+                        destination: ItemsView(itemsArray: ItemsArray(collection: collection.title), collection: collection.title),
                         label: {
                             SingleCollectionView(collection: collection)
                                 .padding(.bottom, 280)
@@ -150,7 +147,7 @@ struct CollectionsView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            CollectionsView()
+            CollectionsView(customCollections: CollectionsArray(isSuggested: false), suggestedCollections: CollectionsArray(isSuggested: true))
                 .preferredColorScheme(.dark)
         }
         .preferredColorScheme(.light)

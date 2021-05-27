@@ -10,17 +10,20 @@ import SwiftUI
 struct TabContainerView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isOnboardingWatched") private var isOnboardingToWatch = true
-    let posts = CollectionsArray(isSuggested: true)
+   // let posts = CollectionsArray(isSuggested: true)
     @AppStorage("userID") private var userID = ""
     @State var selectedTab: Int = 0
     @State var showAddSheet: Bool = false
+    
+    let customCollections = CollectionsArray(isSuggested: false)
+    let suggestedCollections = CollectionsArray(isSuggested: true)
     
     var body: some View {
         
         VStack {
             if selectedTab == 0 {
                 NavigationView {
-                    CollectionsView()
+                    CollectionsView(customCollections: customCollections, suggestedCollections: suggestedCollections)
                 }
 
             }

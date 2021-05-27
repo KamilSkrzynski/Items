@@ -62,7 +62,7 @@ struct ProfileView: View {
                                 label: {
                                 }))
                 .background(NavigationLink(
-                                destination: BoughtItemsView(),
+                                destination: BoughtItemsView(itemsArray: ItemsArray(isBought: true)),
                                 isActive: $viewModel.itemsBoughtPushed,
                                 label: {
                                     

@@ -11,20 +11,38 @@ struct ItemsView: View {
     
     @StateObject private var viewModel = ItemsViewModel()
     
-    @ObservedObject private var itemsArray = ItemsArray(collection: "Clothes")
+    @ObservedObject var itemsArray: ItemsArray
     
     @State var collection: String
     @State var search = ""
+    @State private var isSearchShow = false
     
     var body: some View {
         HStack {
+            Spacer()
+            Button(action: {
+                withAnimation {
+                isSearchShow = true
+                }
+            }, label: {
+                Image(systemName: "magnifyingglass")
+            })
+            if isSearchShow {
             TextField("Search item", text: $search)
             Spacer()
-            Image(systemName: "magnifyingglass")
+                Button(action: {
+                    withAnimation {
+                    isSearchShow = false
+                    }
+                }, label: {
+                    Image(systemName: "xmark")
+                })
+            }
         }
         .frame(maxWidth: .infinity)
+        .frame(height: 20)
         .padding()
-        .background(Color.grayColor)
+        .background(isSearchShow ? Color.grayColor : Color.clear)
         
         if itemsArray.itemsArray.count > 0 {
             VStack {
@@ -60,10 +78,9 @@ struct ItemsView: View {
 }
 
 struct ItemView_Previews: PreviewProvider {
-    static var collection = "Clothes"
     static var previews: some View {
         NavigationView {
-            ItemsView(collection: collection)
+            ItemsView(itemsArray: ItemsArray(collection: "Clothes"), collection: "Clothes")
         }
     }
 }
