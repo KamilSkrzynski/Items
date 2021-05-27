@@ -14,6 +14,7 @@ final class ProfileViewModel: ObservableObject {
     
     @Published private(set) var itemViewModels: [ProfileItemViewModel] = []
     @Published var loginSignupPushed = false
+    @Published var itemsBoughtPushed = false
     private let authService: AuthServiceProtocol
     
     init(authService: AuthServiceProtocol = AuthService()) {
@@ -27,6 +28,7 @@ final class ProfileViewModel: ObservableObject {
     private func buildItems() {
         itemViewModels = [
             .init(name: authService.currentUser?.email ?? "Create Account", image: "person.fill", type: .account),
+            .init(name: "Items Bought", image: "bag.fill", type: .bought),
             .init(name: "Switch to \(isDarkMode ? "Light" : "Dark") Mode", image: "lightbulb.fill", type: .mode),
             .init(name: "Privacy Policy", image: "shield.lefthalf.fill", type: .privacy)
         ]
@@ -41,6 +43,8 @@ final class ProfileViewModel: ObservableObject {
         case .mode:
             isDarkMode = !isDarkMode
             buildItems()
+        case .bought:
+            itemsBoughtPushed = true
         case .account:
             guard authService.currentUser?.email == nil else { return }
             loginSignupPushed = true

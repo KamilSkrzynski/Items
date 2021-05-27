@@ -19,7 +19,7 @@ final class DataService {
     private var REF_COLLECTIONS = db.collection("collections")
     private var REF_ITEMS = db.collection("items")
     
-    func createItem(userID: String, collection: String, name: String, tag: String, dateCreated: Date, image: UIImage) {
+    func createItem(userID: String, collection: String, name: String, tag: String, isBought: Bool, dateCreated: Date, image: UIImage) {
         
         let document = REF_ITEMS.document()
         let itemID = document.documentID
@@ -31,6 +31,7 @@ final class DataService {
             "collection": collection,
             "name": name,
             "tag": tag,
+            "is_bought": isBought,
             "date_created": dateCreated
         ])
         
@@ -64,13 +65,37 @@ final class DataService {
         }
     }
     
-    func downloadItems(userID: String, collection: String, handler: @escaping(_ items: [Item]) -> ()) {
+    func downloadItems(userID: String, collection: String, isBought: Bool, handler: @escaping(_ items: [Item]) -> ()) {
         
-        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("collection", isEqualTo: collection).getDocuments { querySnapshot, error in
+        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("collection", isEqualTo: collection).whereField("is_bought", isEqualTo: false).getDocuments { querySnapshot, error in
             
             
             handler(self.getItemsFromSnapshot(querySnapshot: querySnapshot))
             print("Getting \(collection) items for user: \(userID)")
+        }
+    }
+    
+    func downloadBoughtItems(userID: String, isBought: Bool, handler: @escaping(_ items: [Item]) -> ()) {
+        
+        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("is_bought", isEqualTo: true).getDocuments { querySnapshot, error in
+            
+            
+            handler(self.getItemsFromSnapshot(querySnapshot: querySnapshot))
+            print("Getting bought items for user: \(userID)")
+        }
+    }
+    
+    func updateItem(itemID: String) {
+        REF_ITEMS.document("\(itemID)").updateData([
+            "is_bought": true,
+        ]) {
+            error in
+            if let error = error {
+                print("Error updating item \(itemID): \(error)")
+            }
+            else {
+                print("Item \(itemID) successfully updated")
+            }
         }
     }
     
@@ -171,11 +196,12 @@ final class DataService {
                    let itemID = document.get("item_id") as? String,
                    let collection = document.get("collection") as? String,
                    let name = document.get("name") as? String,
+                   let isBought = document.get("is_bought") as? Bool,
                    let tag = document.get("tag") as? String
                    
                    {
                     print("Getting \(collection) items from Firebase")
-                    let item = Item(itemID: itemID, userID: userID, name: name, tag: tag, collection: collection)
+                    let item = Item(itemID: itemID, userID: userID, name: name, tag: tag, isBought: isBought, collection: collection)
                     
                     print("Adding \(collection) items to items array")
                     items.append(item)

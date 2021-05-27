@@ -52,6 +52,7 @@
 		379E17B9265AA0DE002AD0F0 /* ItemsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17B8265AA0DD002AD0F0 /* ItemsArray.swift */; };
 		379E17BB265AB7CB002AD0F0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17BA265AB7CB002AD0F0 /* ImagePicker.swift */; };
 		379E17BD265ADF36002AD0F0 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17BC265ADF36002AD0F0 /* ItemsViewModel.swift */; };
+		379E17BF265FB5CD002AD0F0 /* BoughtItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E17BE265FB5CC002AD0F0 /* BoughtItemsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		379E17B8265AA0DD002AD0F0 /* ItemsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsArray.swift; sourceTree = "<group>"; };
 		379E17BA265AB7CB002AD0F0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		379E17BC265ADF36002AD0F0 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
+		379E17BE265FB5CC002AD0F0 /* BoughtItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoughtItemsView.swift; sourceTree = "<group>"; };
 		865CE8F45EECC9453FF5BF56 /* Pods-Items.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Items.release.xcconfig"; path = "Target Support Files/Pods-Items/Pods-Items.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -248,6 +250,7 @@
 				379E17B426518804002AD0F0 /* CustomCollectionsView.swift */,
 				379E17B626518810002AD0F0 /* SuggestedCollectionsView.swift */,
 				379E17BA265AB7CB002AD0F0 /* ImagePicker.swift */,
+				379E17BE265FB5CC002AD0F0 /* BoughtItemsView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				378F9093262C3542003AAE39 /* SingleCollectionViewModel.swift in Sources */,
 				37734A8F262B4F3B0048E659 /* ProfileViewButton.swift in Sources */,
 				379E17A126405663002AD0F0 /* NewCollectionViewModel.swift in Sources */,
+				379E17BF265FB5CD002AD0F0 /* BoughtItemsView.swift in Sources */,
 				37734A82262B31630048E659 /* Colors.swift in Sources */,
 				37734A57262B2DF10048E659 /* SingleItemView.swift in Sources */,
 				37734A4E262B2D6C0048E659 /* CollectionsView.swift in Sources */,

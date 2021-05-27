@@ -15,6 +15,7 @@ struct Item: Identifiable, Hashable {
     var userID: String
     var name: String
     var tag: String
+    var isBought: Bool
     var collection: String
     
     func hash(into hasher: inout Hasher) {

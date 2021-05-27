@@ -55,10 +55,17 @@ struct ProfileView: View {
         VStack {
             
             profileOptions
-                .background(NavigationLink(
+                .background(
+                    NavigationLink(
                                 destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
                                 isActive: $viewModel.loginSignupPushed,
                                 label: {
+                                }))
+                .background(NavigationLink(
+                                destination: BoughtItemsView(),
+                                isActive: $viewModel.itemsBoughtPushed,
+                                label: {
+                                    
                                 }))
             Spacer()
             

@@ -82,7 +82,7 @@ struct AddItemView: View {
             }
             
             Button(action: {
-                DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, dateCreated: Date(), image: imageSelected)
+                DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, isBought: false, dateCreated: Date(), image: imageSelected)
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {

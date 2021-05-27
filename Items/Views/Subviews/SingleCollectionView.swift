@@ -28,33 +28,32 @@ struct SingleCollectionView: View {
                     .padding(.horizontal)
                 
                 
-                if collection.isSuggested == false {
                 HStack {
-                    Spacer()
-                    Button(action: {
-                        DataService.instance.deleteCollection(collectionID: collection.collectionID)
-                    }, label: {
-                        Image(systemName: "trash")
-                            .font(.system(size: 15))
-                            .foregroundColor(.secondaryColor)
-                    })
-                    .offset(x: -10, y: 5)
-                }
-                }
-                
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(collection.title)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        
-                        Text(collection.subtitle)
-                            .font(.callout)
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.leading)
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(collection.title)
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            
+                            Text(collection.subtitle)
+                                .font(.callout)
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .padding()
+                        Spacer()
                     }
-                    .padding()
-                    Spacer()
+                    if collection.isSuggested == false {
+                        Button(action: {
+                            DataService.instance.deleteCollection(collectionID: collection.collectionID)
+                        }, label: {
+                            Image(systemName: "trash")
+                                .font(.system(size: 15))
+                                .foregroundColor(.secondaryColor)
+                        })
+                        .offset(x: -10, y: -30)
+                    }
+
                 }
             }
             .padding()
@@ -77,7 +76,7 @@ struct SingleCollectionView: View {
 }
 
 struct SingleCollectionView_Previews: PreviewProvider {
-    static var collection = SuggestedCollection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat jasdkajs ahsdjash", isSuggested: true)
+    static var collection = SuggestedCollection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat jasdkajs ahsdjash", isSuggested: false)
     
     static var previews: some View {
         SingleCollectionView(collection: collection)

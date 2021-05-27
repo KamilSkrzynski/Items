@@ -1,19 +1,20 @@
 //
-//  ItemsView.swift
+//  BoughtItemsView.swift
 //  Items
 //
-//  Created by Kamil Skrzyński on 17/04/2021.
+//  Created by Kamil Skrzyński on 27/05/2021.
 //
 
 import SwiftUI
 
-struct ItemsView: View {
+struct BoughtItemsView: View {
     
     @StateObject private var viewModel = ItemsViewModel()
     
-    @ObservedObject private var itemsArray = ItemsArray(collection: "Clothes")
+ //   @ObservedObject private var itemsArray = ItemsArray(collection: "Clothes")
     
-    @State var collection: String
+    @ObservedObject private var itemsArray = ItemsArray(isBought: true)
+    
     @State var search = ""
     
     var body: some View {
@@ -38,7 +39,7 @@ struct ItemsView: View {
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
-            .navigationTitle("\(collection)")
+            .navigationTitle("Bought")
             .accentColor(.primary)
         }
         else {
@@ -49,21 +50,20 @@ struct ItemsView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.appColor)
                     .padding(.bottom)
-                Text("Add first item to this collection")
+                Text("You haven't tag any item as bought!")
             }
             .edgesIgnoringSafeArea(.bottom)
-            .navigationTitle("\(collection)")
+            .navigationTitle("Bought")
             .accentColor(.primary)
         }
         Spacer()
     }
 }
 
-struct ItemView_Previews: PreviewProvider {
-    static var collection = "Clothes"
+struct BoughtItemsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ItemsView(collection: collection)
+            BoughtItemsView()
         }
     }
 }

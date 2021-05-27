@@ -21,14 +21,28 @@ struct SingleItemView: View {
                     .foregroundColor(Color.grayColor)
                 
                 VStack {
-                    Button(action: {
-                        DataService.instance.deleteItem(itemID: item.itemID)
-                    }, label: {
-                        Image(systemName: "trash")
-                            .font(.system(size: 15))
-                            .foregroundColor(.secondaryColor)
-                    })
-                    .offset(x: 60, y: 5)
+                    HStack {
+                        Spacer()
+                        if item.isBought == false {
+                        Button(action: {
+                            DataService.instance.updateItem(itemID: item.itemID)
+                        }, label: {
+                            Image(systemName: "checkmark.square")
+                                .font(.system(size: 18))
+                                .foregroundColor(.secondaryColor)
+                        })
+                        }
+                        
+                        Button(action: {
+                            DataService.instance.deleteItem(itemID: item.itemID)
+                        }, label: {
+                            Image(systemName: "trash")
+                                .font(.system(size: 15))
+                                .foregroundColor(.secondaryColor)
+                        })
+                    }
+                    .padding(5)
+                    
                     
                     Spacer()
                     
@@ -50,9 +64,16 @@ struct SingleItemView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 
+                if item.isBought == true {
+                    Text("#\(item.collection)")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+                
                 Text("#\(item.tag)")
                     .font(.caption)
                     .foregroundColor(.gray)
+                
             }
             .offset(x: -5, y: 10)
             .padding(.horizontal, 5)
@@ -72,7 +93,7 @@ struct SingleItemView: View {
 }
 
 struct SingleItemView_Previews: PreviewProvider {
-    static let item = Item(itemID: "", userID: "", name: "T-shirt", tag: "tops", collection: "")
+    static let item = Item(itemID: "", userID: "", name: "T-shirt", tag: "tops", isBought: false, collection: "")
     static var previews: some View {
         SingleItemView(item: item)
             .preferredColorScheme(.dark)
