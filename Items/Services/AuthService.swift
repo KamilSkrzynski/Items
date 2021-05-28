@@ -71,13 +71,13 @@ final class AuthService: AuthServiceProtocol {
                 let suggestedCollections = [
                     SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Clothes", subtitle: "Expand your wardrobe", isSuggested: true),
                     SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Tech", subtitle: "Save your tech essentials", isSuggested: true),
-                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Home", subtitle: "Elevate your home's design", isSuggested: true),
-                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Bought", subtitle: "", isSuggested: true)
+                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Home", subtitle: "Elevate your home's design", isSuggested: true)
                 ]
                 
                 self.createUser(userID: id, email: "anonymous", dateCreated: Date(), isPro: false)
+                let image = UIImage(named: "Placeholder")!
                 suggestedCollections.forEach { collection in
-                    DataService.instance.createCollection(userID: id, title: collection.title, subtitle: collection.subtitle, dateCreated: Date(), image: UIImage(named: collection.title)!, isSuggested: collection.isSuggested)
+                    DataService.instance.createCollection(userID: id, title: collection.title, subtitle: collection.subtitle, dateCreated: Date(), image: UIImage(named: collection.title) ?? image, isSuggested: collection.isSuggested)
                     
                     print("Successfully created suggested collections")
                 }
@@ -105,6 +105,8 @@ final class AuthService: AuthServiceProtocol {
                 return
             }
             else {
+                guard let user = authResult?.user else { return }
+                UserDefaults.standard.setValue(user.uid, forKey: "userID")
                 self.isSignedIn = true
                 print("Successfully logged in with email \(email)")
                 return
@@ -120,7 +122,7 @@ final class AuthService: AuthServiceProtocol {
                 "email": email,
                 "date_created": Date(),
                 "is_pro": isPro
-        ]
+            ]
         )
     }
     

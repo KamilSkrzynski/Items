@@ -35,7 +35,7 @@ struct CollectionsView: View {
                     HStack {
                         ForEach(customCollections.collectionArray, id: \.self) { collection in
                         NavigationLink(
-                            destination: ItemsView(itemsArray: ItemsArray(collection: collection.title), collection: collection.title),
+                            destination: ItemsView(collection: collection.title),
                             label: {
                                 SingleCollectionView(collection: collection)
                                     .padding(.bottom, 280)
@@ -92,7 +92,7 @@ struct CollectionsView: View {
             LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
                 ForEach(suggestedCollections.collectionArray, id: \.self) { collection in
                     NavigationLink(
-                        destination: ItemsView(itemsArray: ItemsArray(collection: collection.title), collection: collection.title),
+                        destination: ItemsView(collection: collection.title),
                         label: {
                             SingleCollectionView(collection: collection)
                                 .padding(.bottom, 280)

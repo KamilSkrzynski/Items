@@ -56,7 +56,8 @@ struct LandingView: View {
                 }
                 
                 NavigationLink(
-                    destination: AccountView(viewModel: .init(mode: .login, isPushed: $viewModel.loginPushed)),
+                    destination: AccountView(viewModel: .init(mode: .login, isPushed: $viewModel.loginPushed))
+                        .accentColor(.primary),
                     isActive: $viewModel.loginPushed){
                         Button(action: {
                             viewModel.loginPushed = true
@@ -68,6 +69,7 @@ struct LandingView: View {
             }
             .shadow(radius: 3)
         }
+        .accentColor(.primary)
     }
 }
 

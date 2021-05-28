@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ItemsView: View {
     
-    @StateObject private var viewModel = ItemsViewModel()
-    
-    @ObservedObject var itemsArray: ItemsArray
+    @ObservedObject private var viewModel = ItemsViewModel()
+    @AppStorage("userID") private var userID = ""
+//    @ObservedObject var itemsArray: ItemsArray
     
     @State var collection: String
     @State var search = ""
@@ -39,16 +39,19 @@ struct ItemsView: View {
                 })
             }
         }
+        .onAppear() {
+            viewModel.fetchItems(userID: userID, collection: collection)
+        }
         .frame(maxWidth: .infinity)
         .frame(height: 20)
         .padding()
         .background(isSearchShow ? Color.grayColor : Color.clear)
         
-        if itemsArray.itemsArray.count > 0 {
+        if viewModel.items.count > 0 {
             VStack {
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: [.init(.flexible(), spacing: 20), .init(.flexible())], spacing: 20, content: {
-                        ForEach((itemsArray.itemsArray)
+                        ForEach((viewModel.items)
                                     .filter({ "\($0)".contains(search) || search.isEmpty}), id: \.self) { item in
                             SingleItemView(item: item)
                         }
@@ -80,7 +83,7 @@ struct ItemsView: View {
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ItemsView(itemsArray: ItemsArray(collection: "Clothes"), collection: "Clothes")
+            ItemsView(collection: "Clothes")
         }
     }
 }

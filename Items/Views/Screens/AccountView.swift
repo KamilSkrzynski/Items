@@ -88,6 +88,7 @@ struct AccountView: View {
             
             Spacer()
         }
+        .accentColor(.primary)
         .padding()
         .navigationTitle(viewModel.title)
     }

@@ -53,8 +53,6 @@ final class DataService {
         ])
     }
     
- //   func listen
-    
     func downloadCollections(userID: String, isSuggested: Bool, handler: @escaping(_ suggestedCollections: [SuggestedCollection]) -> ()) {
         
         REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).whereField("is_suggested", isEqualTo: isSuggested).getDocuments { querySnapshot, error in
@@ -65,15 +63,15 @@ final class DataService {
         }
     }
     
-    func downloadItems(userID: String, collection: String, isBought: Bool, handler: @escaping(_ items: [Item]) -> ()) {
-        
-        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("collection", isEqualTo: collection).whereField("is_bought", isEqualTo: false).getDocuments { querySnapshot, error in
-            
-            
-            handler(self.getItemsFromSnapshot(querySnapshot: querySnapshot))
-            print("Getting \(collection) items for user: \(userID)")
-        }
-    }
+//    func downloadItems(userID: String, collection: String, isBought: Bool, handler: @escaping(_ items: [Item]) -> ()) {
+//        
+//        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("collection", isEqualTo: collection).whereField("is_bought", isEqualTo: false).addSnapshotListener { querySnapshot, error in
+//            
+//            
+//            handler(self.getItemsFromSnapshot(querySnapshot: querySnapshot))
+//            print("Getting \(collection) items for user: \(userID)")
+//        }
+//    }
     
     func downloadBoughtItems(userID: String, isBought: Bool, handler: @escaping(_ items: [Item]) -> ()) {
         
@@ -119,18 +117,7 @@ final class DataService {
                 print("Collection removed!")
             }
         }
-      //  REF_ITEMS.whereField("collection_id", isEqualTo: collectionID).getDocuments(completion: <#T##FIRQuerySnapshotBlock##FIRQuerySnapshotBlock##(QuerySnapshot?, Error?) -> Void#>)
     }
-    
-//    private func getItemsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Item] {
-//        var items = [Item]()
-//
-//        if let snapshot = querySnapshot, snapshot.documents.count > 0 {
-//            for document in snapshot.documents {
-//                if let userID = document.get("user_id") as? String,
-//            }
-//        }
-//    }
     
     func downloadCollectionNames(userID: String, handler: @escaping(_ suggestedCollections: [String]) -> ()) {
         REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).getDocuments { querySnapshot, error in
@@ -139,6 +126,7 @@ final class DataService {
             print("Getting collection names for user: \(userID)")
         }
     }
+    
     // MARK: Private functions
     private func getCollectionNameFromSnapshot(querySnapshot: QuerySnapshot?) -> [String] {
         var collectionNames = [String]()
@@ -159,7 +147,6 @@ final class DataService {
     
     private func getCollectionsFromSnapshot(querySnapshot: QuerySnapshot?) -> [SuggestedCollection] {
         var suggestedCollections = [SuggestedCollection]()
-        
         
         if let snapshot = querySnapshot, snapshot.documents.count > 0 {
             
@@ -188,7 +175,6 @@ final class DataService {
     private func getItemsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Item] {
         var items = [Item]()
         
-        
         if let snapshot = querySnapshot, snapshot.documents.count > 0 {
             
             for document in snapshot.documents {
@@ -200,10 +186,8 @@ final class DataService {
                    let tag = document.get("tag") as? String
                    
                    {
-                    print("Getting \(collection) items from Firebase")
                     let item = Item(itemID: itemID, userID: userID, name: name, tag: tag, isBought: isBought, collection: collection)
                     
-                    print("Adding \(collection) items to items array")
                     items.append(item)
                 }
             }

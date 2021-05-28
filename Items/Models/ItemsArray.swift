@@ -18,12 +18,12 @@ final class ItemsArray: ObservableObject, Identifiable {
         self.itemsArray.append(item)
     }
     
-    init(collection: String) {
-        DataService.instance.downloadItems(userID: self.userID, collection: collection, isBought: false) { returnedItems in
-            self.itemsArray.append(contentsOf: returnedItems)
-            print(self.itemsArray)
-        }
-    }
+//    init(collection: String) {
+//        DataService.instance.downloadItems(userID: self.userID, collection: collection, isBought: false) { returnedItems in
+//            self.itemsArray.append(contentsOf: returnedItems)
+//            print(self.itemsArray)
+//        }
+//    }
     
     init(isBought: Bool) {
         DataService.instance.downloadBoughtItems(userID: self.userID, isBought: isBought) { returnedItems in

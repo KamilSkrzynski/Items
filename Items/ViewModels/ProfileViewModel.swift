@@ -12,7 +12,7 @@ final class ProfileViewModel: ObservableObject {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     
-    @Published private(set) var itemViewModels: [ProfileItemViewModel] = []
+    @Published var itemViewModels: [ProfileItemViewModel] = []
     @Published var loginSignupPushed = false
     @Published var itemsBoughtPushed = false
     private let authService: AuthServiceProtocol
@@ -22,13 +22,14 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func onAppear() {
+        
         buildItems()
     }
     
     private func buildItems() {
         itemViewModels = [
             .init(name: authService.currentUser?.email ?? "Create Account", image: "person.fill", type: .account),
-            .init(name: "Items Bought", image: "bag.fill", type: .bought),
+            .init(name: "Bought", image: "bag.fill", type: .bought),
             .init(name: "Switch to \(isDarkMode ? "Light" : "Dark") Mode", image: "lightbulb.fill", type: .mode),
             .init(name: "Privacy Policy", image: "shield.lefthalf.fill", type: .privacy)
         ]

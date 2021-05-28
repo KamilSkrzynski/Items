@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     
-    @StateObject private var viewModel = ProfileViewModel()
+    @ObservedObject private var viewModel = ProfileViewModel()
     
     @State var activeSheet: ProfileViewButton.ProfileViewButtonType?
     
@@ -55,17 +55,24 @@ struct ProfileView: View {
         VStack {
             
             profileOptions
-                .background(
-                    NavigationLink(
-                                destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
-                                isActive: $viewModel.loginSignupPushed,
-                                label: {
-                                }))
+                .onAppear() {
+                    viewModel.onAppear()
+                }
+                .sheet(isPresented: $viewModel.loginSignupPushed, content: {
+                    NavigationView {
+                        AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed))
+                    }
+                })
+//                .background(
+//                    NavigationLink(
+//                                destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
+//                                isActive: $viewModel.loginSignupPushed,
+//                                label: {
+//                                }))
                 .background(NavigationLink(
                                 destination: BoughtItemsView(itemsArray: ItemsArray(isBought: true)),
                                 isActive: $viewModel.itemsBoughtPushed,
                                 label: {
-                                    
                                 }))
             Spacer()
             

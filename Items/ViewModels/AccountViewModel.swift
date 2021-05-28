@@ -9,6 +9,7 @@ import SwiftUI
 
 final class AccountViewModel: ObservableObject {
     
+    @ObservedObject var viewModel = ProfileViewModel()
     @Binding var isPushed: Bool
     private let mode: Mode
     private let authService: AuthServiceProtocol
