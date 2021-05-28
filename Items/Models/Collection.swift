@@ -1,5 +1,5 @@
 //
-//  SuggestedCollection.swift
+//  Collection.swift
 //  Items
 //
 //  Created by Kamil Skrzyński on 18/04/2021.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct SuggestedCollection: Identifiable, Hashable {
+struct Collection: Identifiable, Hashable {
     
     let id = UUID()
     var collectionID: String
