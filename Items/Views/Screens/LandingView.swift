@@ -79,7 +79,7 @@ struct LandingView: View {
             }
             .background(Image("Background")
                             .scaledToFit()
-                            .overlay(Color.black.opacity(0.6)))
+                            .overlay(Color.black.opacity(0.7)))
             .ignoresSafeArea(.all)
         }
         }

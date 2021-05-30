@@ -21,17 +21,18 @@ struct ItemsView: View {
             Spacer()
             Button(action: {
                 withAnimation {
-                isSearchShow = true
+                    isSearchShow = true
                 }
             }, label: {
                 Image(systemName: "magnifyingglass")
             })
             if isSearchShow {
-            TextField("Search item", text: $search)
-            Spacer()
+                TextField("Search item", text: $search)
+                Spacer()
                 Button(action: {
                     withAnimation {
-                    isSearchShow = false
+                        isSearchShow = false
+                        search = ""
                     }
                 }, label: {
                     Image(systemName: "xmark")

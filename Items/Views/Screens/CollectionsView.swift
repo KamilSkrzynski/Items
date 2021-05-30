@@ -11,13 +11,15 @@ struct CollectionsView: View {
     
     @ObservedObject private var viewModel = CollectionsViewModel()
     
-//    @ObservedObject var customCollections: CollectionsArray
- //   @ObservedObject var suggestedCollections: CollectionsArray
+    //    @ObservedObject var customCollections: CollectionsArray
+    //   @ObservedObject var suggestedCollections: CollectionsArray
     
     @AppStorage("userID") private var userID = ""
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var showSheet: Bool = false
+    @State var search = ""
+    @State private var isSearchShow = false
     
     @State var createCollection: Bool = false
     
@@ -38,25 +40,26 @@ struct CollectionsView: View {
             if viewModel.customCollections.count > 0 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(viewModel.customCollections, id: \.self) { collection in
-                        NavigationLink(
-                            destination: ItemsView(collection: collection.title),
-                            label: {
-                                SingleCollectionView(collection: collection)
-                                    .padding(.bottom, 280)
-                                    .padding(.trailing, 190)
-                            })
-                    }
-                    .foregroundColor(.primary)
-                       
+                        ForEach(viewModel.customCollections
+                                    .filter({ "\($0)".contains(search) || search.isEmpty}), id: \.self) { collection in
+                            NavigationLink(
+                                destination: ItemsView(collection: collection.title),
+                                label: {
+                                    SingleCollectionView(collection: collection)
+                                        .padding(.bottom, 280)
+                                        .padding(.trailing, 190)
+                                })
+                        }
+                        .foregroundColor(.primary)
+                        
                         HStack {
                             Button(action: {
                                 self.createCollection.toggle()
                             }, label: {
-                                        Text(viewModel.anyCustomListButtonTitle)
-                                            .font(.system(size: 15))
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(.secondary)
+                                Text(viewModel.anyCustomListButtonTitle)
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.secondary)
                             })
                             
                             Spacer()
@@ -70,10 +73,10 @@ struct CollectionsView: View {
                     Button(action: {
                         self.createCollection.toggle()
                     }, label: {
-                                Text(viewModel.emptyCustomListButtonTitle)
-                                    .font(.system(size: 15))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.secondary)
+                        Text(viewModel.emptyCustomListButtonTitle)
+                            .font(.system(size: 15))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.secondary)
                     })
                     
                     Spacer()
@@ -94,32 +97,56 @@ struct CollectionsView: View {
             .padding()
             
             ScrollView(.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
-                ForEach(viewModel.suggestedCollections, id: \.self) { collection in
-                    NavigationLink(
-                        destination: ItemsView(collection: collection.title),
-                        label: {
-                            SingleCollectionView(collection: collection)
-                                .padding(.bottom, 280)
-                                .padding(.trailing, 190)
-                        })
-                }
-                .foregroundColor(.primary)
-            })
+                LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
+                    ForEach(viewModel.suggestedCollections.filter({ "\($0)".contains(search) || search.isEmpty}), id: \.self) { collection in
+                        NavigationLink(
+                            destination: ItemsView(collection: collection.title),
+                            label: {
+                                SingleCollectionView(collection: collection)
+                                    .padding(.bottom, 280)
+                                    .padding(.trailing, 190)
+                            })
+                    }
+                    .foregroundColor(.primary)
+                })
             }
         }
     }
     
     var body: some View {
         VStack {
-            ScrollView(showsIndicators: false) {
                 HStack {
+                    if !isSearchShow {
                     Text(viewModel.subtitle)
                         .font(.headline)
                         .foregroundColor(.gray)
+                    }
                     Spacer()
+                    Button(action: {
+                        withAnimation {
+                            isSearchShow = true
+                        }
+                    }, label: {
+                        Image(systemName: "magnifyingglass")
+                    })
+                    if isSearchShow {
+                        TextField("Search item", text: $search)
+                        Spacer()
+                        Button(action: {
+                            withAnimation {
+                                isSearchShow = false
+                                search = ""
+                            }
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                    }
                 }
+                .frame(maxWidth: .infinity)
+                .frame(height: 20)
                 .padding()
+                .background(isSearchShow ? Color.grayColor : Color.clear)
+            ScrollView(showsIndicators: false) {
                 customGrid
                 
                 Divider()
@@ -139,12 +166,12 @@ struct CollectionsView: View {
                     .background(isDarkMode == true ? Color.black.ignoresSafeArea()  : Color.white.ignoresSafeArea() )           }
         }
         .accentColor(.primary)
-//        .sheet(isPresented: $showSheet, content: {
-//            NavigationView {
-//                ProView()
-//            }
-//        })
-//        .accentColor(.primary)
+        //        .sheet(isPresented: $showSheet, content: {
+        //            NavigationView {
+        //                ProView()
+        //            }
+        //        })
+        //        .accentColor(.primary)
     }
 }
 
