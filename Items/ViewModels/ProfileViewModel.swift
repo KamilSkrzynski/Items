@@ -43,6 +43,7 @@ final class ProfileViewModel: ObservableObject {
         switch itemViewModels[index].type {
         case .mode:
             isDarkMode = !isDarkMode
+            buildItems()
         case .bought:
             itemsBoughtPushed = true
         case .account:

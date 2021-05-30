@@ -12,7 +12,7 @@ struct ProfileView: View {
     
     @ObservedObject private var viewModel = ProfileViewModel()
     
-    @State var activeSheet: ProfileViewButton.ProfileViewButtonType?
+   // @State var activeSheet: ProfileViewButton.ProfileViewButtonType?
     
     var profileOptions: some View {
         
@@ -55,11 +55,11 @@ struct ProfileView: View {
         VStack {
             
             profileOptions
-                .alert(isPresented: $viewModel.showLogoutAlert, content: {
-                    Alert(title: Text("Logout"), message: Text("Are you sure you want to logout?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Logout").fontWeight(.bold)) {
-                        self.viewModel.authService.logout()
-                    })
-                })
+//                .alert(isPresented: $viewModel.showLogoutAlert, content: {
+//                    Alert(title: Text("Logout"), message: Text("Are you sure you want to logout?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Logout").fontWeight(.bold)) {
+//                        self.viewModel.authService.logout()
+//                    })
+//                })
                 .background(
                     NavigationLink(
                                 destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),

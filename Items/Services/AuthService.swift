@@ -67,7 +67,6 @@ final class AuthService: AuthServiceProtocol {
                 self.isSignedIn = true
                 let id = user.uid
                 self.userID = id
-                print(userID)
                 let suggestedCollections = [
                     Collection(collectionID: UUID().uuidString, userID: id, title: "Clothes", subtitle: "Expand your wardrobe", isSuggested: true),
                     Collection(collectionID: UUID().uuidString, userID: id, title: "Tech", subtitle: "Save your tech essentials", isSuggested: true),

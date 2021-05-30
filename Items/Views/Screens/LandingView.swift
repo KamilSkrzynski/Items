@@ -12,19 +12,22 @@ struct LandingView: View {
     @StateObject private var viewModel = LandingViewModel()
     
     var body: some View {
+        GeometryReader { proxy in
         NavigationView {
             VStack {
-                Spacer()
-                
-                Text("ITEMS")
+                Spacer().frame(height: proxy.size.height*0.2)
+                Image("Landing")
+                    .resizable()
+                    .opacity(0.95)
+                    .frame(width: 150, height: 150)
+                Text("I T E M S")
+                    .foregroundColor(.white)
                     .font(.system(size: 50, weight: .bold))
-                    .animation(.default)
                 Text("Track things you want to buy")
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .animation(.default)
-                
-                Spacer()
+                    .foregroundColor(.grayColor).opacity(0.6)
+                Spacer().frame(height: proxy.size.height*0.33)
                 NavigationLink(
                     destination: TabContainerView())
                     {
@@ -62,12 +65,23 @@ struct LandingView: View {
                         Button(action: {
                             viewModel.loginPushed = true
                         }, label: {
-                            Text("I already have an account")
+                            HStack {
+                                Text("Already have account?")
+                                    .foregroundColor(.white.opacity(0.7))
+                                Text("Sign in")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.grayColor)
+                            }
                         })
                         .accentColor(.primary)
                     }
+                Spacer()
             }
-            .shadow(radius: 3)
+            .background(Image("Background")
+                            .scaledToFit()
+                            .overlay(Color.black.opacity(0.6)))
+            .ignoresSafeArea(.all)
+        }
         }
         .accentColor(.primary)
     }
