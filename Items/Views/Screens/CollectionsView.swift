@@ -11,9 +11,10 @@ struct CollectionsView: View {
     
     @ObservedObject private var viewModel = CollectionsViewModel()
     
-    @ObservedObject var customCollections: CollectionsArray
-    @ObservedObject var suggestedCollections: CollectionsArray
+//    @ObservedObject var customCollections: CollectionsArray
+ //   @ObservedObject var suggestedCollections: CollectionsArray
     
+    @AppStorage("userID") private var userID = ""
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var showSheet: Bool = false
@@ -28,12 +29,16 @@ struct CollectionsView: View {
                     .fontWeight(.semibold)
                 Spacer()
             }
+            .onAppear() {
+                viewModel.fetchCustomCollections(userID: self.userID)
+                viewModel.fetchSuggestedCollections(userID: self.userID)
+            }
             .padding()
             
-            if customCollections.collectionArray.count > 0 {
+            if viewModel.customCollections.count > 0 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(customCollections.collectionArray, id: \.self) { collection in
+                        ForEach(viewModel.customCollections, id: \.self) { collection in
                         NavigationLink(
                             destination: ItemsView(collection: collection.title),
                             label: {
@@ -90,7 +95,7 @@ struct CollectionsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: [GridItem(.adaptive(minimum: 300))], content: {
-                ForEach(suggestedCollections.collectionArray, id: \.self) { collection in
+                ForEach(viewModel.suggestedCollections, id: \.self) { collection in
                     NavigationLink(
                         destination: ItemsView(collection: collection.title),
                         label: {
@@ -147,7 +152,7 @@ struct CollectionsView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            CollectionsView(customCollections: CollectionsArray(isSuggested: false), suggestedCollections: CollectionsArray(isSuggested: true))
+            CollectionsView()
                 .preferredColorScheme(.dark)
         }
         .preferredColorScheme(.light)

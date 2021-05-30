@@ -19,6 +19,7 @@ struct AddItemView: View {
     @State var imageSelected: UIImage = UIImage(named: "Placeholder")!
     @State private var showImagePicker: Bool = false
     @State private var showCollections = false
+    @State private var showAlert = false
     
     var collections = ["tech", "clothes", "home"]
     
@@ -83,7 +84,7 @@ struct AddItemView: View {
             
             Button(action: {
                 DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, isBought: false, dateCreated: Date(), image: imageSelected)
-                presentationMode.wrappedValue.dismiss()
+                self.showAlert.toggle()
             }, label: {
                 HStack {
                     Image(systemName: viewModel.buttonImageName)
@@ -111,6 +112,11 @@ struct AddItemView: View {
             
             Spacer()
         }
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Added!"), message: Text("Item successfully added"), dismissButton: .default(Text("OK")) {
+                self.presentationMode.wrappedValue.dismiss()
+            })
+        })
         .sheet(isPresented: $showImagePicker, content: {
             ImagePicker(imageSelected: $imageSelected, isEdit: true).preferredColorScheme(isDarkMode ? .dark : .light)
         })

@@ -13,6 +13,8 @@ struct SingleItemView: View {
     
     @State var item: Item
     @State var image: UIImage = UIImage(named: "Placeholder")!
+    @State private var showTagAlert = false
+    @State private var showDeleteAlert = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,20 +27,30 @@ struct SingleItemView: View {
                         Spacer()
                         if item.isBought == false {
                         Button(action: {
-                            DataService.instance.updateItem(itemID: item.itemID)
+                            showTagAlert.toggle()
                         }, label: {
                             Image(systemName: "checkmark.square")
                                 .font(.system(size: 18))
                                 .foregroundColor(.secondaryColor)
                         })
+                        .alert(isPresented: $showTagAlert, content: {
+                            Alert(title: Text("Bought"), message: Text("Are you sure you want to tag this item as bought?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Bought").fontWeight(.bold)) {
+                                DataService.instance.updateItem(itemID: item.itemID)
+                            })
+                        })
                         }
                         
                         Button(action: {
-                            DataService.instance.deleteItem(itemID: item.itemID)
+                            showDeleteAlert = true
                         }, label: {
                             Image(systemName: "trash")
                                 .font(.system(size: 15))
                                 .foregroundColor(.secondaryColor)
+                        })
+                        .alert(isPresented: $showDeleteAlert, content: {
+                            Alert(title: Text("Delete Item"), message: Text("Are you sure you want to delete this item?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Delete").fontWeight(.bold)) {
+                                DataService.instance.deleteItem(itemID: item.itemID)
+                            })
                         })
                     }
                     .padding(5)
@@ -77,7 +89,8 @@ struct SingleItemView: View {
             }
             .offset(x: -5, y: 10)
             .padding(.horizontal, 5)
-        }.onAppear {
+        }
+        .onAppear {
             getImage()
         }
         .padding()

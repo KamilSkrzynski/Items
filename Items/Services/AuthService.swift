@@ -69,9 +69,9 @@ final class AuthService: AuthServiceProtocol {
                 self.userID = id
                 print(userID)
                 let suggestedCollections = [
-                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Clothes", subtitle: "Expand your wardrobe", isSuggested: true),
-                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Tech", subtitle: "Save your tech essentials", isSuggested: true),
-                    SuggestedCollection(collectionID: UUID().uuidString, userID: id, title: "Home", subtitle: "Elevate your home's design", isSuggested: true)
+                    Collection(collectionID: UUID().uuidString, userID: id, title: "Clothes", subtitle: "Expand your wardrobe", isSuggested: true),
+                    Collection(collectionID: UUID().uuidString, userID: id, title: "Tech", subtitle: "Save your tech essentials", isSuggested: true),
+                    Collection(collectionID: UUID().uuidString, userID: id, title: "Home", subtitle: "Elevate your home's design", isSuggested: true)
                 ]
                 
                 self.createUser(userID: id, email: "anonymous", dateCreated: Date(), isPro: false)

@@ -55,20 +55,17 @@ struct ProfileView: View {
         VStack {
             
             profileOptions
-                .onAppear() {
-                    viewModel.onAppear()
-                }
-                .sheet(isPresented: $viewModel.loginSignupPushed, content: {
-                    NavigationView {
-                        AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed))
-                    }
+                .alert(isPresented: $viewModel.showLogoutAlert, content: {
+                    Alert(title: Text("Logout"), message: Text("Are you sure you want to logout?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Logout").fontWeight(.bold)) {
+                        self.viewModel.authService.logout()
+                    })
                 })
-//                .background(
-//                    NavigationLink(
-//                                destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
-//                                isActive: $viewModel.loginSignupPushed,
-//                                label: {
-//                                }))
+                .background(
+                    NavigationLink(
+                                destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
+                                isActive: $viewModel.loginSignupPushed,
+                                label: {
+                                }))
                 .background(NavigationLink(
                                 destination: BoughtItemsView(itemsArray: ItemsArray(isBought: true)),
                                 isActive: $viewModel.itemsBoughtPushed,

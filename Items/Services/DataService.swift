@@ -53,7 +53,7 @@ final class DataService {
         ])
     }
     
-    func downloadCollections(userID: String, isSuggested: Bool, handler: @escaping(_ suggestedCollections: [SuggestedCollection]) -> ()) {
+    func downloadCollections(userID: String, isSuggested: Bool, handler: @escaping(_ suggestedCollections: [Collection]) -> ()) {
         
         REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).whereField("is_suggested", isEqualTo: isSuggested).getDocuments { querySnapshot, error in
             
@@ -145,8 +145,8 @@ final class DataService {
         }
     }
     
-    private func getCollectionsFromSnapshot(querySnapshot: QuerySnapshot?) -> [SuggestedCollection] {
-        var suggestedCollections = [SuggestedCollection]()
+    private func getCollectionsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Collection] {
+        var collections = [Collection]()
         
         if let snapshot = querySnapshot, snapshot.documents.count > 0 {
             
@@ -159,16 +159,16 @@ final class DataService {
                    
                    {
                     print("Getting collection \(collectionID) from Firebase")
-                    let suggestedCollection = SuggestedCollection(collectionID: collectionID, userID: userID, title: title, subtitle: subtitle, isSuggested: isSuggested)
+                    let collection = Collection(collectionID: collectionID, userID: userID, title: title, subtitle: subtitle, isSuggested: isSuggested)
                     
                     print("Adding collection \(collectionID) to \(isSuggested ? "suggested" : "custom") collections array")
-                    suggestedCollections.append(suggestedCollection)
+                    collections.append(collection)
                 }
             }
-            return suggestedCollections
+            return collections
         }
         else {
-            return suggestedCollections
+            return collections
         }
     }
     

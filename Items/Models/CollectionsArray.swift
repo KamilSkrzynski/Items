@@ -12,9 +12,9 @@ final class CollectionsArray: ObservableObject, Identifiable {
     
     @AppStorage("userID") private var userID = ""
     
-    @Published var collectionArray = [SuggestedCollection]()
+    @Published var collectionArray = [Collection]()
     
-    init(collection: SuggestedCollection) {
+    init(collection: Collection) {
         self.collectionArray.append(collection)
     }
     

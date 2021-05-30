@@ -15,14 +15,14 @@ final class ProfileViewModel: ObservableObject {
     @Published var itemViewModels: [ProfileItemViewModel] = []
     @Published var loginSignupPushed = false
     @Published var itemsBoughtPushed = false
-    private let authService: AuthServiceProtocol
+    @Published var showLogoutAlert = false
+    let authService: AuthServiceProtocol
     
     init(authService: AuthServiceProtocol = AuthService()) {
         self.authService = authService
     }
     
     func onAppear() {
-        
         buildItems()
     }
     
@@ -43,14 +43,13 @@ final class ProfileViewModel: ObservableObject {
         switch itemViewModels[index].type {
         case .mode:
             isDarkMode = !isDarkMode
-            buildItems()
         case .bought:
             itemsBoughtPushed = true
         case .account:
             guard authService.currentUser?.email == nil else { return }
             loginSignupPushed = true
         case .logout:
-            authService.logout()
+            showLogoutAlert = true
         default:
             break
         }

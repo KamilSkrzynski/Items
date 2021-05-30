@@ -10,7 +10,53 @@ import SwiftUI
 
 final class CollectionsViewModel: ObservableObject {
     
+    private var REF_COLLECTIONS = db.collection("collections")
     @AppStorage("userID") private var userID = ""
+    
+    @Published var suggestedCollections = [Collection]()
+    @Published var customCollections = [Collection]()
+    
+    func fetchSuggestedCollections(userID: String) {
+        REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).whereField("is_suggested", isEqualTo: true).addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
+                print("No collections")
+                return
+            }
+            
+            self.suggestedCollections = documents.map { queryDocumentSnapshot -> Collection in
+                let data = queryDocumentSnapshot.data()
+                
+                let userID = data["user_id"] as? String ?? ""
+                   let collectionID = data["collection_id"] as? String ?? ""
+                   let title = data["title"] as? String ?? ""
+                   let subtitle = data["subtitle"] as? String ?? ""
+                   let isSuggested = data["is_suggested"] as? Bool ?? false
+                
+                return Collection(collectionID: collectionID, userID: userID, title: title, subtitle: subtitle, isSuggested: isSuggested)
+            }
+        }
+    }
+    
+    func fetchCustomCollections(userID: String) {
+        REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).whereField("is_suggested", isEqualTo: false).addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
+                print("No collections")
+                return
+            }
+            
+            self.customCollections = documents.map { queryDocumentSnapshot -> Collection in
+                let data = queryDocumentSnapshot.data()
+                
+                let userID = data["user_id"] as? String ?? ""
+                   let collectionID = data["collection_id"] as? String ?? ""
+                   let title = data["title"] as? String ?? ""
+                   let subtitle = data["subtitle"] as? String ?? ""
+                   let isSuggested = data["is_suggested"] as? Bool ?? false
+                
+                return Collection(collectionID: collectionID, userID: userID, title: title, subtitle: subtitle, isSuggested: isSuggested)
+            }
+        }
+    }
     
     let title = "Collections"
     let subtitle = "Sort your items by collections"

@@ -9,10 +9,11 @@ import SwiftUI
 
 struct SingleCollectionView: View {
     
-    @State var collection: SuggestedCollection
+    @State var collection: Collection
     @AppStorage("userID") private var userID = ""
     
     @State var image: UIImage = UIImage(named: "Placeholder")!
+    @State private var showDeleteAlert = false
     
     var body: some View {
         GeometryReader { proxy in
@@ -45,7 +46,7 @@ struct SingleCollectionView: View {
                     }
                     if collection.isSuggested == false {
                         Button(action: {
-                            DataService.instance.deleteCollection(collectionID: collection.collectionID)
+                            showDeleteAlert.toggle()
                         }, label: {
                             Image(systemName: "trash")
                                 .font(.system(size: 15))
@@ -60,6 +61,12 @@ struct SingleCollectionView: View {
             .frame(width: 180, height: 310)
             .background(Color.grayColor)
         }
+        .alert(isPresented: $showDeleteAlert, content: {
+            Alert(title: Text("Delete Collection"), message: Text("Are you sure you want to delete this collection?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Delete").fontWeight(.bold)) {
+                DataService.instance.deleteCollection(collectionID: collection.collectionID)
+            })
+        })
+        
         .onAppear {
             getImage()
         }
@@ -76,7 +83,7 @@ struct SingleCollectionView: View {
 }
 
 struct SingleCollectionView_Previews: PreviewProvider {
-    static var collection = SuggestedCollection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat jasdkajs ahsdjash", isSuggested: false)
+    static var collection = Collection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat jasdkajs ahsdjash", isSuggested: false)
     
     static var previews: some View {
         SingleCollectionView(collection: collection)

@@ -19,6 +19,7 @@ struct NewCollectionView: View {
     @State var imageSelected: UIImage = UIImage(named: "Placeholder")!
     @State private var showImagePicker: Bool = false
     @State private var showCollections = false
+    @State private var showAlert = false
     
     var body: some View {
         ScrollView {
@@ -61,7 +62,7 @@ struct NewCollectionView: View {
             
             Button(action: {
                 DataService.instance.createCollection(userID: userID, title: viewModel.collectionTitle, subtitle: viewModel.collectionSubtitle, dateCreated: Date(), image: imageSelected, isSuggested: false)
-                presentationMode.wrappedValue.dismiss()
+                self.showAlert.toggle()
             }, label: {
                 HStack {
                     Image(systemName: viewModel.buttonImageName)
@@ -88,7 +89,13 @@ struct NewCollectionView: View {
             .opacity(viewModel.check() ? 1.0 : 0.3)
             
             Spacer()
-        }.sheet(isPresented: $showImagePicker, content: {
+        }
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Added!"), message: Text("Collection successfully created"), dismissButton: .default(Text("OK")) {
+                self.presentationMode.wrappedValue.dismiss()
+            })
+        })
+        .sheet(isPresented: $showImagePicker, content: {
             ImagePicker(imageSelected: $imageSelected, isEdit: false).preferredColorScheme(isDarkMode ? .dark : .light)
         })
         .padding()
