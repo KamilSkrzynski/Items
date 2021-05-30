@@ -10,7 +10,6 @@ import SwiftUI
 struct TabContainerView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isOnboardingWatched") private var isOnboardingToWatch = true
-   // let posts = CollectionsArray(isSuggested: true)
     @AppStorage("userID") private var userID = ""
     @State var selectedTab: Int = 0
     @State var showAddSheet: Bool = false
@@ -86,9 +85,11 @@ struct TabContainerView: View {
         .accentColor(.primary)
         .edgesIgnoringSafeArea(.all)
         .fullScreenCover(isPresented: $isOnboardingToWatch) {
+            withAnimation {
             NavigationView {
                 OnboardingView()
                     .preferredColorScheme(isDarkMode ? .dark : .light)
+            }
             }
         }
         .fullScreenCover(isPresented: $showAddSheet) {

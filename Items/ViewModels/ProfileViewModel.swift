@@ -12,9 +12,10 @@ final class ProfileViewModel: ObservableObject {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     
-    @Published var itemViewModels: [ProfileItemViewModel] = []
+    @Published private(set) var itemViewModels: [ProfileItemViewModel] = []
     @Published var loginSignupPushed = false
     @Published var itemsBoughtPushed = false
+    @Published var termsPushed = false
     @Published var showLogoutAlert = false
     let authService: AuthServiceProtocol
     
@@ -51,6 +52,8 @@ final class ProfileViewModel: ObservableObject {
             loginSignupPushed = true
         case .logout:
             showLogoutAlert = true
+        case .privacy:
+            termsPushed = true
         default:
             break
         }

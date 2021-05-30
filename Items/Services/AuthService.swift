@@ -25,8 +25,11 @@ let db = Firestore.firestore()
 final class AuthService: AuthServiceProtocol {
     
     // MARK: Properties
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isOnboardingWatched") private var isOnboardingToWatch = true
     @AppStorage("isSignedIn") private var isSignedIn = false
     @AppStorage("userID") private var userID = ""
+    @AppStorage("userEmail") private var userEmail = ""
     
     let currentUser = Auth.auth().currentUser
     
@@ -51,6 +54,7 @@ final class AuthService: AuthServiceProtocol {
                     //Good to go
                     let id = user.uid
                     self.updateUserAfterLink(userID: id, email: email)
+                    self.userEmail = email
                 }
             }
         })
@@ -91,6 +95,8 @@ final class AuthService: AuthServiceProtocol {
         do {
             try Auth.auth().signOut()
             self.isSignedIn = false
+            self.isDarkMode = false
+            self.isOnboardingToWatch = true
         }
         catch {
             print("Error logging out: \(error)")

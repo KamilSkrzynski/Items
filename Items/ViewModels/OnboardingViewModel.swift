@@ -15,9 +15,9 @@ final class OnboardingViewModel: ObservableObject {
     let skipButtonTitle = "Skip"
     
     let views = [
-        OnboardingItem(title: "Create your own collections", subtitle: "1sub", image: "Onboarding1", selection: 0),
-        OnboardingItem(title: "2", subtitle: "2sub", image: "Onboarding1", selection: 1),
-        OnboardingItem(title: "3", subtitle: "3sub", image: "Onboarding1", selection: 2)
+        OnboardingItem(title: "Create your own collections", subtitle: "Customize the way you track shoppings. Make custom collections to sort your needs.", image: "Onboarding1", selection: 0),
+        OnboardingItem(title: "Add items", subtitle: "Fill in collections with things you need to buy. Use tag to sort items within collections.", image: "Onboarding2", selection: 1),
+        OnboardingItem(title: "Search. Tag as bought. Delete", subtitle: "Search items via name or tag. Tag them when you buy it. When you make mistake - don't worry, just delete.", image: "Onboarding3", selection: 2)
     ]
 }
 

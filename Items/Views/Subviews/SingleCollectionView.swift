@@ -22,43 +22,39 @@ struct SingleCollectionView: View {
                     .resizable()
                     .frame(width: 150, height: 150)
                     .scaledToFill()
-                    .padding(.horizontal)
-                    .offset(y: -2)
                 
                 Divider()
                     .padding(.horizontal)
                 
-                
-                HStack {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(collection.title)
-                                .font(.title2)
-                                .fontWeight(.semibold)
+                VStack(alignment: .leading) {
+                            HStack {
+                                Text(collection.title)
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                Spacer()
+                                if collection.isSuggested == false {
+                                    Button(action: {
+                                        showDeleteAlert.toggle()
+                                    }, label: {
+                                        Image(systemName: "trash")
+                                            .font(.system(size: 15))
+                                            .foregroundColor(.secondaryColor)
+                                    })
+                                }
+                            }.padding(.vertical, 7)
                             
-                            Text(collection.subtitle)
-                                .font(.callout)
-                                .foregroundColor(.gray)
-                                .multilineTextAlignment(.leading)
+                    HStack {
+                        Text(collection.subtitle)
+                                    .font(.callout)
+                                    .foregroundColor(.gray)
+                            .multilineTextAlignment(.leading)
+                        Spacer().frame(width: proxy.size.width*0.08)
+                    }
                         }
-                        .padding()
-                        Spacer()
-                    }
-                    if collection.isSuggested == false {
-                        Button(action: {
-                            showDeleteAlert.toggle()
-                        }, label: {
-                            Image(systemName: "trash")
-                                .font(.system(size: 15))
-                                .foregroundColor(.secondaryColor)
-                        })
-                        .offset(x: -10, y: -30)
-                    }
-
-                }
+                .frame(height: 90)
+                        .padding(.horizontal)
             }
-            .padding()
-            .frame(width: 180, height: 310)
+            .frame(width: 180, height: 300)
             .background(Color.grayColor)
         }
         .alert(isPresented: $showDeleteAlert, content: {
@@ -83,7 +79,7 @@ struct SingleCollectionView: View {
 }
 
 struct SingleCollectionView_Previews: PreviewProvider {
-    static var collection = Collection(collectionID: "", userID: "", title: "Home", subtitle: "Elevate your flat jasdkajs ahsdjash", isSuggested: false)
+    static var collection = Collection(collectionID: "", userID: "", title: "Home", subtitle: "Fragnances needed", isSuggested: false)
     
     static var previews: some View {
         SingleCollectionView(collection: collection)

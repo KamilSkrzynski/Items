@@ -9,6 +9,7 @@ import Foundation
 
 struct ProfileViewButton: Hashable {
     
+    
     var imageName: String
     var title: String
     var type: ProfileViewButtonType

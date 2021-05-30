@@ -27,7 +27,7 @@ struct LandingView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.grayColor).opacity(0.6)
-                Spacer().frame(height: proxy.size.height*0.33)
+                Spacer().frame(height: proxy.size.height*0.4)
                 NavigationLink(
                     destination: TabContainerView())
                     {
@@ -66,7 +66,7 @@ struct LandingView: View {
                             viewModel.loginPushed = true
                         }, label: {
                             HStack {
-                                Text("Already have account?")
+                                Text("Already have an account?")
                                     .foregroundColor(.white.opacity(0.7))
                                 Text("Sign in")
                                     .fontWeight(.semibold)

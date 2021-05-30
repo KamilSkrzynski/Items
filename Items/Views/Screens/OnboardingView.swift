@@ -29,7 +29,7 @@ struct OnboardingView: View {
                 Text(view.title)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text("Customize the way you track shoppings. Make custom collections to sort your needs.")
+                Text(view.subtitle)
                     .font(.callout)
                     .foregroundColor(.gray)
                     .fontWeight(.semibold)
