@@ -11,7 +11,6 @@ struct ItemsView: View {
     
     @ObservedObject private var viewModel = ItemsViewModel()
     @AppStorage("userID") private var userID = ""
-//    @ObservedObject var itemsArray: ItemsArray
     
     @State var collection: String
     @State var search = ""

@@ -11,8 +11,7 @@ struct BoughtItemsView: View {
     
     @StateObject private var viewModel = ItemsViewModel()
     
-    @ObservedObject var itemsArray: ItemsArray
-    
+    @AppStorage("userID") private var userID = ""
     @State var search = ""
     @State private var isSearchShow = false
 
@@ -39,16 +38,19 @@ struct BoughtItemsView: View {
                 })
             }
         }
+        .onAppear() {
+            viewModel.fetchBoughtItems(userID: userID)
+        }
         .frame(maxWidth: .infinity)
         .frame(height: 20)
         .padding()
         .background(isSearchShow ? Color.grayColor : Color.clear)
         
-        if itemsArray.itemsArray.count > 0 {
+        if viewModel.boughtItems.count > 0 {
             VStack {
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: [.init(.flexible(), spacing: 20), .init(.flexible())], spacing: 20, content: {
-                        ForEach((itemsArray.itemsArray)
+                        ForEach((viewModel.boughtItems)
                                     .filter({ "\($0)".contains(search) || search.isEmpty}), id: \.self) { item in
                             SingleItemView(item: item)
                         }
@@ -80,7 +82,7 @@ struct BoughtItemsView: View {
 struct BoughtItemsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BoughtItemsView(itemsArray: ItemsArray(isBought: true))
+            BoughtItemsView()
         }
     }
 }
