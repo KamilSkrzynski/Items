@@ -33,6 +33,7 @@ final class AccountViewModel: ObservableObject {
     let passwordIconImage = "lock.rectangle.fill"
     let buttonIconImage = "arrow.right.square.fill"
     let closeIconImage = "xmark"
+    let privacyButtonText = "Privacy Policy"
     
     var title: String {
         switch mode {

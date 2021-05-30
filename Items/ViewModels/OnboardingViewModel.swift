@@ -13,6 +13,9 @@ final class OnboardingViewModel: ObservableObject {
     
     let title = "Welcome to Items!"
     let skipButtonTitle = "Skip"
+    let previousButtonText = "Previous"
+    let nextButtonText = "Next"
+    let closeOnboardingText = "Got it!"
     
     let views = [
         OnboardingItem(title: "Create your own collections", subtitle: "Customize the way you track shoppings. Make custom collections to sort your needs.", image: "Onboarding1", selection: 0),

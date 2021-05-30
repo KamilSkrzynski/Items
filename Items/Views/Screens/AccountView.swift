@@ -75,16 +75,11 @@ struct AccountView: View {
             .accentColor(.primary)
             .padding(.vertical)
             .opacity(withAnimation {
-                
                 viewModel.buttonOpacity()
-
     })
-            
-            Text("Privacy Policy")
+            Text(viewModel.privacyButtonText)
                 .font(.footnote)
                 .foregroundColor(.gray)
-            
-            
             
             Spacer()
         }

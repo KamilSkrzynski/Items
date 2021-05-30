@@ -42,7 +42,7 @@ struct OnboardingView: View {
                             viewModel.tabSelection -= 1
                         }
                     }, label: {
-                        Text("Previous")
+                        Text(viewModel.previousButtonText)
                             .fontWeight(.bold)
                             .frame(width: 110, height: 30)
                             .padding(.horizontal)
@@ -57,7 +57,7 @@ struct OnboardingView: View {
                             viewModel.tabSelection += 1
                             }
                     }, label: {
-                        Text("Next")
+                        Text(viewModel.nextButtonText)
                             .fontWeight(.bold)
                             .frame(width: 110, height: 30)
                             .padding(.horizontal)
@@ -72,7 +72,7 @@ struct OnboardingView: View {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }, label: {
-                        Text("Got it!")
+                        Text(viewModel.closeOnboardingText)
                             .font(.system(size: 30))
                                 .fontWeight(.bold)
                                 .frame(width: 110, height: 40)

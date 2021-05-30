@@ -16,14 +16,14 @@ struct LandingView: View {
         NavigationView {
             VStack {
                 Spacer().frame(height: proxy.size.height*0.2)
-                Image("Landing")
+                Image(viewModel.backgroundImage)
                     .resizable()
                     .opacity(0.95)
                     .frame(width: 150, height: 150)
-                Text("I T E M S")
+                Text(viewModel.title)
                     .foregroundColor(.white)
                     .font(.system(size: 50, weight: .bold))
-                Text("Track things you want to buy")
+                Text(viewModel.subtitle)
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.grayColor).opacity(0.6)
@@ -37,17 +37,17 @@ struct LandingView: View {
                     viewModel.getStartedTapped()
                 }, label: {
                     HStack {
-                        Image(systemName: "arrow.right")
+                        Image(systemName: viewModel.buttonImageName)
                             .font(.system(size: 25))
                             .foregroundColor(.clear)
                             .padding()
                         Spacer()
-                    Text("Get Started")
+                        Text(viewModel.buttonTitle)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .font(.title2)
                         Spacer()
-                        Image(systemName: "arrow.right")
+                        Image(systemName: viewModel.buttonImageName)
                             .font(.system(size: 25))
                             .foregroundColor(.white).padding()
                     }
@@ -66,9 +66,9 @@ struct LandingView: View {
                             viewModel.loginPushed = true
                         }, label: {
                             HStack {
-                                Text("Already have an account?")
+                                Text(viewModel.alreadyButtonText)
                                     .foregroundColor(.white.opacity(0.7))
-                                Text("Sign in")
+                                Text(viewModel.signInButtonText)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.grayColor)
                             }
@@ -77,7 +77,7 @@ struct LandingView: View {
                     }
                 Spacer()
             }
-            .background(Image("Background")
+            .background(Image(viewModel.backgroundImage)
                             .scaledToFit()
                             .overlay(Color.black.opacity(0.7)))
             .ignoresSafeArea(.all)
