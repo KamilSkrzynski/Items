@@ -14,6 +14,16 @@ final class ItemsViewModel: ObservableObject {
     @Published var items = [Item]()
     @Published var boughtItems = [Item]()
     
+    @State var search = ""
+    @State var isSearchShow = false
+    
+    let searchImageName = "magnifyingglass"
+    let searchPlaceholderText = "Search item"
+    let closeSearchImageName = "xmark"
+    
+    let emptyCollectionTitleText = "Collection is empty!"
+    let emptyCollectionSubtitleText = "Add first item to this collection"
+    
     func fetchItems(userID: String, collection: String) {
         REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("collection", isEqualTo: collection).whereField("is_bought", isEqualTo: false).addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {

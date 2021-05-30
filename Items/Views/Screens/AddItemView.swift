@@ -16,13 +16,6 @@ struct AddItemView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var imageSelected: UIImage = UIImage(named: "Placeholder")!
-    @State private var showImagePicker: Bool = false
-    @State private var showCollections = false
-    @State private var showAlert = false
-    
-    var collections = ["tech", "clothes", "home"]
-    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -32,9 +25,9 @@ struct AddItemView: View {
                     .padding(.bottom)
                 HStack {
                     Button(action: {
-                        showImagePicker.toggle()
+                        viewModel.showImagePicker.toggle()
                     }, label: {
-                        Image(uiImage: imageSelected)
+                        Image(uiImage: viewModel.imageSelected)
                                     .resizable()
                                     .frame(width: 150, height: 150)
                                     .scaledToFill()
@@ -83,8 +76,8 @@ struct AddItemView: View {
             }
             
             Button(action: {
-                DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, isBought: false, dateCreated: Date(), image: imageSelected)
-                self.showAlert.toggle()
+                DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, isBought: false, dateCreated: Date(), image: viewModel.imageSelected)
+                viewModel.showAlert.toggle()
             }, label: {
                 HStack {
                     Image(systemName: viewModel.buttonImageName)
@@ -112,13 +105,13 @@ struct AddItemView: View {
             
             Spacer()
         }
-        .alert(isPresented: $showAlert, content: {
-            Alert(title: Text("Added!"), message: Text("Item successfully added"), dismissButton: .default(Text("OK")) {
+        .alert(isPresented: $viewModel.showAlert, content: {
+            Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage), dismissButton: .default(Text(viewModel.alertButtonText)) {
                 self.presentationMode.wrappedValue.dismiss()
             })
         })
-        .sheet(isPresented: $showImagePicker, content: {
-            ImagePicker(imageSelected: $imageSelected, isEdit: true).preferredColorScheme(isDarkMode ? .dark : .light)
+        .sheet(isPresented: $viewModel.showImagePicker, content: {
+            ImagePicker(imageSelected: $viewModel.imageSelected, isEdit: true).preferredColorScheme(isDarkMode ? .dark : .light)
         })
         .padding()
         .navigationTitle(viewModel.title)

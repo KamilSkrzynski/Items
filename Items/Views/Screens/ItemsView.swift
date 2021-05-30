@@ -13,29 +13,27 @@ struct ItemsView: View {
     @AppStorage("userID") private var userID = ""
     
     @State var collection: String
-    @State var search = ""
-    @State private var isSearchShow = false
     
     var body: some View {
         HStack {
             Spacer()
             Button(action: {
                 withAnimation {
-                    isSearchShow = true
+                    viewModel.isSearchShow = true
                 }
             }, label: {
-                Image(systemName: "magnifyingglass")
+                Image(systemName: viewModel.searchImageName)
             })
-            if isSearchShow {
-                TextField("Search item", text: $search)
+            if viewModel.isSearchShow {
+                TextField(viewModel.searchPlaceholderText, text: $viewModel.search)
                 Spacer()
                 Button(action: {
                     withAnimation {
-                        isSearchShow = false
-                        search = ""
+                        viewModel.isSearchShow = false
+                        viewModel.search = ""
                     }
                 }, label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: viewModel.closeSearchImageName)
                 })
             }
         }
@@ -45,14 +43,14 @@ struct ItemsView: View {
         .frame(maxWidth: .infinity)
         .frame(height: 20)
         .padding()
-        .background(isSearchShow ? Color.grayColor : Color.clear)
+        .background(viewModel.isSearchShow ? Color.grayColor : Color.clear)
         
         if viewModel.items.count > 0 {
             VStack {
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: [.init(.flexible(), spacing: 20), .init(.flexible())], spacing: 20, content: {
                         ForEach((viewModel.items)
-                                    .filter({ "\($0)".contains(search) || search.isEmpty}), id: \.self) { item in
+                                    .filter({ "\($0)".contains(viewModel.search) || viewModel.search.isEmpty}), id: \.self) { item in
                             SingleItemView(item: item)
                         }
                     })
@@ -65,12 +63,12 @@ struct ItemsView: View {
         else {
             Spacer()
             VStack {
-                Text("Collection is empty!")
+                Text(viewModel.emptyCollectionTitleText)
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.appColor)
                     .padding(.bottom)
-                Text("Add first item to this collection")
+                Text(viewModel.emptyCollectionSubtitleText)
             }
             .edgesIgnoringSafeArea(.bottom)
             .navigationTitle("\(collection)")

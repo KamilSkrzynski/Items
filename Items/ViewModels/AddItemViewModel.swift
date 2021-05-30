@@ -30,10 +30,19 @@ final class AddItemViewModel: ObservableObject {
     let collectionImageName = "doc.fill"
     let closeButtonImageName = "xmark"
     
+    @State var imageSelected: UIImage = UIImage(named: "Placeholder")!
+    @State var showImagePicker: Bool = false
+    @State var showCollections = false
+    @State var showAlert = false
+    
     @Published var name = ""
     @Published var tag = ""
     @Published var collection = "collection"
     @Published var collectionNames = [String]()
+    
+    @State var alertTitle = "Added!"
+    @State var alertMessage = "Item successfully added"
+    @State var alertButtonText = "OK"
     
     init() {
         DataService.instance.downloadCollectionNames(userID: userID) { returnedNames in
