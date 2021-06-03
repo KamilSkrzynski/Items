@@ -106,7 +106,7 @@ struct SingleItemView: View {
 }
 
 struct SingleItemView_Previews: PreviewProvider {
-    static let item = Item(itemID: "", userID: "", name: "T-shirt", tag: "tops", isBought: false, collection: "")
+    static let item = Item(itemID: "", userID: "", name: "T-shirt", tag: "tops", isBought: false, collection: "", amount: "1", price: "$0.00")
     static var previews: some View {
         SingleItemView(item: item)
             .preferredColorScheme(.dark)

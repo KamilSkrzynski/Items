@@ -20,5 +20,6 @@ extension ProfileViewModel {
         case privacy
         case logout
         case bought
+        case usage
     }
 }

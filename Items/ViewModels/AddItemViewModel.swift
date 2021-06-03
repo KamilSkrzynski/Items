@@ -21,28 +21,35 @@ final class AddItemViewModel: ObservableObject {
     let namePlaceholer = "name"
     let storePlaceholer = "store"
     let tagPlaceholer = "tag"
+    let pricePlaceholer = "price"
+    let amountPlaceholer = "amount"
     let collectionPlaceholder = "collection"
     
     let imagePlaceholderImageName = "photo.fill"
     
     let nameImageName = "square.and.pencil"
     let tagImageName = "tag.fill"
+    let priceImageName = "dollarsign.square.fill"
+    let amountImageName = "number.square.fill"
     let collectionImageName = "doc.fill"
     let closeButtonImageName = "xmark"
     
-    @State var imageSelected: UIImage = UIImage(named: "Placeholder")!
-    @State var showImagePicker: Bool = false
+    @Published var imageSelected: UIImage = UIImage(named: "Placeholder")!
+    @Published var showImagePicker: Bool = false
     @State var showCollections = false
-    @State var showAlert = false
+    @Published var showAlert = false
+    @Published var disableButton = true
     
     @Published var name = ""
     @Published var tag = ""
+    @Published var price = ""
+    @Published var amount = ""
     @Published var collection = "collection"
     @Published var collectionNames = [String]()
     
-    @State var alertTitle = "Added!"
-    @State var alertMessage = "Item successfully added"
-    @State var alertButtonText = "OK"
+    let alertTitle = "Added!"
+    let alertMessage = "Item successfully added"
+    let alertButtonText = "OK"
     
     init() {
         DataService.instance.downloadCollectionNames(userID: userID) { returnedNames in
@@ -53,7 +60,7 @@ final class AddItemViewModel: ObservableObject {
     
     
     func check() -> Bool {
-        if !name.isEmpty, !tag.isEmpty, !collection.isEmpty {
+        if !name.isEmpty, !tag.isEmpty, !amount.isEmpty, collection != "collection" {
             return true
         }
         else {

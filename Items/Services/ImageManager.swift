@@ -37,6 +37,20 @@ final class ImageManager {
             handler(returnedImage)
         }
     }
+    // To-do
+//    func deleteItemImage(userID: String, itemID: String, handler: @escaping (_ success: Bool) -> ()) {
+//        let path = "items/\(userID)/\(itemID)"
+//
+//        REF_STORAGE.reference(withPath: path).delete { error in
+//            if error != nil {
+//                handler(false)
+//                return
+//            }
+//            else {
+//                handler(true)
+//            }
+//        }
+//    }
     
     func downloadCollectionImage(userID: String, collectionID: String, handler: @escaping (_ image: UIImage?) -> ()) {
         let path = getCollectionImagePath(userID: userID, collectionID: collectionID)
@@ -115,7 +129,6 @@ final class ImageManager {
     private func downloadImage(path: StorageReference, handler: @escaping(_ image: UIImage?) -> ()) {
         
         if let cachedImage = imageCache.object(forKey: path) {
-            print("Image found in cache")
             handler(cachedImage)
             return
         }

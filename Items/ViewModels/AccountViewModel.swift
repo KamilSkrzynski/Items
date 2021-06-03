@@ -68,7 +68,14 @@ final class AccountViewModel: ObservableObject {
             authService.login(email: email, password: password)
             self.isPushed = false
         case .signup:
-            authService.linkAccount(email: email, password: password)
+            authService.linkAccount(email: email, password: password) { success in
+                if success {
+                    self.viewModel.onAppear()
+                }
+                else {
+                    self.viewModel.onAppear()
+                }
+            }
             self.isPushed = false
         }
     }

@@ -19,7 +19,7 @@ final class DataService {
     private var REF_COLLECTIONS = db.collection("collections")
     private var REF_ITEMS = db.collection("items")
     
-    func createItem(userID: String, collection: String, name: String, tag: String, isBought: Bool, dateCreated: Date, image: UIImage) {
+    func createItem(userID: String, collection: String, name: String, tag: String, price: String, amount: String, isBought: Bool, dateCreated: Date, image: UIImage) {
         
         let document = REF_ITEMS.document()
         let itemID = document.documentID
@@ -31,6 +31,8 @@ final class DataService {
             "collection": collection,
             "name": name,
             "tag": tag,
+            "price": price,
+            "amount": amount,
             "is_bought": isBought,
             "date_created": dateCreated
         ])
@@ -63,29 +65,25 @@ final class DataService {
         }
     }
     
-//    func downloadItems(userID: String, collection: String, isBought: Bool, handler: @escaping(_ items: [Item]) -> ()) {
-//        
-//        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("collection", isEqualTo: collection).whereField("is_bought", isEqualTo: false).addSnapshotListener { querySnapshot, error in
-//            
-//            
-//            handler(self.getItemsFromSnapshot(querySnapshot: querySnapshot))
-//            print("Getting \(collection) items for user: \(userID)")
-//        }
-//    }
-    
-    func downloadBoughtItems(userID: String, isBought: Bool, handler: @escaping(_ items: [Item]) -> ()) {
-        
-        REF_ITEMS.whereField("user_id", isEqualTo: userID).whereField("is_bought", isEqualTo: true).getDocuments { querySnapshot, error in
-            
-            
-            handler(self.getItemsFromSnapshot(querySnapshot: querySnapshot))
-            print("Getting bought items for user: \(userID)")
-        }
-    }
-    
     func updateItem(itemID: String) {
         REF_ITEMS.document("\(itemID)").updateData([
             "is_bought": true,
+        ]) {
+            error in
+            if let error = error {
+                print("Error updating item \(itemID): \(error)")
+            }
+            else {
+                print("Item \(itemID) successfully updated")
+            }
+        }
+    }
+    
+    func updateDetailItem(itemID: String, amount: String, price: String, tag: String) {
+        REF_ITEMS.document("\(itemID)").updateData([
+            "amount": amount,
+            "price": price,
+            "tag": tag
         ]) {
             error in
             if let error = error {
@@ -114,6 +112,7 @@ final class DataService {
                 print("Error removing collection: \(error)")
             }
             else {
+   //             REF_ITEMS.whereField("collection_id", isEqualTo: collectionID)
                 print("Collection removed!")
             }
         }
@@ -169,32 +168,6 @@ final class DataService {
         }
         else {
             return collections
-        }
-    }
-    
-    private func getItemsFromSnapshot(querySnapshot: QuerySnapshot?) -> [Item] {
-        var items = [Item]()
-        
-        if let snapshot = querySnapshot, snapshot.documents.count > 0 {
-            
-            for document in snapshot.documents {
-                if let userID = document.get("user_id") as? String,
-                   let itemID = document.get("item_id") as? String,
-                   let collection = document.get("collection") as? String,
-                   let name = document.get("name") as? String,
-                   let isBought = document.get("is_bought") as? Bool,
-                   let tag = document.get("tag") as? String
-                   
-                   {
-                    let item = Item(itemID: itemID, userID: userID, name: name, tag: tag, isBought: isBought, collection: collection)
-                    
-                    items.append(item)
-                }
-            }
-            return items
-        }
-        else {
-            return items
         }
     }
 }

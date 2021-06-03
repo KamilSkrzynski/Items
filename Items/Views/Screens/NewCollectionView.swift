@@ -82,6 +82,7 @@ struct NewCollectionView: View {
                 .padding()
                 .frame(height: 60)
             })
+            .disabled(viewModel.collectionTitle.isEmpty)
             .frame(maxWidth: .infinity)
             .background(Color.appColor)
             .accentColor(.primary)
@@ -91,7 +92,7 @@ struct NewCollectionView: View {
             Spacer()
         }
         .alert(isPresented: $showAlert, content: {
-            Alert(title: Text("Added!"), message: Text("Collection successfully created"), dismissButton: .default(Text("OK")) {
+            Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage), dismissButton: .default(Text(viewModel.alertButtonText)) {
                 self.presentationMode.wrappedValue.dismiss()
             })
         })

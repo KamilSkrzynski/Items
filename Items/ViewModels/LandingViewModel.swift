@@ -12,6 +12,7 @@ final class LandingViewModel: ObservableObject {
     private let authService: AuthServiceProtocol
     @Published var loginPushed = false
     
+    @Published var isLoading = false
     let iconImage = "Landing"
     let title = "I T E M S"
     let subtitle = "Track things you want to buy"
@@ -28,6 +29,14 @@ final class LandingViewModel: ObservableObject {
     }
     
     func getStartedTapped() {
-        self.authService.signInAnonymously()
+        isLoading = true
+        self.authService.signInAnonymously() { success in
+            if success {
+                self.isLoading = false
+            }
+            else {
+                self.isLoading = true
+            }
+        }
     }
 }

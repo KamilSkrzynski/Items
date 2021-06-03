@@ -17,6 +17,8 @@ struct Item: Identifiable, Hashable {
     var tag: String
     var isBought: Bool
     var collection: String
+    var amount: String
+    var price: String
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

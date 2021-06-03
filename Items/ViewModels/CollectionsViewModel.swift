@@ -15,8 +15,10 @@ final class CollectionsViewModel: ObservableObject {
     
     @Published var suggestedCollections = [Collection]()
     @Published var customCollections = [Collection]()
+    @Published private(set) var isLoading = false
     
     func fetchSuggestedCollections(userID: String) {
+        isLoading = true
         REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).whereField("is_suggested", isEqualTo: true).addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
                 print("No collections")
@@ -35,9 +37,11 @@ final class CollectionsViewModel: ObservableObject {
                 return Collection(collectionID: collectionID, userID: userID, title: title, subtitle: subtitle, isSuggested: isSuggested)
             }
         }
+        isLoading = false
     }
     
     func fetchCustomCollections(userID: String) {
+        isLoading = true
         REF_COLLECTIONS.whereField("user_id", isEqualTo: userID).whereField("is_suggested", isEqualTo: false).addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
                 print("No collections")
@@ -56,6 +60,7 @@ final class CollectionsViewModel: ObservableObject {
                 return Collection(collectionID: collectionID, userID: userID, title: title, subtitle: subtitle, isSuggested: isSuggested)
             }
         }
+        isLoading = false
     }
     
     let title = "Collections"

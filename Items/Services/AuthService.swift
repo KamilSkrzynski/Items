@@ -12,8 +12,8 @@ import SwiftUI
 
 protocol AuthServiceProtocol {
     var currentUser: User? { get }
-    func signInAnonymously()
-    func linkAccount(email: String, password: String)
+    func signInAnonymously(handler: @escaping (_ success: Bool) -> ())
+    func linkAccount(email: String, password: String, handler: @escaping (_ success: Bool) -> ())
     func logout()
     func login(email: String, password: String)
     func createUser(userID: String, email: String, dateCreated: Date, isPro: Bool)
@@ -29,7 +29,7 @@ final class AuthService: AuthServiceProtocol {
     @AppStorage("isOnboardingWatched") private var isOnboardingToWatch = true
     @AppStorage("isSignedIn") private var isSignedIn = false
     @AppStorage("userID") private var userID = ""
-    @AppStorage("userEmail") private var userEmail = ""
+    
     
     let currentUser = Auth.auth().currentUser
     
@@ -38,29 +38,31 @@ final class AuthService: AuthServiceProtocol {
     
     // MARK: Authentication functions
     
-    func linkAccount(email: String, password: String) {
+    func linkAccount(email: String, password: String, handler: @escaping (_ success: Bool) -> ()) {
         let emailCredential = EmailAuthProvider.credential(withEmail: email, password: password)
         Auth.auth().currentUser?.link(with: emailCredential, completion: { authResult, error in
             if let error = error {
                 print("Unable to link account with credential: \(error)")
+                handler(false)
                 return
             }
             else if let user = authResult?.user {
                 Auth.auth().updateCurrentUser(user) { error in
                     if let error = error {
                         print("Unable to update current user in Database: \(error)")
+                        handler(false)
                         return
                     }
                     //Good to go
                     let id = user.uid
                     self.updateUserAfterLink(userID: id, email: email)
-                    self.userEmail = email
+                    handler(true)
                 }
             }
         })
     }
     
-    func signInAnonymously() {
+    func signInAnonymously(handler: @escaping (_ success: Bool) -> ()) {
         Auth.auth().signInAnonymously { [self] authResult, error in
             if let error = error {
                 print("Error singing in anonymously: \(error)")
@@ -85,9 +87,9 @@ final class AuthService: AuthServiceProtocol {
                     print("Successfully created suggested collections")
                 }
                 print("Successfully signed in anonymously")
+                handler(true)
                 return
             }
-            
         }
     }
     

@@ -40,8 +40,10 @@ final class ItemsViewModel: ObservableObject {
                    let name = data["name"] as? String ?? ""
                    let isBought = data["is_bought"] as? Bool ?? false
                    let tag = data["tag"] as? String ?? ""
+                let amount = data["amount"] as? String ?? "1"
+                let price = data["price"] as? String ?? "$0.00"
                 
-                return Item(itemID: itemID, userID: userID, name: name, tag: tag, isBought: isBought, collection: collection)
+                return Item(itemID: itemID, userID: userID, name: name, tag: tag, isBought: isBought, collection: collection, amount: amount, price: price)
             }
         }
     }
@@ -62,8 +64,10 @@ final class ItemsViewModel: ObservableObject {
                    let name = data["name"] as? String ?? ""
                    let isBought = data["is_bought"] as? Bool ?? false
                    let tag = data["tag"] as? String ?? ""
+                let amount = data["amount"] as? String ?? "1"
+                let price = data["price"] as? String ?? "$0.00"
                 
-                return Item(itemID: itemID, userID: userID, name: name, tag: tag, isBought: isBought, collection: collection)
+                return Item(itemID: itemID, userID: userID, name: name, tag: tag, isBought: isBought, collection: collection, amount: amount, price: price)
             }
         }
     }

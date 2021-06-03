@@ -28,6 +28,10 @@ final class NewCollectionViewModel: ObservableObject {
     
     let closeButtonImageName = "xmark"
     
+    let alertTitle = "Added!"
+    let alertMessage = "Collection successfully created"
+    let alertButtonText = "OK"
+    
     
     func check() -> Bool {
         if !collectionTitle.isEmpty, !collectionSubtitle.isEmpty {

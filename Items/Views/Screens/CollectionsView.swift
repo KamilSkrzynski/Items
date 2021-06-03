@@ -11,15 +11,13 @@ struct CollectionsView: View {
     
     @ObservedObject private var viewModel = CollectionsViewModel()
     
-    //    @ObservedObject var customCollections: CollectionsArray
-    //   @ObservedObject var suggestedCollections: CollectionsArray
-    
     @AppStorage("userID") private var userID = ""
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var showSheet: Bool = false
     @State var search = ""
     @State private var isSearchShow = false
+    let item = Item(itemID: "", userID: "", name: "", tag: "", isBought: false, collection: "", amount: "", price: "")
     
     @State var createCollection: Bool = false
     
@@ -114,12 +112,16 @@ struct CollectionsView: View {
     }
     
     var body: some View {
-        VStack {
+        if viewModel.isLoading {
+            ProgressView()
+        }
+        else {
+            VStack {
                 HStack {
                     if !isSearchShow {
-                    Text(viewModel.subtitle)
-                        .font(.headline)
-                        .foregroundColor(.gray)
+                        Text(viewModel.subtitle)
+                            .font(.headline)
+                            .foregroundColor(.gray)
                     }
                     Spacer()
                     Button(action: {
@@ -146,32 +148,33 @@ struct CollectionsView: View {
                 .frame(height: 20)
                 .padding()
                 .background(isSearchShow ? Color.grayColor : Color.clear)
-            ScrollView(showsIndicators: false) {
-                customGrid
-                
-                Divider()
-                    .frame(height: 5)
-                    .padding(.horizontal)
-                
-                suggestedGrid
+                ScrollView(showsIndicators: false) {
+                    customGrid
+                    
+                    Divider()
+                        .frame(height: 5)
+                        .padding(.horizontal)
+                    
+                    suggestedGrid
+                }
+                Spacer()
             }
-            Spacer()
+            .edgesIgnoringSafeArea(.bottom)
+            .navigationTitle(viewModel.title)
+            .sheet(isPresented: $createCollection) {
+                NavigationView {
+                    NewCollectionView()
+                        .preferredColorScheme(isDarkMode ? .dark : .light)
+                        .background(isDarkMode == true ? Color.black.ignoresSafeArea()  : Color.white.ignoresSafeArea() )           }
+            }
+            .accentColor(.primary)
+            //        .sheet(isPresented: $showSheet, content: {
+            //            NavigationView {
+            //                ProView()
+            //            }
+            //        })
+            //        .accentColor(.primary)
         }
-        .edgesIgnoringSafeArea(.bottom)
-        .navigationTitle(viewModel.title)
-        .sheet(isPresented: $createCollection) {
-            NavigationView {
-                NewCollectionView()
-                    .preferredColorScheme(isDarkMode ? .dark : .light)
-                    .background(isDarkMode == true ? Color.black.ignoresSafeArea()  : Color.white.ignoresSafeArea() )           }
-        }
-        .accentColor(.primary)
-        //        .sheet(isPresented: $showSheet, content: {
-        //            NavigationView {
-        //                ProView()
-        //            }
-        //        })
-        //        .accentColor(.primary)
     }
 }
 

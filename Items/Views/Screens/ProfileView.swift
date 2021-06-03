@@ -17,68 +17,77 @@ struct ProfileView: View {
     var profileOptions: some View {
         
         VStack {
-            HStack {
-                Text(viewModel.subtitle)
-                .font(.headline)
-                .foregroundColor(.gray)
-            Spacer()
-        }
-        .padding()
-                .onAppear {
-                    viewModel.onAppear()
-                }
             ForEach(viewModel.itemViewModels.indices, id: \.self) { index in
                 Button(action: {
                     viewModel.tappedItem(at: index)
                 }, label: {
-                    HStack {
+                        HStack {
                         Image(systemName: viewModel.itemViewModels[index].image)
-                            .foregroundColor(.secondaryColor)
                             .font(.system(size: 25))
                         Text(viewModel.itemViewModels[index].name)
                         Spacer()
                     }
+                    .foregroundColor(viewModel.itemViewModels[index].name == "Logout" ? Color.red : Color.secondaryColor)
                     .offset(x: 10)
                     .accentColor(.primary)
-                    
                 })
                 .frame(height: 60)
                 .background(Color.grayColor)
                 .padding(.horizontal)
                 .padding(.vertical, 5)
+                if viewModel.itemViewModels[index].name == "Privacy Policy" {
+                    Divider()
+                        .padding(.horizontal)
+                }
             }
         }
     }
     
     var body: some View {
-        VStack {
-            
-            profileOptions
-                .alert(isPresented: $viewModel.showLogoutAlert, content: {
-                    Alert(title: Text("Logout"), message: Text("Are you sure you want to logout?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Logout").fontWeight(.bold)) {
-                        self.viewModel.authService.logout()
+            VStack {
+                HStack {
+                    Text(viewModel.subtitle)
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                Spacer()
+            }
+            .padding()
+                    .onAppear {
+                        viewModel.onAppear()
+                    }
+                ScrollView {
+                profileOptions
+                    .alert(isPresented: $viewModel.showLogoutAlert, content: {
+                        Alert(title: Text("Logout"), message: Text("Are you sure you want to logout?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Logout").fontWeight(.bold)) {
+                            self.viewModel.authService.logout()
+                        })
                     })
-                })
-                .background(
-                    NavigationLink(
-                                destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
-                                isActive: $viewModel.loginSignupPushed,
-                                label: {
-                                }))
-                .background(NavigationLink(
-                                destination: BoughtItemsView(),
-                                isActive: $viewModel.itemsBoughtPushed,
-                                label: {
-                                }))
-                .background(NavigationLink(
-                                destination: TermsPrivacyView(),
-                                isActive: $viewModel.termsPushed,
-                                label: {
-                                }))
-            Spacer()
-            
+                    .background(
+                        NavigationLink(
+                                    destination: AccountView(viewModel: .init(mode: .signup, isPushed: $viewModel.loginSignupPushed)),
+                                    isActive: $viewModel.loginSignupPushed,
+                                    label: {
+                                    }))
+                    .background(NavigationLink(
+                                    destination: BoughtItemsView(),
+                                    isActive: $viewModel.itemsBoughtPushed,
+                                    label: {
+                                    }))
+                    .background(NavigationLink(
+                                    destination: TermsPrivacyView(),
+                                    isActive: $viewModel.termsPushed,
+                                    label: {
+                                    }))
+                    .background(NavigationLink(
+                                    destination: UsageView(),
+                                    isActive: $viewModel.usagePushed,
+                                    label: {
+                                    }))
+                Spacer()
+                
+            }
+            .navigationTitle(viewModel.title)
         }
-        .navigationTitle(viewModel.title)
     }
 }
 

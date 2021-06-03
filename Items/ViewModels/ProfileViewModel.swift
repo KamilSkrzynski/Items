@@ -16,6 +16,7 @@ final class ProfileViewModel: ObservableObject {
     @Published var loginSignupPushed = false
     @Published var itemsBoughtPushed = false
     @Published var termsPushed = false
+    @Published var usagePushed = false
     @Published var showLogoutAlert = false
     let authService: AuthServiceProtocol
     
@@ -30,6 +31,7 @@ final class ProfileViewModel: ObservableObject {
     private func buildItems() {
         itemViewModels = [
             .init(name: authService.currentUser?.email ?? "Create Account", image: "person.fill", type: .account),
+            .init(name: "Data", image: "doc.fill", type: .usage),
             .init(name: "Bought", image: "bag.fill", type: .bought),
             .init(name: "Switch to \(isDarkMode ? "Light" : "Dark") Mode", image: "lightbulb.fill", type: .mode),
             .init(name: "Privacy Policy", image: "shield.lefthalf.fill", type: .privacy)
@@ -54,6 +56,8 @@ final class ProfileViewModel: ObservableObject {
             showLogoutAlert = true
         case .privacy:
             termsPushed = true
+        case .usage:
+            usagePushed = true
         default:
             break
         }

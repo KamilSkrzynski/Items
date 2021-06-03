@@ -11,6 +11,7 @@ struct ItemsView: View {
     
     @ObservedObject private var viewModel = ItemsViewModel()
     @AppStorage("userID") private var userID = ""
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var collection: String
     
@@ -51,7 +52,11 @@ struct ItemsView: View {
                     LazyVGrid(columns: [.init(.flexible(), spacing: 20), .init(.flexible())], spacing: 20, content: {
                         ForEach((viewModel.items)
                                     .filter({ "\($0)".contains(viewModel.search) || viewModel.search.isEmpty}), id: \.self) { item in
-                            SingleItemView(item: item)
+                                NavigationLink(
+                                    destination: ItemDetailView(item: item),
+                                    label: {
+                                        SingleItemView(item: item)
+                                    })
                         }
                     })
                 }

@@ -13,7 +13,6 @@ struct AddItemView: View {
     @AppStorage("userID") private var userID = ""
     
     @StateObject private var viewModel = AddItemViewModel()
-    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -33,11 +32,10 @@ struct AddItemView: View {
                                     .scaledToFill()
                     })
                     
-                    
                     Spacer()
                     
                     VStack(spacing: 20) {
-                        HStack { //scribble.variable
+                        HStack {
                             Image(systemName: viewModel.nameImageName)
                             TextField(viewModel.namePlaceholer, text: $viewModel.name)
                                 .autocapitalization(.none)
@@ -47,6 +45,22 @@ struct AddItemView: View {
                             Image(systemName: viewModel.tagImageName)
                                 .font(.system(size: 15))
                             TextField(viewModel.tagPlaceholer, text: $viewModel.tag)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
+                        }
+                        
+                        HStack {
+                            Image(systemName: viewModel.tagImageName)
+                                .font(.system(size: 15))
+                            TextField(viewModel.pricePlaceholer, text: $viewModel.price)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
+                        }
+                        
+                        HStack {
+                            Image(systemName: viewModel.tagImageName)
+                                .font(.system(size: 15))
+                            TextField(viewModel.amountPlaceholer, text: $viewModel.amount)
                                 .autocapitalization(.none)
                                 .disableAutocorrection(true)
                         }
@@ -76,7 +90,7 @@ struct AddItemView: View {
             }
             
             Button(action: {
-                DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, isBought: false, dateCreated: Date(), image: viewModel.imageSelected)
+                DataService.instance.createItem(userID: userID, collection: viewModel.collection, name: viewModel.name, tag: viewModel.tag, price: viewModel.price, amount: viewModel.amount, isBought: false, dateCreated: Date(), image: viewModel.imageSelected)
                 viewModel.showAlert.toggle()
             }, label: {
                 HStack {
@@ -97,6 +111,7 @@ struct AddItemView: View {
                 .padding()
                 .frame(height: 60)
             })
+            .disabled(viewModel.name.isEmpty || viewModel.collection == "collection")
             .frame(maxWidth: .infinity)
             .background(Color.appColor)
             .accentColor(.primary)
@@ -109,7 +124,9 @@ struct AddItemView: View {
             Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage), dismissButton: .default(Text(viewModel.alertButtonText)) {
                 self.presentationMode.wrappedValue.dismiss()
             })
-        })
+            
+        }).preferredColorScheme(isDarkMode ? .dark : .light)
+        
         .sheet(isPresented: $viewModel.showImagePicker, content: {
             ImagePicker(imageSelected: $viewModel.imageSelected, isEdit: true).preferredColorScheme(isDarkMode ? .dark : .light)
         })

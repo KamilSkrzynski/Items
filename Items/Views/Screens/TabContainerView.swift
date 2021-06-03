@@ -7,15 +7,20 @@
 
 import SwiftUI
 
+struct TapButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.9 : 1)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+    }
+}
+
 struct TabContainerView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isOnboardingWatched") private var isOnboardingToWatch = true
     @AppStorage("userID") private var userID = ""
     @State var selectedTab: Int = 0
     @State var showAddSheet: Bool = false
-    
-    let customCollections = CollectionsArray(isSuggested: false)
-    let suggestedCollections = CollectionsArray(isSuggested: true)
     
     var body: some View {
         
@@ -48,10 +53,8 @@ struct TabContainerView: View {
                 }, label: {
                     ZStack {
                         Circle()
-                            //      .stroke(Color.black)
                             .foregroundColor(Color.secondaryColor)
                             .frame(width: 80, height: 80)
-                      //      .shadow(color: .primary, radius: 5)
                         
                         Circle()
                             .foregroundColor(Color.mainColor)
@@ -62,6 +65,7 @@ struct TabContainerView: View {
                             .foregroundColor(.primary)
                     }
                 })
+                .buttonStyle(TapButtonStyle())
                 .offset(y: -30)
                 
                 Spacer(minLength: 0)
@@ -70,7 +74,7 @@ struct TabContainerView: View {
                     self.selectedTab = 1
                     
                 }, label: {
-                    Image(systemName: "person.fill")
+                    Image(systemName: "gearshape.2.fill")
                         .offset(x: -10, y: -5)
                         .font(.system(size: 30))
                         .foregroundColor(Color.primary.opacity(selectedTab == 1 ? 1.0 : 0.3))
