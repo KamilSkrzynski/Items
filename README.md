@@ -1,4 +1,4 @@
-
+![ItemsList](https://user-images.githubusercontent.com/56888971/130656449-ec67351f-e361-484c-810a-9711991c3c1a.png)
 # Items
 iOS app that tracks all kind of essentials that you wish to buy.
 
